@@ -1,0 +1,15 @@
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Resources;
+[assembly: AssemblyTitle("jkop")]
+[assembly: AssemblyProduct("jkop")]
+[assembly: AssemblyDescription("jkop")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyCopyright("Copyright")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("1C753975-C5F6-C336-5283-F5F1118CEFD7")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]

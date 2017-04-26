@@ -1,0 +1,75 @@
+
+/*
+ * This file is part of Jkop for UWP
+ * Copyright (c) 2016-2017 Job and Esther Technologies, Inc.
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+namespace capex.net
+{
+	public abstract class TCPSocket : capex.net.ConnectedSocket
+	{
+		public TCPSocket() {
+		}
+
+		public static capex.net.TCPSocket create() {
+			return((capex.net.TCPSocket)new capex.net.TCPSocketImpl());
+		}
+
+		public static capex.net.TCPSocket createAndConnect(string address, int port) {
+			var v = capex.net.TCPSocket.create();
+			if(v == null) {
+				return(null);
+			}
+			if(v.connect(address, port) == false) {
+				v = null;
+			}
+			return(v);
+		}
+
+		public static capex.net.TCPSocket createAndListen(int port) {
+			var v = capex.net.TCPSocket.create();
+			if(v == null) {
+				return(null);
+			}
+			if(v.listen(port) == false) {
+				v = null;
+			}
+			return(v);
+		}
+
+		public abstract string getRemoteAddress();
+		public abstract int getRemotePort();
+		public abstract string getLocalAddress();
+		public abstract int getLocalPort();
+		public abstract bool connect(string address, int port);
+		public abstract bool listen(int port);
+		public abstract capex.net.TCPSocket accept();
+		public abstract bool setBlocking(bool blocking);
+		public abstract void close();
+		public abstract int read(byte[] buffer);
+
+		public virtual int readWithTimeout(byte[] buffer, int timeout) {
+			return(read(buffer));
+		}
+
+		public abstract int write(byte[] buffer, int size);
+	}
+}

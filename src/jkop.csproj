@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <Platform Condition="'$(Platform)' == ''">x86</Platform>
+    <ProjectGuid>{1C753975-C5F6-C336-5283-F5F1118CEFD7}</ProjectGuid>
+    <AppDesignerFolder></AppDesignerFolder>
+    <RootNamespace>jkop</RootNamespace>
+    <AssemblyName>jkop</AssemblyName>
+    <OutputType>Library</OutputType>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>14</EnableDotNetNativeCompatibleProfile>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>;2008</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>;2008</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <PlatformTarget>ARM</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>;2008</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <PlatformTarget>ARM</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>;2008</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cape.ApplicationContext.cs" />
+    <Compile Include="cape.Array.cs" />
+    <Compile Include="cape.ArrayObject.cs" />
+    <Compile Include="cape.Base64Decoder.cs" />
+    <Compile Include="cape.Base64Encoder.cs" />
+    <Compile Include="cape.Boolean.cs" />
+    <Compile Include="cape.BooleanIterator.cs" />
+    <Compile Include="cape.BooleanObject.cs" />
+    <Compile Include="cape.Buffer.cs" />
+    <Compile Include="cape.BufferDataReceiver.cs" />
+    <Compile Include="cape.BufferObject.cs" />
+    <Compile Include="cape.BufferReader.cs" />
+    <Compile Include="cape.BufferWriter.cs" />
+    <Compile Include="cape.ByteReader.cs" />
+    <Compile Include="cape.Character.cs" />
+    <Compile Include="cape.CharacterDecoder.cs" />
+    <Compile Include="cape.CharacterIterator.cs" />
+    <Compile Include="cape.CharacterIteratorForBuffer.cs" />
+    <Compile Include="cape.CharacterIteratorForReader.cs" />
+    <Compile Include="cape.CharacterIteratorForString.cs" />
+    <Compile Include="cape.CharacterObject.cs" />
+    <Compile Include="cape.Closable.cs" />
+    <Compile Include="cape.CurrentProcess.cs" />
+    <Compile Include="cape.CurrentThread.cs" />
+    <Compile Include="cape.DateTime.cs" />
+    <Compile Include="cape.DotNetStreamReader.cs" />
+    <Compile Include="cape.DotNetStreamWriter.cs" />
+    <Compile Include="cape.Double.cs" />
+    <Compile Include="cape.DoubleIterator.cs" />
+    <Compile Include="cape.DoubleObject.cs" />
+    <Compile Include="cape.Duplicateable.cs" />
+    <Compile Include="cape.DynamicIterator.cs" />
+    <Compile Include="cape.DynamicMap.cs" />
+    <Compile Include="cape.DynamicMapObject.cs" />
+    <Compile Include="cape.DynamicVector.cs" />
+    <Compile Include="cape.Environment.cs" />
+    <Compile Include="cape.Error.cs" />
+    <Compile Include="cape.File.cs" />
+    <Compile Include="cape.FileAdapter.cs" />
+    <Compile Include="cape.FileDescriptor.cs" />
+    <Compile Include="cape.FileFinder.cs" />
+    <Compile Include="cape.FileForDotNet.cs" />
+    <Compile Include="cape.FileInfo.cs" />
+    <Compile Include="cape.FileInstance.cs" />
+    <Compile Include="cape.FileInvalid.cs" />
+    <Compile Include="cape.FileReader.cs" />
+    <Compile Include="cape.FileWriter.cs" />
+    <Compile Include="cape.FlushableWriter.cs" />
+    <Compile Include="cape.Integer.cs" />
+    <Compile Include="cape.IntegerIterator.cs" />
+    <Compile Include="cape.IntegerObject.cs" />
+    <Compile Include="cape.Iterateable.cs" />
+    <Compile Include="cape.Iterator.cs" />
+    <Compile Include="cape.JSONEncoder.cs" />
+    <Compile Include="cape.JSONObject.cs" />
+    <Compile Include="cape.JSONParser.cs" />
+    <Compile Include="cape.KeyValueList.cs" />
+    <Compile Include="cape.KeyValueListForStrings.cs" />
+    <Compile Include="cape.KeyValuePair.cs" />
+    <Compile Include="cape.LineReader.cs" />
+    <Compile Include="cape.Log.cs" />
+    <Compile Include="cape.LoggingContext.cs" />
+    <Compile Include="cape.Map.cs" />
+    <Compile Include="cape.MapObject.cs" />
+    <Compile Include="cape.Math.cs" />
+    <Compile Include="cape.Mutex.cs" />
+    <Compile Include="cape.MutexCSharp.cs" />
+    <Compile Include="cape.ObjectWithSize.cs" />
+    <Compile Include="cape.OS.cs" />
+    <Compile Include="cape.PosixEnvironment.cs" />
+    <Compile Include="cape.PrintReader.cs" />
+    <Compile Include="cape.PrintWriter.cs" />
+    <Compile Include="cape.PrintWriterWrapper.cs" />
+    <Compile Include="cape.Process.cs" />
+    <Compile Include="cape.ProcessLauncher.cs" />
+    <Compile Include="cape.ProcessWithIO.cs" />
+    <Compile Include="cape.QueryString.cs" />
+    <Compile Include="cape.Queue.cs" />
+    <Compile Include="cape.Random.cs" />
+    <Compile Include="cape.Reader.cs" />
+    <Compile Include="cape.Runnable.cs" />
+    <Compile Include="cape.SeekableReader.cs" />
+    <Compile Include="cape.SeekableWriter.cs" />
+    <Compile Include="cape.SizedReader.cs" />
+    <Compile Include="cape.Stack.cs" />
+    <Compile Include="cape.StackTrace.cs" />
+    <Compile Include="cape.StaticFileDescriptor.cs" />
+    <Compile Include="cape.String.cs" />
+    <Compile Include="cape.StringBuilder.cs" />
+    <Compile Include="cape.StringDataReceiver.cs" />
+    <Compile Include="cape.StringIterator.cs" />
+    <Compile Include="cape.StringLineReader.cs" />
+    <Compile Include="cape.StringObject.cs" />
+    <Compile Include="cape.StringSet.cs" />
+    <Compile Include="cape.SystemClock.cs" />
+    <Compile Include="cape.Task.cs" />
+    <Compile Include="cape.TemporaryDirectory.cs" />
+    <Compile Include="cape.TemporaryFile.cs" />
+    <Compile Include="cape.Thread.cs" />
+    <Compile Include="cape.TimeValue.cs" />
+    <Compile Include="cape.URL.cs" />
+    <Compile Include="cape.URLDecoder.cs" />
+    <Compile Include="cape.URLEncoder.cs" />
+    <Compile Include="cape.Vector.cs" />
+    <Compile Include="cape.VectorObject.cs" />
+    <Compile Include="cape.Writer.cs" />
+    <Compile Include="capex.console.CommandLineArgument.cs" />
+    <Compile Include="capex.console.ConsoleApplication.cs" />
+    <Compile Include="capex.console.ConsoleApplicationContext.cs" />
+    <Compile Include="capex.console.Stdin.cs" />
+    <Compile Include="capex.console.Stdout.cs" />
+    <Compile Include="capex.console.Terminal.cs" />
+    <Compile Include="capex.console.UsageInfo.cs" />
+    <Compile Include="capex.crypto.BlockCipher.cs" />
+    <Compile Include="capex.crypto.BlockCipherReader.cs" />
+    <Compile Include="capex.crypto.BlockCipherWriter.cs" />
+    <Compile Include="capex.crypto.MD5Encoder.cs" />
+    <Compile Include="capex.crypto.SHAEncoder.cs" />
+    <Compile Include="capex.crypto.SHAEncoderCS.cs" />
+    <Compile Include="capex.data.SQLAdoNet.cs" />
+    <Compile Include="capex.data.SQLDatabase.cs" />
+    <Compile Include="capex.data.SQLiteDatabase.cs" />
+    <Compile Include="capex.data.SQLOrderingRule.cs" />
+    <Compile Include="capex.data.SQLResultSetIterator.cs" />
+    <Compile Include="capex.data.SQLResultSetSingleColumnIterator.cs" />
+    <Compile Include="capex.data.SQLStatement.cs" />
+    <Compile Include="capex.data.SQLTableColumnIndexInfo.cs" />
+    <Compile Include="capex.data.SQLTableColumnInfo.cs" />
+    <Compile Include="capex.data.SQLTableInfo.cs" />
+    <Compile Include="capex.image.BitmapBuffer.cs" />
+    <Compile Include="capex.image.GreyscaleImage.cs" />
+    <Compile Include="capex.image.ImageFilter.cs" />
+    <Compile Include="capex.image.ImageFilterUtil.cs" />
+    <Compile Include="capex.image.ImageResizer.cs" />
+    <Compile Include="capex.image.PixelRegionBuffer.cs" />
+    <Compile Include="capex.image.RGBAPixelIntegerBuffer.cs" />
+    <Compile Include="capex.map.GeoCoder.cs" />
+    <Compile Include="capex.map.GeoCoderAddressListener.cs" />
+    <Compile Include="capex.map.GeoCoderForGoogleMapsAPI.cs" />
+    <Compile Include="capex.map.GeoCoderLocationListener.cs" />
+    <Compile Include="capex.map.GeoLocation.cs" />
+    <Compile Include="capex.map.GeoLocationManager.cs" />
+    <Compile Include="capex.map.PhysicalAddress.cs" />
+    <Compile Include="capex.net.ConnectedSocket.cs" />
+    <Compile Include="capex.net.IOManager.cs" />
+    <Compile Include="capex.net.IOManagerDotNetSelect.cs" />
+    <Compile Include="capex.net.IOManagerEntry.cs" />
+    <Compile Include="capex.net.IOManagerTimer.cs" />
+    <Compile Include="capex.net.SSLSocket.cs" />
+    <Compile Include="capex.net.TCPClient.cs" />
+    <Compile Include="capex.net.TCPClientImpl.cs" />
+    <Compile Include="capex.net.TCPSocket.cs" />
+    <Compile Include="capex.net.TCPSocketImpl.cs" />
+    <Compile Include="capex.net.UDPSocket.cs" />
+    <Compile Include="capex.net.UDPSocketImpl.cs" />
+    <Compile Include="capex.net.WSCloseEvent.cs" />
+    <Compile Include="capex.net.WSMessage.cs" />
+    <Compile Include="capex.net.WSSocket.cs" />
+    <Compile Include="capex.net.WSSocketGeneric.cs" />
+    <Compile Include="capex.text.HTMLString.cs" />
+    <Compile Include="capex.text.RichTextBlockParagraph.cs" />
+    <Compile Include="capex.text.RichTextContentParagraph.cs" />
+    <Compile Include="capex.text.RichTextDocument.cs" />
+    <Compile Include="capex.text.RichTextDocumentReferenceResolver.cs" />
+    <Compile Include="capex.text.RichTextImageParagraph.cs" />
+    <Compile Include="capex.text.RichTextLinkParagraph.cs" />
+    <Compile Include="capex.text.RichTextParagraph.cs" />
+    <Compile Include="capex.text.RichTextPreformattedParagraph.cs" />
+    <Compile Include="capex.text.RichTextReferenceParagraph.cs" />
+    <Compile Include="capex.text.RichTextSegment.cs" />
+    <Compile Include="capex.text.RichTextSeparatorParagraph.cs" />
+    <Compile Include="capex.text.RichTextStyledParagraph.cs" />
+    <Compile Include="capex.text.RichTextWikiMarkupParser.cs" />
+    <Compile Include="capex.text.TextTemplate.cs" />
+    <Compile Include="capex.text.VerboseDateTimeString.cs" />
+    <Compile Include="capex.text.WordWrap.cs" />
+    <Compile Include="capex.text.XMLMaker.cs" />
+    <Compile Include="capex.text.XMLParser.cs" />
+    <Compile Include="capex.util.Matrix33.cs" />
+    <Compile Include="capex.util.Matrix44.cs" />
+    <Compile Include="capex.util.MimeTypeRegistry.cs" />
+    <Compile Include="capex.util.PaperConfiguration.cs" />
+    <Compile Include="capex.util.PaperOrientation.cs" />
+    <Compile Include="capex.util.PaperSize.cs" />
+    <Compile Include="capex.util.SimpleConfigFile.cs" />
+    <Compile Include="capex.util.Vector2.cs" />
+    <Compile Include="capex.util.Vector3.cs" />
+    <Compile Include="capex.util.ZipReader.cs" />
+    <Compile Include="capex.util.ZipReaderEntry.cs" />
+    <Compile Include="capex.util.ZipReaderForDotNet.cs" />
+    <Compile Include="capex.util.ZipWriter.cs" />
+    <Compile Include="capex.util.ZipWriterForDotNet.cs" />
+    <Compile Include="capex.web.JSONAPIClient.cs" />
+    <Compile Include="capex.web.NativeWebClient.cs" />
+    <Compile Include="capex.web.WebClient.cs" />
+    <Compile Include="cave.Color.cs" />
+    <Compile Include="cave.fb.Login.cs" />
+    <Compile Include="cave.FontDescription.cs" />
+    <Compile Include="cave.google.account.Login.cs" />
+    <Compile Include="cave.google.maps.MapMarker.cs" />
+    <Compile Include="cave.google.maps.MapWidget.cs" />
+    <Compile Include="cave.google.maps.StreetViewWidget.cs" />
+    <Compile Include="cave.GuiApplicationContext.cs" />
+    <Compile Include="cave.GuiApplicationContextForUWP.cs" />
+    <Compile Include="cave.Image.cs" />
+    <Compile Include="cave.ImageSheet.cs" />
+    <Compile Include="cave.KeyEvent.cs" />
+    <Compile Include="cave.KeyListener.cs" />
+    <Compile Include="cave.Length.cs" />
+    <Compile Include="cave.notification.Notification.cs" />
+    <Compile Include="cave.photo.Camera.cs" />
+    <Compile Include="cave.pim.Contact.cs" />
+    <Compile Include="cave.pim.ContactPicker.cs" />
+    <Compile Include="cave.PointerEvent.cs" />
+    <Compile Include="cave.PointerListener.cs" />
+    <Compile Include="cave.ScreenWithContext.cs" />
+    <Compile Include="cave.ui.ActionBarControlWidget.cs" />
+    <Compile Include="cave.ui.ActionBarWidget.cs" />
+    <Compile Include="cave.ui.AlignWidget.cs" />
+    <Compile Include="cave.ui.AsynchronousImageWidget.cs" />
+    <Compile Include="cave.ui.ButtonWidget.cs" />
+    <Compile Include="cave.ui.CanvasWidget.cs" />
+    <Compile Include="cave.ui.CheckBoxWidget.cs" />
+    <Compile Include="cave.ui.CustomContainerWidget.cs" />
+    <Compile Include="cave.ui.DateSelectorWidget.cs" />
+    <Compile Include="cave.ui.DisplayAwareWidget.cs" />
+    <Compile Include="cave.ui.FileInputWidget.cs" />
+    <Compile Include="cave.ui.FileSelectorWidget.cs" />
+    <Compile Include="cave.ui.FormDeclaration.cs" />
+    <Compile Include="cave.ui.FormWidget.cs" />
+    <Compile Include="cave.ui.GridWidget.cs" />
+    <Compile Include="cave.ui.HeightAwareWidget.cs" />
+    <Compile Include="cave.ui.HorizontalBoxWidget.cs" />
+    <Compile Include="cave.ui.HorizontalScrollerWidget.cs" />
+    <Compile Include="cave.ui.HyperLinkWidget.cs" />
+    <Compile Include="cave.ui.ImageButtonWidget.cs" />
+    <Compile Include="cave.ui.ImageWidget.cs" />
+    <Compile Include="cave.ui.JSONAPIClientWithGui.cs" />
+    <Compile Include="cave.ui.LabelWidget.cs" />
+    <Compile Include="cave.ui.LayerWidget.cs" />
+    <Compile Include="cave.ui.ListItemWidget.cs" />
+    <Compile Include="cave.ui.LoadingWidget.cs" />
+    <Compile Include="cave.ui.Menu.cs" />
+    <Compile Include="cave.ui.MenuBarWidget.cs" />
+    <Compile Include="cave.ui.NavigationWidget.cs" />
+    <Compile Include="cave.ui.PhotoSelectorWidget.cs" />
+    <Compile Include="cave.ui.PopupDialogManager.cs" />
+    <Compile Include="cave.ui.PopupMenu.cs" />
+    <Compile Include="cave.ui.PopupWidget.cs" />
+    <Compile Include="cave.ui.RadioButtonGroupWidget.cs" />
+    <Compile Include="cave.ui.ResizeAwareWidget.cs" />
+    <Compile Include="cave.ui.ScreenAwareWidget.cs" />
+    <Compile Include="cave.ui.ScreenForWidget.cs" />
+    <Compile Include="cave.ui.SelectWidget.cs" />
+    <Compile Include="cave.ui.SidebarWidget.cs" />
+    <Compile Include="cave.ui.SignatureWidget.cs" />
+    <Compile Include="cave.ui.SplashScreenWidget.cs" />
+    <Compile Include="cave.ui.SwitcherLayerWidget.cs" />
+    <Compile Include="cave.ui.TextAreaWidget.cs" />
+    <Compile Include="cave.ui.TextButtonWidget.cs" />
+    <Compile Include="cave.ui.TextInputWidget.cs" />
+    <Compile Include="cave.ui.TitleContainerWidget.cs" />
+    <Compile Include="cave.ui.TitledWidget.cs" />
+    <Compile Include="cave.ui.ToolbarWidget.cs" />
+    <Compile Include="cave.ui.TopMarginLayerWidget.cs" />
+    <Compile Include="cave.ui.VerticalBoxWidget.cs" />
+    <Compile Include="cave.ui.VerticalScrollerWidget.cs" />
+    <Compile Include="cave.ui.VerticalScrollerWithToolbarWidget.cs" />
+    <Compile Include="cave.ui.WebImageWidget.cs" />
+    <Compile Include="cave.ui.WebWidget.cs" />
+    <Compile Include="cave.ui.Widget.cs" />
+    <Compile Include="cave.ui.WidgetAnimation.cs" />
+    <Compile Include="cave.ui.WidgetWithLayout.cs" />
+    <Compile Include="cave.ui.WidgetWithValue.cs" />
+    <Compile Include="motion.AudioClip.cs" />
+    <Compile Include="motion.AudioManager.cs" />
+    <Compile Include="motion.AudioStream.cs" />
+    <Compile Include="motion.Backend.cs" />
+    <Compile Include="motion.ContainerSprite.cs" />
+    <Compile Include="motion.Entity.cs" />
+    <Compile Include="motion.EntityScene.cs" />
+    <Compile Include="motion.MultiSpriteEntity.cs" />
+    <Compile Include="motion.Scene.cs" />
+    <Compile Include="motion.SceneManager.cs" />
+    <Compile Include="motion.Sprite.cs" />
+    <Compile Include="motion.SpriteEntity.cs" />
+    <Compile Include="motion.SpriteLayer.cs" />
+    <Compile Include="motion.SpriteScene.cs" />
+    <Compile Include="motion.SpriteSceneWithEntities.cs" />
+    <Compile Include="motion.SpriteSheetEntity.cs" />
+    <Compile Include="motion.SpriteUtil.cs" />
+    <Compile Include="motion.TextButtonEntity.cs" />
+    <Compile Include="motion.TextProperties.cs" />
+    <Compile Include="motion.TextSprite.cs" />
+    <Compile Include="motion.Texture.cs" />
+    <Compile Include="motion.TextureSprite.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+</Project>
