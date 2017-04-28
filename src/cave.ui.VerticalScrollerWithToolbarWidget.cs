@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class VerticalScrollerWithToolbarWidget : cave.ui.LayerWidget
 	{
-		public VerticalScrollerWithToolbarWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public VerticalScrollerWithToolbarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public VerticalScrollerWithToolbarWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		private bool autohideToolbar = false;

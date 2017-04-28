@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public abstract class ListItemWidget : cave.ui.VerticalBoxWidget, cave.ui.TitledWidget, cave.ui.DisplayAwareWidget
 	{
+		public ListItemWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		protected cave.ui.VerticalBoxWidget list = null;
 		private int widgetListSpacing = 0;
 		private int widgetListMargin = 0;

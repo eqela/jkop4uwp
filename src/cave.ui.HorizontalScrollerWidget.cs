@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class HorizontalScrollerWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithLayout
 	{
+		public HorizontalScrollerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.HorizontalScrollerWidget forWidget(cave.GuiApplicationContext context, Windows.UI.Xaml.UIElement widget) {
 			var v = new cave.ui.HorizontalScrollerWidget(context);
 			v.addWidget(widget);

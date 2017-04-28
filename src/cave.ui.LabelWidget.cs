@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class LabelWidget : Windows.UI.Xaml.Controls.UserControl
 	{
+		public LabelWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public const int ALIGN_LEFT = 0;
 		public const int ALIGN_CENTER = 1;
 		public const int ALIGN_RIGHT = 2;

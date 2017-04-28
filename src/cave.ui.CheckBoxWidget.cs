@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class CheckBoxWidget : Windows.UI.Xaml.Controls.CheckBox, cave.ui.WidgetWithValue
 	{
+		public CheckBoxWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.CheckBoxWidget forText(cave.GuiApplicationContext context, string text) {
 			var v = new cave.ui.CheckBoxWidget(context);
 			v.setWidgetText(text);

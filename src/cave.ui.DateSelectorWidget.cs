@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class DateSelectorWidget : cave.ui.LayerWidget, cave.ui.WidgetWithValue
 	{
+		public DateSelectorWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static new cave.ui.DateSelectorWidget forContext(cave.GuiApplicationContext context) {
 			var v = new cave.ui.DateSelectorWidget(context);
 			return(v);

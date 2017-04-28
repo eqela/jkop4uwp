@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class SwitcherLayerWidget : cave.ui.CustomContainerWidget
 	{
-		public SwitcherLayerWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public SwitcherLayerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public SwitcherLayerWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		public static cave.ui.SwitcherLayerWidget findTopMostLayerWidget(Windows.UI.Xaml.UIElement widget) {

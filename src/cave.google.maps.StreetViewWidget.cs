@@ -26,6 +26,9 @@ namespace cave.google.maps
 {
 	public class StreetViewWidget : cave.ui.ScreenAwareWidget
 	{
+		public StreetViewWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private cave.GuiApplicationContext context = null;
 
 		public StreetViewWidget(cave.GuiApplicationContext context) {

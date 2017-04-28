@@ -26,6 +26,20 @@ namespace cave.ui
 {
 	public class MenuBarWidget : cave.ui.LayerWidget
 	{
+		public MenuBarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public MenuBarWidget(cave.GuiApplicationContext context) : base(context) {
+			var thisWidget = (dynamic)this;
+			var widget = new cave.ui.CanvasWidget(context);
+			widget.setWidgetColor(cave.Color.forString("#BBBBBB"));
+			addWidget((Windows.UI.Xaml.UIElement)widget);
+			box = new cave.ui.HorizontalBoxWidget(context);
+			box.setWidgetSpacing(context.getWidthValue("300um"));
+			box.setWidgetMargin(context.getWidthValue("300um"));
+			addWidget((Windows.UI.Xaml.UIElement)box);
+		}
+
 		public cave.ui.Menu addMenu(string title, cave.ui.Menu menu = null) {
 			var v = menu;
 			if(!(v != null)) {
@@ -40,17 +54,6 @@ namespace cave.ui
 			});
 			box.addWidget((Windows.UI.Xaml.UIElement)button);
 			return(v);
-		}
-
-		public MenuBarWidget(cave.GuiApplicationContext context) : base(context) {
-			var thisWidget = (dynamic)this;
-			var widget = new cave.ui.CanvasWidget(context);
-			widget.setWidgetColor(cave.Color.forString("#BBBBBB"));
-			addWidget((Windows.UI.Xaml.UIElement)widget);
-			box = new cave.ui.HorizontalBoxWidget(context);
-			box.setWidgetSpacing(context.getWidthValue("300um"));
-			box.setWidgetMargin(context.getWidthValue("300um"));
-			addWidget((Windows.UI.Xaml.UIElement)box);
 		}
 
 		cave.ui.HorizontalBoxWidget box = null;

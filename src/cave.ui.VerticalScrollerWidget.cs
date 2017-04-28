@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class VerticalScrollerWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithLayout, cave.ui.HeightAwareWidget
 	{
+		public VerticalScrollerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.VerticalScrollerWidget forWidget(cave.GuiApplicationContext context, Windows.UI.Xaml.UIElement widget) {
 			var v = new cave.ui.VerticalScrollerWidget(context);
 			v.addWidget(widget);

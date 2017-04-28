@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class FileInputWidget
 	{
+		public FileInputWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.FileInputWidget forType(cave.GuiApplicationContext context, string type) {
 			var v = new cave.ui.FileInputWidget(context);
 			v.setWidgetType(type);

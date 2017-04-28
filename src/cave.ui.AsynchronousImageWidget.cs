@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class AsynchronousImageWidget : cave.ui.LayerWidget
 	{
+		public AsynchronousImageWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private Windows.UI.Xaml.UIElement overlay = null;
 		private int widgetImageWidth = 0;
 		private int widgetImageHeight = 0;

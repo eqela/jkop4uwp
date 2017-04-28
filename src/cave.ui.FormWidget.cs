@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class FormWidget : cave.ui.LayerWidget
 	{
+		public FormWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private class Action
 		{
 			public Action() {
@@ -37,6 +40,9 @@ namespace cave.ui
 
 		private class MyStringListInputWidget : cave.ui.TextInputWidget
 		{
+			public MyStringListInputWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+			}
+
 			public MyStringListInputWidget(cave.GuiApplicationContext context) : base(context) {
 			}
 
@@ -82,6 +88,9 @@ namespace cave.ui
 
 		private class StaticTextWidget : cave.ui.LayerWidget, cave.ui.WidgetWithValue
 		{
+			public StaticTextWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+			}
+
 			public static cave.ui.FormWidget.StaticTextWidget forText(cave.GuiApplicationContext context, string text) {
 				var v = new cave.ui.FormWidget.StaticTextWidget(context);
 				v.setWidgetValue((object)text);

@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class HyperLinkWidget : Windows.UI.Xaml.Controls.HyperlinkButton
 	{
+		public HyperLinkWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.HyperLinkWidget forText(cave.GuiApplicationContext context, string text, System.Action handler) {
 			var v = new cave.ui.HyperLinkWidget(context);
 			v.setWidgetText(text);

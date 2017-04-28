@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class LoadingWidget : cave.ui.LayerWidget
 	{
-		public LoadingWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public LoadingWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public LoadingWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		private static string displayText = null;

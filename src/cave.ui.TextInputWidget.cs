@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class TextInputWidget : Windows.UI.Xaml.Controls.TextBox, cave.ui.WidgetWithValue
 	{
+		public TextInputWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.TextInputWidget forType(cave.GuiApplicationContext context, int type, string placeholder) {
 			var v = new cave.ui.TextInputWidget(context);
 			v.setWidgetType(type);

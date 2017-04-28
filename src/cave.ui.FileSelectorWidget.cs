@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class FileSelectorWidget
 	{
+		public FileSelectorWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private cave.GuiApplicationContext context = null;
 
 		public FileSelectorWidget(cave.GuiApplicationContext context) {

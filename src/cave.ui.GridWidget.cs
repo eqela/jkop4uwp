@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class GridWidget : cave.ui.CustomContainerWidget
 	{
-		public GridWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public GridWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public GridWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		public static cave.ui.GridWidget forContext(cave.GuiApplicationContext context) {

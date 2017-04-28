@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class TextAreaWidget : Windows.UI.Xaml.Controls.TextBox, cave.ui.WidgetWithValue
 	{
+		public TextAreaWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.TextAreaWidget forPlaceholder(cave.GuiApplicationContext context, string placeholder, int rows = 1) {
 			var v = new cave.ui.TextAreaWidget(context);
 			v.setWidgetPlaceholder(placeholder);

@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class WebImageWidget : cave.ui.AsynchronousImageWidget
 	{
+		public WebImageWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.WebImageWidget forPlaceholderImage(cave.GuiApplicationContext context, cave.Image image) {
 			var v = new cave.ui.WebImageWidget(context);
 			v.setWidgetPlaceholderImage(image);

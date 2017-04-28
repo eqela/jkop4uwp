@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class AlignWidget : cave.ui.CustomContainerWidget
 	{
+		public AlignWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private class MyChildEntry
 		{
 			public MyChildEntry() {

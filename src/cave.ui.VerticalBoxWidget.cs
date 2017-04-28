@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class VerticalBoxWidget : cave.ui.CustomContainerWidget
 	{
+		public VerticalBoxWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private class MyChildEntry
 		{
 			public MyChildEntry() {

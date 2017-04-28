@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class ActionBarWidget : cave.ui.LayerWidget, cave.ui.ScreenAwareWidget
 	{
-		public ActionBarWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public ActionBarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public ActionBarWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		private cave.Color widgetBackgroundColor = null;

@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class PopupWidget : cave.ui.LayerWidget
 	{
+		public PopupWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.PopupWidget forContentWidget(cave.GuiApplicationContext context, Windows.UI.Xaml.UIElement widget) {
 			var v = new cave.ui.PopupWidget(context);
 			v.setWidgetContent(widget);

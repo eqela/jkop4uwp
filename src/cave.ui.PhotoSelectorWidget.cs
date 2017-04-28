@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class PhotoSelectorWidget
 	{
+		public PhotoSelectorWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private cave.GuiApplicationContext context = null;
 
 		public PhotoSelectorWidget(cave.GuiApplicationContext context) {

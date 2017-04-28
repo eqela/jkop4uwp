@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class SplashScreenWidget : cave.ui.LayerWidget
 	{
+		public SplashScreenWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private class Slide
 		{
 			public Slide() {

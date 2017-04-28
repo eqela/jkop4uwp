@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class NavigationWidget : cave.ui.LayerWidget, cave.ui.TitleContainerWidget, cave.KeyListener
 	{
+		public NavigationWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static bool switchToContainer(Windows.UI.Xaml.UIElement widget, Windows.UI.Xaml.UIElement newWidget) {
 			cave.ui.NavigationWidget ng = null;
 			var pp = cave.ui.Widget.getParent(widget);

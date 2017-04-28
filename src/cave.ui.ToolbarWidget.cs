@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class ToolbarWidget : cave.ui.LayerWidget
 	{
-		public ToolbarWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public ToolbarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public ToolbarWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		public static cave.ui.ToolbarWidget forItems(cave.GuiApplicationContext ctx, System.Collections.Generic.List<Windows.UI.Xaml.UIElement> items, cave.Color color = null) {

@@ -1,9 +1,14 @@
 {
-	"description" : "A universal software development framework",
+	"title" : "Jkop for UWP",
+	"description" : "Implementation of the Jkop library and framework API for the Universal Windows Platform",
+	"packOptions" : {
+		"projectUrl" : "http://www.jkop.org"
+	},
+	"copyright" : "Copyright (c) 2016-2017 Job and Esther Technologies, Inc.",
 	"authors" : [
 		"Job and Esther Technologies, Inc."
 	],
-	"version" : "1.0.20170427",
+	"version" : "1.0.20170428",
 	"runtimes" : {
 		"win10-arm" : {
 		},

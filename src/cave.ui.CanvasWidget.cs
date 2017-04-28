@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class CanvasWidget : Windows.UI.Xaml.Controls.UserControl, cave.ui.WidgetWithLayout
 	{
+		public CanvasWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.CanvasWidget forColor(cave.GuiApplicationContext context, cave.Color color) {
 			var v = new cave.ui.CanvasWidget(context);
 			v.setWidgetColor(color);

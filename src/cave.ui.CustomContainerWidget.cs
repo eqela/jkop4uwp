@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class CustomContainerWidget : Windows.UI.Xaml.Controls.Panel, cave.ui.WidgetWithLayout, cave.ui.HeightAwareWidget
 	{
+		public CustomContainerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		protected cave.GuiApplicationContext context = null;
 		private bool allowResize = true;
 		private double lastWidth = -1.00;

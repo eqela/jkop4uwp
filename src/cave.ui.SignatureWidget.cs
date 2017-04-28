@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class SignatureWidget : cave.ui.CanvasWidget
 	{
+		public SignatureWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private cave.Color strokeColor = null;
 		private float strokeWidth = 0.00f;
 

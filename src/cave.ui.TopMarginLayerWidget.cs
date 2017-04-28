@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class TopMarginLayerWidget : cave.ui.LayerWidget
 	{
-		public TopMarginLayerWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public TopMarginLayerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public TopMarginLayerWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		public override void computeWidgetLayout(int widthConstraint) {

@@ -29,6 +29,15 @@ namespace cave
 		public GuiApplicationContextForUWP() {
 		}
 
+		private static cave.GuiApplicationContextForUWP instance = null;
+
+		public static cave.GuiApplicationContextForUWP getInstance() {
+			if(!(cave.GuiApplicationContextForUWP.instance != null)) {
+				cave.GuiApplicationContextForUWP.instance = new cave.GuiApplicationContextForUWP();
+			}
+			return(cave.GuiApplicationContextForUWP.instance);
+		}
+
 		public virtual void logError(string message) {
 			System.Diagnostics.Debug.WriteLine("[ERROR] " + message);
 		}

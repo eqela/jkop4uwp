@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class ImageWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithLayout
 	{
+		public ImageWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.ImageWidget forImage(cave.GuiApplicationContext context, cave.Image image) {
 			var v = new cave.ui.ImageWidget(context);
 			v.setWidgetImage(image);

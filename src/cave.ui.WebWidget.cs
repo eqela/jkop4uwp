@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class WebWidget
 	{
+		public WebWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.WebWidget forUrl(cave.GuiApplicationContext context, string url) {
 			var v = new cave.ui.WebWidget(context);
 			v.setWidgetUrl(url);

@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class HorizontalBoxWidget : cave.ui.CustomContainerWidget
 	{
+		public HorizontalBoxWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		private class MyChildEntry
 		{
 			public MyChildEntry() {

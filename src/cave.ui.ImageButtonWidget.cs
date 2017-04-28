@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class ImageButtonWidget : cave.ui.LayerWidget
 	{
+		public ImageButtonWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.ImageButtonWidget forImage(cave.GuiApplicationContext context, cave.Image image, System.Action handler) {
 			var v = new cave.ui.ImageButtonWidget(context);
 			v.setWidgetImage(image);

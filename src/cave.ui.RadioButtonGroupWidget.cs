@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class RadioButtonGroupWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithValue
 	{
+		public RadioButtonGroupWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.RadioButtonGroupWidget forGroup(cave.GuiApplicationContext context, string group, System.Collections.Generic.List<string> items) {
 			var v = new cave.ui.RadioButtonGroupWidget(context);
 			v.setWidgetName(group);

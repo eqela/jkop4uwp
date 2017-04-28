@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class SelectWidget : Windows.UI.Xaml.Controls.ComboBox, cave.ui.WidgetWithValue
 	{
+		public SelectWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.SelectWidget forKeyValueList(cave.GuiApplicationContext context, cape.KeyValueList<string, string> options) {
 			var v = new cave.ui.SelectWidget(context);
 			v.setWidgetItemsAsKeyValueList(options);

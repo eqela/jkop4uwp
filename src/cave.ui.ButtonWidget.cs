@@ -26,6 +26,9 @@ namespace cave.ui
 {
 	public class ButtonWidget : Windows.UI.Xaml.Controls.Button
 	{
+		public ButtonWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
 		public static cave.ui.ButtonWidget forText(cave.GuiApplicationContext context, string text, System.Action handler) {
 			var v = new cave.ui.ButtonWidget(context);
 			v.setWidgetText(text);

@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class LayerWidget : cave.ui.CustomContainerWidget
 	{
-		public LayerWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public LayerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public LayerWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		public static cave.ui.LayerWidget findTopMostLayerWidget(Windows.UI.Xaml.UIElement widget) {

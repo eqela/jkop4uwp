@@ -26,7 +26,10 @@ namespace cave.ui
 {
 	public class SidebarWidget : cave.ui.LayerWidget
 	{
-		public SidebarWidget(cave.GuiApplicationContext ctx) : base(ctx) {
+		public SidebarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
+		}
+
+		public SidebarWidget(cave.GuiApplicationContext context) : base(context) {
 		}
 
 		public static cave.ui.SidebarWidget forItems(cave.GuiApplicationContext ctx, System.Collections.Generic.List<Windows.UI.Xaml.UIElement> items, cave.Color color = null) {

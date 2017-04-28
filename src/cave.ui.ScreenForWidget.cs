@@ -120,7 +120,7 @@ namespace cave.ui
 
 		private cave.GuiApplicationContext createContext() {
 			cave.GuiApplicationContext v = null;
-			v = (cave.GuiApplicationContext)new cave.GuiApplicationContextForUWP();
+			v = (cave.GuiApplicationContext)cave.GuiApplicationContextForUWP.getInstance();
 			return(v);
 		}
 
