@@ -92,11 +92,11 @@ namespace capex.text
 						sb.append(sg.getText());
 						var link = sg.getLink();
 						if(cape.String.isEmpty(link) == false) {
-							sb.append((" (" + link) + ")");
+							sb.append(" (" + link + ")");
 						}
 						var @ref = sg.getReference();
 						if(cape.String.isEmpty(@ref) == false) {
-							sb.append((" {" + @ref) + "}");
+							sb.append(" {" + @ref + "}");
 						}
 					}
 				}
@@ -124,14 +124,14 @@ namespace capex.text
 						var link = sg.getLink();
 						if(cape.String.isEmpty(link) == false) {
 							if(sg.getIsInline()) {
-								sb.append(("<img src=\"" + capex.text.HTMLString.sanitize(link)) + "\" />");
+								sb.append("<img src=\"" + capex.text.HTMLString.sanitize(link) + "\" />");
 							}
 							else {
 								var targetblank = "";
 								if(sg.getLinkPopup()) {
 									targetblank = " target=\"_blank\"";
 								}
-								sb.append(((("<a" + targetblank) + " class=\"urlLink\" href=\"") + capex.text.HTMLString.sanitize(link)) + "\">");
+								sb.append("<a" + targetblank + " class=\"urlLink\" href=\"" + capex.text.HTMLString.sanitize(link) + "\">");
 								aOpen = true;
 							}
 						}
@@ -148,12 +148,12 @@ namespace capex.text
 								if(cape.String.isEmpty(text)) {
 									text = @ref;
 								}
-								sb.append(("<a class=\"referenceLink\" href=\"" + capex.text.HTMLString.sanitize(href)) + "\">");
+								sb.append("<a class=\"referenceLink\" href=\"" + capex.text.HTMLString.sanitize(href) + "\">");
 								aOpen = true;
 							}
 						}
 						var span = false;
-						if(((sg.getBold() || sg.getItalic()) || sg.getUnderline()) || (cape.String.isEmpty(sg.getColor()) == false)) {
+						if(sg.getBold() || sg.getItalic() || sg.getUnderline() || cape.String.isEmpty(sg.getColor()) == false) {
 							span = true;
 							sb.append("<span style=\"");
 							if(sg.getBold()) {
@@ -166,7 +166,7 @@ namespace capex.text
 								sb.append(" text-decoration: underline;");
 							}
 							if(cape.String.isEmpty(sg.getColor()) == false) {
-								sb.append((" color: " + capex.text.HTMLString.sanitize(sg.getColor())) + "");
+								sb.append(" color: " + capex.text.HTMLString.sanitize(sg.getColor()) + "");
 							}
 							sb.append("\">");
 						}
@@ -182,7 +182,7 @@ namespace capex.text
 					}
 				}
 			}
-			sb.append(("</" + tag) + ">");
+			sb.append("</" + tag + ">");
 			return(sb.toString());
 		}
 
@@ -383,12 +383,12 @@ namespace capex.text
 					pc = (char)0;
 					continue;
 				}
-				if(((((c != '*') && (c != '_')) && (c != '\'')) && (c != '{')) && (c != '[')) {
+				if(c != '*' && c != '_' && c != '\'' && c != '{' && c != '[') {
 					sb.append(c);
 				}
 				pc = c;
 			}
-			if(((((pc == '*') || (pc == '_')) || (pc == '\'')) && (pc != '{')) && (pc != '[')) {
+			if((pc == '*' || pc == '_' || pc == '\'') && pc != '{' && pc != '[') {
 				sb.append(pc);
 			}
 			if(sb.count() > 0) {
@@ -415,7 +415,7 @@ namespace capex.text
 				var key = prefixes[n];
 				if(cape.String.startsWith(txt, key + " ") && cape.String.endsWith(txt, " " + key)) {
 					setHeading(n + 1);
-					txt = cape.String.subString(txt, cape.String.getLength(key) + 1, (cape.String.getLength(txt) - (cape.String.getLength(key) * 2)) - 2);
+					txt = cape.String.subString(txt, cape.String.getLength(key) + 1, cape.String.getLength(txt) - cape.String.getLength(key) * 2 - 2);
 					if(!(object.Equals(txt, null))) {
 						txt = cape.String.strip(txt);
 					}

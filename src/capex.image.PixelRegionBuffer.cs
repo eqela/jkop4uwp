@@ -47,12 +47,12 @@ namespace capex.image
 		}
 
 		public byte[] getBufferRegion(int x, int y, bool newbuffer = false) {
-			if((cache == null) && (newbuffer == false)) {
-				cache = new byte[(rangew * rangeh) * 4];
+			if(cache == null && newbuffer == false) {
+				cache = new byte[rangew * rangeh * 4];
 			}
 			var v = cache;
 			if(newbuffer) {
-				v = new byte[(rangew * rangeh) * 4];
+				v = new byte[rangew * rangeh * 4];
 			}
 			var p = v;
 			if(p == null) {
@@ -63,10 +63,10 @@ namespace capex.image
 			for(i = 0 ; i < rangeh ; i++) {
 				for(j = 0 ; j < rangew ; j++) {
 					var pix = src.getRgbaPixel(x + j, y + i);
-					cape.Buffer.setByte(p, (long)((((i * rangew) + j) * 4) + 0), (byte)pix[0]);
-					cape.Buffer.setByte(p, (long)((((i * rangew) + j) * 4) + 1), (byte)pix[1]);
-					cape.Buffer.setByte(p, (long)((((i * rangew) + j) * 4) + 2), (byte)pix[2]);
-					cape.Buffer.setByte(p, (long)((((i * rangew) + j) * 4) + 3), (byte)pix[3]);
+					cape.Buffer.setByte(p, (long)((i * rangew + j) * 4 + 0), (byte)pix[0]);
+					cape.Buffer.setByte(p, (long)((i * rangew + j) * 4 + 1), (byte)pix[1]);
+					cape.Buffer.setByte(p, (long)((i * rangew + j) * 4 + 2), (byte)pix[2]);
+					cape.Buffer.setByte(p, (long)((i * rangew + j) * 4 + 3), (byte)pix[3]);
 				}
 			}
 			return(v);

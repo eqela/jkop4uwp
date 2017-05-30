@@ -75,7 +75,7 @@ namespace motion
 		}
 
 		public bool nextFrame() {
-			if((imageSheet == null) || (arraySize < 1)) {
+			if(imageSheet == null || arraySize < 1) {
 				sprite = null;
 				return(false);
 			}

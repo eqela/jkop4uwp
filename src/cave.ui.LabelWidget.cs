@@ -47,6 +47,7 @@ namespace cave.ui
 		private double widgetFontSize = 0.00;
 		private bool widgetFontBold = false;
 		private string widgetFontFamily = null;
+		private string widgetFontResource = null;
 		private int widgetTextAlign = 0;
 
 		public LabelWidget(cave.GuiApplicationContext context) {
@@ -126,6 +127,12 @@ namespace cave.ui
 
 		public cave.ui.LabelWidget setWidgetFontFamily(string font) {
 			widgetFontFamily = font;
+			updateWidgetFont();
+			return(this);
+		}
+
+		public cave.ui.LabelWidget setWidgetFontResource(string res) {
+			widgetFontResource = res;
 			updateWidgetFont();
 			return(this);
 		}

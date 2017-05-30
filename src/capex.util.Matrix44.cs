@@ -336,29 +336,29 @@ namespace capex.util
 
 		public static capex.util.Matrix44 multiplyMatrix(capex.util.Matrix44 a, capex.util.Matrix44 b) {
 			var matrix44 = new capex.util.Matrix44();
-			matrix44.v[0] = (((a.v[0] * b.v[0]) + (a.v[1] * b.v[4])) + (a.v[2] * b.v[8])) + (a.v[3] * b.v[12]);
-			matrix44.v[1] = (((a.v[0] * b.v[1]) + (a.v[1] * b.v[5])) + (a.v[2] * b.v[9])) + (a.v[3] * b.v[13]);
-			matrix44.v[2] = (((a.v[0] * b.v[2]) + (a.v[1] * b.v[6])) + (a.v[2] * b.v[10])) + (a.v[3] * b.v[14]);
-			matrix44.v[3] = (((a.v[0] * b.v[3]) + (a.v[1] * b.v[7])) + (a.v[2] * b.v[11])) + (a.v[3] * b.v[15]);
-			matrix44.v[4] = (((a.v[4] * b.v[0]) + (a.v[5] * b.v[4])) + (a.v[6] * b.v[8])) + (a.v[7] * b.v[12]);
-			matrix44.v[5] = (((a.v[4] * b.v[1]) + (a.v[5] * b.v[5])) + (a.v[6] * b.v[9])) + (a.v[7] * b.v[13]);
-			matrix44.v[6] = (((a.v[4] * b.v[2]) + (a.v[5] * b.v[6])) + (a.v[6] * b.v[10])) + (a.v[7] * b.v[14]);
-			matrix44.v[7] = (((a.v[4] * b.v[3]) + (a.v[5] * b.v[7])) + (a.v[6] * b.v[11])) + (a.v[7] * b.v[15]);
-			matrix44.v[8] = (((a.v[8] * b.v[0]) + (a.v[9] * b.v[4])) + (a.v[10] * b.v[8])) + (a.v[11] * b.v[12]);
-			matrix44.v[9] = (((a.v[8] * b.v[1]) + (a.v[9] * b.v[5])) + (a.v[10] * b.v[9])) + (a.v[11] * b.v[13]);
-			matrix44.v[10] = (((a.v[8] * b.v[2]) + (a.v[9] * b.v[6])) + (a.v[10] * b.v[10])) + (a.v[11] * b.v[14]);
-			matrix44.v[11] = (((a.v[8] * b.v[3]) + (a.v[9] * b.v[7])) + (a.v[10] * b.v[11])) + (a.v[11] * b.v[15]);
-			matrix44.v[12] = (((a.v[12] * b.v[0]) + (a.v[13] * b.v[4])) + (a.v[14] * b.v[8])) + (a.v[15] * b.v[12]);
-			matrix44.v[13] = (((a.v[12] * b.v[1]) + (a.v[13] * b.v[5])) + (a.v[14] * b.v[9])) + (a.v[15] * b.v[13]);
-			matrix44.v[14] = (((a.v[12] * b.v[2]) + (a.v[13] * b.v[6])) + (a.v[14] * b.v[10])) + (a.v[15] * b.v[14]);
-			matrix44.v[15] = (((a.v[12] * b.v[3]) + (a.v[13] * b.v[7])) + (a.v[14] * b.v[11])) + (a.v[15] * b.v[15]);
+			matrix44.v[0] = a.v[0] * b.v[0] + a.v[1] * b.v[4] + a.v[2] * b.v[8] + a.v[3] * b.v[12];
+			matrix44.v[1] = a.v[0] * b.v[1] + a.v[1] * b.v[5] + a.v[2] * b.v[9] + a.v[3] * b.v[13];
+			matrix44.v[2] = a.v[0] * b.v[2] + a.v[1] * b.v[6] + a.v[2] * b.v[10] + a.v[3] * b.v[14];
+			matrix44.v[3] = a.v[0] * b.v[3] + a.v[1] * b.v[7] + a.v[2] * b.v[11] + a.v[3] * b.v[15];
+			matrix44.v[4] = a.v[4] * b.v[0] + a.v[5] * b.v[4] + a.v[6] * b.v[8] + a.v[7] * b.v[12];
+			matrix44.v[5] = a.v[4] * b.v[1] + a.v[5] * b.v[5] + a.v[6] * b.v[9] + a.v[7] * b.v[13];
+			matrix44.v[6] = a.v[4] * b.v[2] + a.v[5] * b.v[6] + a.v[6] * b.v[10] + a.v[7] * b.v[14];
+			matrix44.v[7] = a.v[4] * b.v[3] + a.v[5] * b.v[7] + a.v[6] * b.v[11] + a.v[7] * b.v[15];
+			matrix44.v[8] = a.v[8] * b.v[0] + a.v[9] * b.v[4] + a.v[10] * b.v[8] + a.v[11] * b.v[12];
+			matrix44.v[9] = a.v[8] * b.v[1] + a.v[9] * b.v[5] + a.v[10] * b.v[9] + a.v[11] * b.v[13];
+			matrix44.v[10] = a.v[8] * b.v[2] + a.v[9] * b.v[6] + a.v[10] * b.v[10] + a.v[11] * b.v[14];
+			matrix44.v[11] = a.v[8] * b.v[3] + a.v[9] * b.v[7] + a.v[10] * b.v[11] + a.v[11] * b.v[15];
+			matrix44.v[12] = a.v[12] * b.v[0] + a.v[13] * b.v[4] + a.v[14] * b.v[8] + a.v[15] * b.v[12];
+			matrix44.v[13] = a.v[12] * b.v[1] + a.v[13] * b.v[5] + a.v[14] * b.v[9] + a.v[15] * b.v[13];
+			matrix44.v[14] = a.v[12] * b.v[2] + a.v[13] * b.v[6] + a.v[14] * b.v[10] + a.v[15] * b.v[14];
+			matrix44.v[15] = a.v[12] * b.v[3] + a.v[13] * b.v[7] + a.v[14] * b.v[11] + a.v[15] * b.v[15];
 			return(matrix44);
 		}
 
 		public static capex.util.Vector3 multiplyVector(capex.util.Matrix44 a, capex.util.Vector3 b) {
-			var x = (((a.v[0] * b.x) + (a.v[1] * b.y)) + (a.v[2] * b.z)) + (a.v[3] * 1.00);
-			var y = (((a.v[4] * b.x) + (a.v[5] * b.y)) + (a.v[6] * b.z)) + (a.v[7] * 1.00);
-			var z = (((a.v[8] * b.x) + (a.v[9] * b.y)) + (a.v[10] * b.z)) + (a.v[11] * 1.00);
+			var x = a.v[0] * b.x + a.v[1] * b.y + a.v[2] * b.z + a.v[3] * 1.00;
+			var y = a.v[4] * b.x + a.v[5] * b.y + a.v[6] * b.z + a.v[7] * 1.00;
+			var z = a.v[8] * b.x + a.v[9] * b.y + a.v[10] * b.z + a.v[11] * 1.00;
 			return(capex.util.Vector3.create(x, y, z));
 		}
 

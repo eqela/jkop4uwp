@@ -59,10 +59,10 @@ namespace cape
 				if(object.Equals(pattern, check)) {
 					return(true);
 				}
-				if((suffix != null) && cape.String.endsWith(check, suffix)) {
+				if(suffix != null && cape.String.endsWith(check, suffix)) {
 					return(true);
 				}
-				if((prefix != null) && cape.String.startsWith(check, prefix)) {
+				if(prefix != null && cape.String.startsWith(check, prefix)) {
 					return(true);
 				}
 				return(false);
@@ -174,10 +174,10 @@ namespace cape
 						return(e);
 					}
 				}
-				else if((includeMatchingDirectories && e.isDirectory()) && matchPattern(e)) {
+				else if(includeMatchingDirectories && e.isDirectory() && matchPattern(e)) {
 					return(e);
 				}
-				else if(e.isDirectory() && (e.isLink() == false)) {
+				else if(e.isDirectory() && e.isLink() == false) {
 					var ees = e.entries();
 					if(ees != null) {
 						stack.push((cape.Iterator<cape.File>)ees);

@@ -79,16 +79,16 @@ namespace cape
 			var cs = currentSize;
 			if(cs > 1) {
 				var n = 0;
-				for(n = 0 ; n < (cs - 1) ; n++) {
+				for(n = 0 ; n < cs - 1 ; n++) {
 					if(moveToPreviousByte() == false) {
 						return(false);
 					}
 				}
 			}
 			var v = doMoveToPreviousChar();
-			if((v == false) && (cs > 1)) {
+			if(v == false && cs > 1) {
 				var n1 = 0;
-				for(n1 = 0 ; n1 < (cs - 1) ; n1++) {
+				for(n1 = 0 ; n1 < cs - 1 ; n1++) {
 					moveToNextByte();
 				}
 			}
@@ -188,7 +188,7 @@ namespace cape
 				if(moveToNextByte() == false) {
 					return(false);
 				}
-				current = (char)((c01 << 8) & c11);
+				current = (char)(c01 << 8 & c11);
 				return(true);
 			}
 			return(false);
@@ -278,7 +278,7 @@ namespace cape
 					return(false);
 				}
 				var c1 = (int)getCurrentByte();
-				current = (char)((c0 << 8) & c1);
+				current = (char)(c0 << 8 & c1);
 				return(true);
 			}
 			return(false);

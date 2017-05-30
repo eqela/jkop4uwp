@@ -128,18 +128,18 @@ namespace capex.net
 			}
 
 			public static capex.net.WSSocketGeneric.MyWSMessage forCloseControlFrame(int statusCode = -1, string reason = null) {
-				if((statusCode < 65536) && (statusCode > -1)) {
+				if(statusCode < 65536 && statusCode > -1) {
 					if(cape.String.isEmpty(reason) == false) {
 						var rBuffer = cape.String.toUTF8Buffer(reason);
 						var size = rBuffer.Length;
 						var plBuffer = cape.Buffer.allocate((long)(size + 2));
-						cape.Buffer.setByte(plBuffer, (long)0, (byte)((statusCode >> 8) & 255));
+						cape.Buffer.setByte(plBuffer, (long)0, (byte)(statusCode >> 8 & 255));
 						cape.Buffer.setByte(plBuffer, (long)1, (byte)(statusCode & 255));
 						cape.Buffer.copyFrom(plBuffer, rBuffer, (long)0, (long)2, (long)size);
 						return(new capex.net.WSSocketGeneric.MyWSMessage().setFin(1).setOpcode(capex.net.WSSocketGeneric.MyWSMessage.CLOSE_FRAME).setPayloadBuffer(plBuffer));
 					}
 					var plBuffer1 = cape.Buffer.allocate((long)2);
-					cape.Buffer.setByte(plBuffer1, (long)0, (byte)((statusCode >> 8) & 255));
+					cape.Buffer.setByte(plBuffer1, (long)0, (byte)(statusCode >> 8 & 255));
 					cape.Buffer.setByte(plBuffer1, (long)1, (byte)(statusCode & 255));
 					return(new capex.net.WSSocketGeneric.MyWSMessage().setFin(1).setOpcode(capex.net.WSSocketGeneric.MyWSMessage.CLOSE_FRAME).setPayloadBuffer(plBuffer1));
 				}
@@ -187,7 +187,7 @@ namespace capex.net
 					payloadLength = payloadBuffer.Length;
 				}
 				var plb = 0;
-				if((payloadLength < 126) && (payloadLength >= 0)) {
+				if(payloadLength < 126 && payloadLength >= 0) {
 					plb = payloadLength;
 				}
 				else if(payloadLength < 65536) {
@@ -236,7 +236,7 @@ namespace capex.net
 				}
 				while(p < tp) {
 					if(n != 0) {
-						cape.Buffer.setByte(messageBuffer, (long)p, (byte)((payloadLength >> n) & 255));
+						cape.Buffer.setByte(messageBuffer, (long)p, (byte)(payloadLength >> n & 255));
 					}
 					else {
 						cape.Buffer.setByte(messageBuffer, (long)p, (byte)(payloadLength & 255));
@@ -300,7 +300,7 @@ namespace capex.net
 				v |= (ushort)(cape.Buffer.getByte(payloadBuffer, (long)0) << 8);
 				v |= (ushort)cape.Buffer.getByte(payloadBuffer, (long)1);
 				e.setStatusCode((int)v);
-				if((size - 2) > 0) {
+				if(size - 2 > 0) {
 					e.setReason(cape.String.forUTF8Buffer(cape.Buffer.getSubBuffer(payloadBuffer, (long)2, (long)(size - 2))));
 				}
 				return((capex.net.WSCloseEvent)e);
@@ -391,6 +391,15 @@ namespace capex.net
 			public HTTPResponseParser() {
 			}
 
+			private class Chunk
+			{
+				public Chunk() {
+				}
+
+				public byte[] data = null;
+				public bool completed = true;
+			}
+
 			private byte[] receivedData = null;
 			public capex.net.WSSocketGeneric.HTTPClientResponse headers = null;
 			public byte[] bodyData = null;
@@ -413,8 +422,8 @@ namespace capex.net
 			private bool hasEndOfHeaders(byte[] buf, long size) {
 				var n = 0;
 				var v = false;
-				while(n <= (size - 4)) {
-					if((((cape.Buffer.getByte(buf, (long)n) == '\r') && (cape.Buffer.getByte(buf, (long)(n + 1)) == '\n')) && (cape.Buffer.getByte(buf, (long)(n + 2)) == '\r')) && (cape.Buffer.getByte(buf, (long)(n + 3)) == '\n')) {
+				while(n <= size - 4) {
+					if(cape.Buffer.getByte(buf, (long)n) == '\r' && cape.Buffer.getByte(buf, (long)(n + 1)) == '\n' && cape.Buffer.getByte(buf, (long)(n + 2)) == '\r' && cape.Buffer.getByte(buf, (long)(n + 3)) == '\n') {
 						v = true;
 						break;
 					}
@@ -461,12 +470,12 @@ namespace capex.net
 						if(cape.String.isEmpty(key) == false) {
 							var val = cape.String.strip(cape.Vector.get(comps1, 1));
 							v.addHeader(key, val);
-							if((isChunked == false) && cape.String.equalsIgnoreCase(key, "transfer-encoding")) {
+							if(isChunked == false && cape.String.equalsIgnoreCase(key, "transfer-encoding")) {
 								if(object.Equals(val, "chunked")) {
 									isChunked = true;
 								}
 							}
-							else if((contentLength < 1) && cape.String.equalsIgnoreCase(key, "content-length")) {
+							else if(contentLength < 1 && cape.String.equalsIgnoreCase(key, "content-length")) {
 								contentLength = cape.String.toInteger(val);
 							}
 						}
@@ -484,7 +493,7 @@ namespace capex.net
 				return(v);
 			}
 
-			private byte[] getChunk() {
+			private capex.net.WSSocketGeneric.HTTPResponseParser.Chunk getChunk() {
 				if(receivedData == null) {
 					return(null);
 				}
@@ -512,16 +521,17 @@ namespace capex.net
 				if(cape.String.isEmpty(t) == false) {
 					cl = cape.String.toIntegerFromHex(t);
 				}
-				byte[] v = null;
+				var chunk = new capex.net.WSSocketGeneric.HTTPResponseParser.Chunk();
 				if(cl > 0) {
-					if((cape.Buffer.getSize(receivedData) - i) < cl) {
-						return(null);
+					if(cape.Buffer.getSize(receivedData) - i < cl) {
+						chunk.completed = false;
+						return(chunk);
 					}
-					v = new byte[cl];
-					cape.Buffer.copyFrom(v, receivedData, (long)i, (long)0, (long)cl);
+					chunk.data = new byte[cl];
+					cape.Buffer.copyFrom(chunk.data, receivedData, (long)i, (long)0, (long)cl);
 					i += cl;
 				}
-				while((i < cape.Buffer.getSize(receivedData)) && ((cape.Buffer.getByte(receivedData, (long)i) == '\r') || (cape.Buffer.getByte(receivedData, (long)i) == '\n'))) {
+				while(i < cape.Buffer.getSize(receivedData) && (cape.Buffer.getByte(receivedData, (long)i) == '\r' || cape.Buffer.getByte(receivedData, (long)i) == '\n')) {
 					i++;
 				}
 				var rem = (int)(cape.Buffer.getSize(receivedData) - i);
@@ -533,7 +543,7 @@ namespace capex.net
 				else {
 					receivedData = null;
 				}
-				return(v);
+				return(chunk);
 			}
 
 			public void onDataReceived(byte[] buf, long size) {
@@ -549,15 +559,18 @@ namespace capex.net
 					while(true) {
 						var r = getChunk();
 						if(r != null) {
-							var sz = cape.Buffer.getSize(r);
+							if(!r.completed) {
+								break;
+							}
+							var sz = cape.Buffer.getSize(r.data);
 							dataCounter += (int)sz;
-							onBodyDataReceived(r, sz);
+							onBodyDataReceived(r.data, sz);
 						}
 						else {
 							onEndOfResponse();
 							break;
 						}
-						if(receivedData == null) {
+						if(!(receivedData != null)) {
 							break;
 						}
 					}
@@ -565,7 +578,7 @@ namespace capex.net
 				else if(contentLength > 0) {
 					var rsz = cape.Buffer.getSize(receivedData);
 					if(rsz > 0) {
-						if((contentLength <= 0) || ((dataCounter + rsz) <= contentLength)) {
+						if(contentLength <= 0 || dataCounter + rsz <= contentLength) {
 							var v = receivedData;
 							receivedData = null;
 							dataCounter += (int)rsz;
@@ -635,7 +648,7 @@ namespace capex.net
 			}
 
 			public static byte[] createOpenHandshakeHTTPRequest(cape.URL url, string key) {
-				if(!((url != null) && (key != null))) {
+				if(!(url != null && key != null)) {
 					return(null);
 				}
 				var sb = new cape.StringBuilder();
@@ -694,7 +707,7 @@ namespace capex.net
 		private int frameNo = 1;
 
 		private bool processData(byte[] data, int size) {
-			if((data == null) || (size < 1)) {
+			if(data == null || size < 1) {
 				return(false);
 			}
 			byte[] nbuffer = null;
@@ -749,7 +762,7 @@ namespace capex.net
 						maskingBuffer = cape.Buffer.allocate((long)4);
 					}
 					payloadLength = (int)(b & 127);
-					if((payloadLength >= 0) && (payloadLength < 126)) {
+					if(payloadLength >= 0 && payloadLength < 126) {
 						p++;
 						if(maskingBuffer != null) {
 							lastMaskingBufferIndex = p + 3;
@@ -966,18 +979,21 @@ namespace capex.net
 				}
 				client.receive((byte[] d, int sz) => {
 					if(processData(d, sz) == false) {
-						;
+						var c5 = getOnCloseCallback();
+						if(c5 != null) {
+							c5((capex.net.WSCloseEvent)new capex.net.WSSocketGeneric.MyWSCloseEvent().setStatusCode(capex.net.WSCloseEvent.CLOSE_ABNORMAL));
+						}
 					}
 				});
-				var c5 = getOnOpenCallback();
-				if(c5 != null) {
-					c5();
+				var c6 = getOnOpenCallback();
+				if(c6 != null) {
+					c6();
 				}
 				return;
 			}
-			var c6 = getOnErrorCallback();
-			if(c6 != null) {
-				c6();
+			var c7 = getOnErrorCallback();
+			if(c7 != null) {
+				c7();
 			}
 		}
 

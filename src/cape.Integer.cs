@@ -24,47 +24,30 @@
 
 namespace cape
 {
-	public class Integer
+	public class Integer : cape.IntegerObject
 	{
 		public Integer() {
 		}
 
-		private class MyIntegerObject : cape.IntegerObject
-		{
-			public MyIntegerObject() {
-			}
-
-			private int integer = 0;
-
-			public virtual int toInteger() {
-				return(integer);
-			}
-
-			public int getInteger() {
-				return(integer);
-			}
-
-			public cape.Integer.MyIntegerObject setInteger(int v) {
-				integer = v;
-				return(this);
-			}
+		public static cape.Integer forValue(int value) {
+			return(cape.Integer.asObject(value));
 		}
 
-		public static cape.IntegerObject asObject(int integer) {
-			var v = new cape.Integer.MyIntegerObject();
-			v.setInteger(integer);
-			return((cape.IntegerObject)v);
+		public static cape.Integer asObject(int integer) {
+			var v = new cape.Integer();
+			v.setValue(integer);
+			return(v);
 		}
 
 		public static int asInteger(string str) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(0);
 			}
 			return(cape.String.toInteger(str));
 		}
 
 		public static int asInteger(object obj) {
-			if(obj == null) {
+			if(!(obj != null)) {
 				return(0);
 			}
 			if(obj is cape.IntegerObject) {
@@ -89,6 +72,25 @@ namespace cape
 				return((int)((cape.CharacterObject)obj).toCharacter());
 			}
 			return(0);
+		}
+
+		private int value = 0;
+
+		public void add(int amount) {
+			value += amount;
+		}
+
+		public virtual int toInteger() {
+			return(value);
+		}
+
+		public int getValue() {
+			return(value);
+		}
+
+		public cape.Integer setValue(int v) {
+			value = v;
+			return(this);
 		}
 	}
 }

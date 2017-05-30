@@ -51,7 +51,7 @@ namespace capex.web
 			if(cape.String.startsWith(api, "/")) {
 				return(url + api);
 			}
-			return((url + "/") + api);
+			return(url + "/" + api);
 		}
 
 		private byte[] toUTF8Buffer(cape.DynamicMap data) {

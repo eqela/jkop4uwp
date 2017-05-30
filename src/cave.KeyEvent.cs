@@ -81,7 +81,7 @@ namespace cave
 		}
 
 		public bool isKeyPress(int key) {
-			if((action == cave.KeyEvent.ACTION_DOWN) && (keyCode == key)) {
+			if(action == cave.KeyEvent.ACTION_DOWN && keyCode == key) {
 				return(true);
 			}
 			return(false);
@@ -102,7 +102,7 @@ namespace cave
 		}
 
 		public bool isCharacter(char value) {
-			if(!(object.Equals(stringValue, null)) && (cape.String.getChar(stringValue, 0) == value)) {
+			if(!(object.Equals(stringValue, null)) && cape.String.getChar(stringValue, 0) == value) {
 				return(true);
 			}
 			return(false);

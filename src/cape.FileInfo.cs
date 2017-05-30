@@ -71,7 +71,7 @@ namespace cape
 		}
 
 		public bool exists() {
-			return((isFile() || isDirectory()) || isLink());
+			return(isFile() || isDirectory() || isLink());
 		}
 
 		public cape.File getFile() {

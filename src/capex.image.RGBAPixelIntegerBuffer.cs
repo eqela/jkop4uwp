@@ -53,7 +53,7 @@ namespace capex.image
 		}
 
 		public int[] getRgbaPixel(int x, int y, bool newbuffer = false) {
-			if((cache == null) && (newbuffer == false)) {
+			if(cache == null && newbuffer == false) {
 				cache = new int[4];
 			}
 			var v = cache;
@@ -61,11 +61,11 @@ namespace capex.image
 				v = new int[4];
 			}
 			var i = 0;
-			if((((x < 0) || (x >= width)) || (y < 0)) || (y >= height)) {
+			if(x < 0 || x >= width || y < 0 || y >= height) {
 				return(v);
 			}
 			for(i = 0 ; i < 4 ; i++) {
-				v[i] = (int)cape.Buffer.getByte(pointer, (long)((((y * width) + x) * 4) + i));
+				v[i] = (int)cape.Buffer.getByte(pointer, (long)((y * width + x) * 4 + i));
 			}
 			return(v);
 		}

@@ -62,7 +62,7 @@ namespace cape
 			if(o == null) {
 				return(false);
 			}
-			if((o is cape.Error) == false) {
+			if(o is cape.Error == false) {
 				return(false);
 			}
 			var e = o as cape.Error;
@@ -96,7 +96,7 @@ namespace cape
 			}
 			if(cape.String.isEmpty(code) == false) {
 				if(cape.String.isEmpty(detail) == false) {
-					return((code + ":") + detail);
+					return(code + ":" + detail);
 				}
 				return(code);
 			}

@@ -30,7 +30,7 @@ namespace capex.crypto
 		}
 
 		public static string encode(byte[] buffer) {
-			if((buffer == null) || (cape.Buffer.getSize(buffer) < 1)) {
+			if(buffer == null || cape.Buffer.getSize(buffer) < 1) {
 				return(null);
 			}
 			string v = null;

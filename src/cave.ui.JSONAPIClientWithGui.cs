@@ -51,7 +51,7 @@ namespace cave.ui
 		}
 
 		public override void onDefaultErrorHandler(cape.Error error) {
-			if((error == null) || (context == null)) {
+			if(error == null || context == null) {
 				return;
 			}
 			context.showErrorDialog(error.toString());

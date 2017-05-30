@@ -69,7 +69,7 @@ namespace cape
 				cape.Buffer.copyFrom(buffer, src, (long)0, (long)0, (long)size);
 				pos = size;
 			}
-			else if((pos + size) <= cape.Buffer.getSize(buffer)) {
+			else if(pos + size <= cape.Buffer.getSize(buffer)) {
 				cape.Buffer.copyFrom(buffer, src, (long)0, (long)pos, (long)size);
 				pos += size;
 			}

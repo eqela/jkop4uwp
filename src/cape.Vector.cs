@@ -87,22 +87,22 @@ namespace cape
 		}
 
 		public static T get<T>(System.Collections.Generic.List<T> vector, int index) {
-			if((index < 0) || (index >= cape.Vector.getSize(vector))) {
-				return((T)(default(T)));
+			if(index < 0 || index >= cape.Vector.getSize(vector)) {
+				return((T)default(T));
 			}
 			return(vector[index]);
 		}
 
 		public static void set<T>(System.Collections.Generic.List<T> vector, int index, T val) {
-			if((index < 0) || (index >= cape.Vector.getSize(vector))) {
+			if(index < 0 || index >= cape.Vector.getSize(vector)) {
 				return;
 			}
 			vector[index] = val;
 		}
 
 		public static T remove<T>(System.Collections.Generic.List<T> vector, int index) {
-			if((index < 0) || (index >= cape.Vector.getSize(vector))) {
-				return((T)(default(T)));
+			if(index < 0 || index >= cape.Vector.getSize(vector)) {
+				return((T)default(T));
 			}
 			var t = vector[index];
 			vector.RemoveAt(index);
@@ -110,8 +110,8 @@ namespace cape
 		}
 
 		public static T popFirst<T>(System.Collections.Generic.List<T> vector) {
-			if((vector == null) || (cape.Vector.getSize(vector) < 1)) {
-				return((T)(default(T)));
+			if(vector == null || cape.Vector.getSize(vector) < 1) {
+				return((T)default(T));
 			}
 			var v = cape.Vector.get(vector, 0);
 			cape.Vector.removeFirst(vector);
@@ -119,15 +119,15 @@ namespace cape
 		}
 
 		public static void removeFirst<T>(System.Collections.Generic.List<T> vector) {
-			if((vector == null) || (cape.Vector.getSize(vector) < 1)) {
+			if(vector == null || cape.Vector.getSize(vector) < 1) {
 				return;
 			}
 			cape.Vector.remove(vector, 0);
 		}
 
 		public static T popLast<T>(System.Collections.Generic.List<T> vector) {
-			if((vector == null) || (cape.Vector.getSize(vector) < 1)) {
-				return((T)(default(T)));
+			if(vector == null || cape.Vector.getSize(vector) < 1) {
+				return((T)default(T));
 			}
 			var v = cape.Vector.get(vector, cape.Vector.getSize(vector) - 1);
 			cape.Vector.removeLast(vector);
@@ -161,7 +161,7 @@ namespace cape
 		}
 
 		public static bool isEmpty<T>(System.Collections.Generic.List<T> vector) {
-			return((vector == null) || (vector.Count < 1));
+			return(vector == null || vector.Count < 1);
 		}
 
 		public static void removeRange<T>(System.Collections.Generic.List<T> vector, int index, int count) {
@@ -177,17 +177,17 @@ namespace cape
 			public VectorIterator(System.Collections.Generic.List<T> vector, int increment) {
 				this.vector = vector;
 				this.increment = increment;
-				if((increment < 0) && (vector != null)) {
+				if(increment < 0 && vector != null) {
 					index = cape.Vector.getSize(vector) - 1;
 				}
 			}
 
 			public virtual T next() {
 				if(vector == null) {
-					return((T)(default(T)));
+					return((T)default(T));
 				}
-				if((index < 0) || (index >= cape.Vector.getSize(vector))) {
-					return((T)(default(T)));
+				if(index < 0 || index >= cape.Vector.getSize(vector)) {
+					return((T)default(T));
 				}
 				var v = vector[index];
 				index += increment;

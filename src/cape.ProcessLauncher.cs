@@ -41,7 +41,7 @@ namespace cape
 			}
 
 			public virtual void onBufferData(byte[] data, long size) {
-				if(((builder == null) || (data == null)) || (size < 1)) {
+				if(builder == null || data == null || size < 1) {
 					return;
 				}
 				var str = cape.String.forBuffer(cape.Buffer.getSubBuffer(data, (long)0, size), encoding);
@@ -116,7 +116,7 @@ namespace cape
 		/// </summary>
 
 		public static cape.ProcessLauncher forFile(cape.File file, object[] @params = null) {
-			if((file == null) || (file.isFile() == false)) {
+			if(file == null || file.isFile() == false) {
 				return(null);
 			}
 			var v = new cape.ProcessLauncher();
@@ -171,7 +171,7 @@ namespace cape
 				return(null);
 			}
 			var arr = cape.String.quotedStringToVector(str, ' ');
-			if((arr == null) || (cape.Vector.getSize(arr) < 1)) {
+			if(arr == null || cape.Vector.getSize(arr) < 1) {
 				return(null);
 			}
 			var vsz = cape.Vector.getSize(arr);

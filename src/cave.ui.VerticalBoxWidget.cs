@@ -134,11 +134,11 @@ namespace cave.ui
 
 		public override void computeWidgetLayout(int widthConstraint) {
 			var wc = -1;
-			if((widthConstraint < 0) && (widgetWidthRequest > 0)) {
-				wc = (widgetWidthRequest - widgetMarginLeft) - widgetMarginRight;
+			if(widthConstraint < 0 && widgetWidthRequest > 0) {
+				wc = widgetWidthRequest - widgetMarginLeft - widgetMarginRight;
 			}
-			if((wc < 0) && (widthConstraint >= 0)) {
-				wc = (widthConstraint - widgetMarginLeft) - widgetMarginRight;
+			if(wc < 0 && widthConstraint >= 0) {
+				wc = widthConstraint - widgetMarginLeft - widgetMarginRight;
 				if(wc < 0) {
 					wc = 0;
 				}
@@ -175,8 +175,8 @@ namespace cave.ui
 						cave.ui.Widget.layout(child1.widget, wc);
 						cave.ui.Widget.move(child1.widget, widgetMarginLeft, y);
 						var ww1 = cave.ui.Widget.getWidth(child1.widget);
-						if(((wc < 0) && (widgetMaximumWidthRequest > 0)) && (((ww1 + widgetMarginLeft) + widgetMarginRight) > widgetMaximumWidthRequest)) {
-							cave.ui.Widget.layout(child1.widget, (widgetMaximumWidthRequest - widgetMarginLeft) - widgetMarginRight);
+						if(wc < 0 && widgetMaximumWidthRequest > 0 && ww1 + widgetMarginLeft + widgetMarginRight > widgetMaximumWidthRequest) {
+							cave.ui.Widget.layout(child1.widget, widgetMaximumWidthRequest - widgetMarginLeft - widgetMarginRight);
 							ww1 = cave.ui.Widget.getWidth(child1.widget);
 						}
 						if(ww1 > widest) {
@@ -187,7 +187,7 @@ namespace cave.ui
 				}
 			}
 			y += widgetMarginBottom;
-			var mywidth = (widest + widgetMarginLeft) + widgetMarginRight;
+			var mywidth = widest + widgetMarginLeft + widgetMarginRight;
 			if(widthConstraint >= 0) {
 				mywidth = widthConstraint;
 			}
@@ -198,7 +198,7 @@ namespace cave.ui
 		public override void onWidgetHeightChanged(int height) {
 			base.onWidgetHeightChanged(height);
 			var totalWeight = 0.00;
-			var availableHeight = (height - widgetMarginTop) - widgetMarginBottom;
+			var availableHeight = height - widgetMarginTop - widgetMarginBottom;
 			var childCount = 0;
 			if(children != null) {
 				var n = 0;
@@ -216,7 +216,7 @@ namespace cave.ui
 					}
 				}
 			}
-			if((childCount > 1) && (widgetSpacing > 0)) {
+			if(childCount > 1 && widgetSpacing > 0) {
 				availableHeight -= (childCount - 1) * widgetSpacing;
 			}
 			if(availableHeight < 0) {
@@ -231,7 +231,7 @@ namespace cave.ui
 					if(child1 != null) {
 						cave.ui.Widget.move(child1.widget, widgetMarginLeft, y);
 						if(child1.weight > 0.00) {
-							var hh = (int)((availableHeight * child1.weight) / totalWeight);
+							var hh = (int)(availableHeight * child1.weight / totalWeight);
 							cave.ui.Widget.resizeHeight(child1.widget, hh);
 						}
 						var hh1 = cave.ui.Widget.getHeight(child1.widget);
@@ -263,6 +263,10 @@ namespace cave.ui
 
 		public override cave.ui.CustomContainerWidget addWidget(Windows.UI.Xaml.UIElement widget) {
 			return((cave.ui.CustomContainerWidget)addWidget(widget, 0.00));
+		}
+
+		public void removeAllChildren() {
+			cave.ui.Widget.removeChildrenOf((Windows.UI.Xaml.UIElement)this);
 		}
 
 		public cave.ui.VerticalBoxWidget addWidget(Windows.UI.Xaml.UIElement widget, double weight) {

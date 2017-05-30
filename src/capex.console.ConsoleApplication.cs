@@ -90,7 +90,7 @@ namespace capex.console
 			ll = capex.console.ConsoleApplication.getLongestString(parameters, 0, ll);
 			ll = capex.console.ConsoleApplication.getLongestString(flags, 1, ll);
 			ll = capex.console.ConsoleApplication.getLongestString(options, 9, ll);
-			stdout.print(("Usage: " + nn) + " [parameters, flags and options]\n");
+			stdout.print("Usage: " + nn + " [parameters, flags and options]\n");
 			if(cape.Array.isEmpty(parameters) == false) {
 				stdout.print("\n");
 				stdout.print("Supported Parameters:\n");
@@ -101,7 +101,7 @@ namespace capex.console
 					for(n = 0 ; n < m ; n++) {
 						var parameter = parameters[n] as object[];
 						if(parameter != null) {
-							stdout.print(((("  " + cape.String.padToLength(cape.String.asString(parameter[0]), ll)) + " - ") + cape.String.asString(parameter[1])) + "\n");
+							stdout.print("  " + cape.String.padToLength(cape.String.asString(parameter[0]), ll) + " - " + cape.String.asString(parameter[1]) + "\n");
 						}
 					}
 				}
@@ -116,7 +116,7 @@ namespace capex.console
 					for(n2 = 0 ; n2 < m2 ; n2++) {
 						var flag = flags[n2] as object[];
 						if(flag != null) {
-							stdout.print(((("  -" + cape.String.padToLength(cape.String.asString(flag[0]), ll)) + " - ") + cape.String.asString(flag[1])) + "\n");
+							stdout.print("  -" + cape.String.padToLength(cape.String.asString(flag[0]), ll) + " - " + cape.String.asString(flag[1]) + "\n");
 						}
 					}
 				}
@@ -131,7 +131,7 @@ namespace capex.console
 					for(n3 = 0 ; n3 < m3 ; n3++) {
 						var option = options[n3] as object[];
 						if(option != null) {
-							stdout.print(((("  -" + cape.String.padToLength(cape.String.asString(option[0]) + "=<value>", ll)) + " - ") + cape.String.asString(option[1])) + "\n");
+							stdout.print("  -" + cape.String.padToLength(cape.String.asString(option[0]) + "=<value>", ll) + " - " + cape.String.asString(option[1]) + "\n");
 						}
 					}
 				}

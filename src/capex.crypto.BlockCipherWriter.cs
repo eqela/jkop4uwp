@@ -30,7 +30,7 @@ namespace capex.crypto
 		}
 
 		public static capex.crypto.BlockCipherWriter create(cape.Writer writer, capex.crypto.BlockCipher cipher) {
-			if((writer == null) || (cipher == null)) {
+			if(writer == null || cipher == null) {
 				return(null);
 			}
 			var v = new capex.crypto.BlockCipherWriter();
@@ -55,7 +55,7 @@ namespace capex.crypto
 		}
 
 		public void close() {
-			if((writer != null) && (bdata != null)) {
+			if(writer != null && bdata != null) {
 				var bb = cape.Buffer.allocate((long)1);
 				var bbptr = bb;
 				if(bcurr > 0) {
@@ -78,14 +78,14 @@ namespace capex.crypto
 		}
 
 		public virtual bool setCurrentPosition(long n) {
-			if((writer != null) && (writer is cape.SeekableWriter)) {
+			if(writer != null && writer is cape.SeekableWriter) {
 				return(((cape.SeekableWriter)writer).setCurrentPosition(n));
 			}
 			return(false);
 		}
 
 		public virtual long getCurrentPosition() {
-			if((writer != null) && (writer is cape.SeekableWriter)) {
+			if(writer != null && writer is cape.SeekableWriter) {
 				return(((cape.SeekableWriter)writer).getCurrentPosition());
 			}
 			return((long)-1);
@@ -101,7 +101,7 @@ namespace capex.crypto
 
 		public int writeBlock(byte[] buf) {
 			var size = cape.Buffer.getSize(buf);
-			if((bcurr + size) < bsize) {
+			if(bcurr + size < bsize) {
 				var bufptr = buf;
 				cape.Buffer.copyFrom(bufptr, bdata, (long)0, (long)bcurr, size);
 				bcurr += (int)size;
@@ -145,7 +145,7 @@ namespace capex.crypto
 			var n = 0;
 			for(n = 0 ; n < size ; n += bsize) {
 				var x = bsize;
-				if((n + x) > size) {
+				if(n + x > size) {
 					x = size - n;
 				}
 				v += writeBlock(cape.Buffer.getSubBuffer(buf, (long)n, (long)x));

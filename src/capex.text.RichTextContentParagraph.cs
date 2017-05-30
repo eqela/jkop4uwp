@@ -32,11 +32,11 @@ namespace capex.text
 		private string contentId = null;
 
 		public override string toMarkup() {
-			return(("@content " + contentId) + "\n");
+			return("@content " + contentId + "\n");
 		}
 
 		public override string toText() {
-			return(("[content:" + contentId) + "]\n");
+			return("[content:" + contentId + "]\n");
 		}
 
 		public override cape.DynamicMap toJson() {
@@ -48,7 +48,7 @@ namespace capex.text
 
 		public override string toHtml(capex.text.RichTextDocumentReferenceResolver refs) {
 			string cc = null;
-			if((refs != null) && !(object.Equals(contentId, null))) {
+			if(refs != null && !(object.Equals(contentId, null))) {
 				cc = refs.getContentString(contentId);
 			}
 			if(object.Equals(cc, null)) {

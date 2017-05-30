@@ -72,6 +72,7 @@ namespace cave.ui
 		private cave.Color widgetTextColor = null;
 		private int widgetPadding = 0;
 		private string widgetFontFamily = null;
+		private string widgetFontResource = null;
 		private double widgetFontSize = 0.00;
 
 		public SelectWidget(cave.GuiApplicationContext context) {
@@ -88,6 +89,13 @@ namespace cave.ui
 			return(this);
 		}
 
+		public cave.ui.SelectWidget setWidgetFontResource(string res) {
+			widgetFontResource = res;
+			updateWidgetFont();
+			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
+			return(this);
+		}
+
 		public cave.ui.SelectWidget setWidgetFontSize(double fontSize) {
 			widgetFontSize = fontSize;
 			updateWidgetFont();
@@ -96,7 +104,7 @@ namespace cave.ui
 		}
 
 		private void updateWidgetFont() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.updateWidgetFont] (SelectWidget.sling:243:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.updateWidgetFont] (SelectWidget.sling:310:2): Not implemented");
 		}
 
 		public cave.ui.SelectWidget setWidgetPadding(int value) {
@@ -149,14 +157,14 @@ namespace cave.ui
 
 		private void updateWidgetAppearance() {
 			var textColor = getActualWidgetTextColor();
-			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.updateWidgetAppearance] (SelectWidget.sling:356:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.updateWidgetAppearance] (SelectWidget.sling:423:2): Not implemented");
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 		}
 
 		public void setWidgetItemsAsKeyValueList(cape.KeyValueList<string, string> items) {
 			var selectedIndex = getSelectedWidgetIndex();
 			widgetItems = items;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.setWidgetItemsAsKeyValueList] (SelectWidget.sling:418:2): Not implemented.");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.setWidgetItemsAsKeyValueList] (SelectWidget.sling:484:2): Not implemented.");
 			setSelectedWidgetIndex(selectedIndex);
 		}
 
@@ -259,7 +267,7 @@ namespace cave.ui
 		}
 
 		public int adjustSelectedWidgetItemIndex(int index) {
-			if((widgetItems == null) || (widgetItems.count() < 1)) {
+			if(widgetItems == null || widgetItems.count() < 1) {
 				return(-1);
 			}
 			if(index < 0) {
@@ -306,13 +314,13 @@ namespace cave.ui
 		}
 
 		public int getSelectedWidgetIndex() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.getSelectedWidgetIndex] (SelectWidget.sling:553:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.getSelectedWidgetIndex] (SelectWidget.sling:619:2): Not implemented");
 			return(-1);
 		}
 
 		public void setSelectedWidgetIndex(int index) {
 			var v = adjustSelectedWidgetItemIndex(index);
-			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.setSelectedWidgetIndex] (SelectWidget.sling:585:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.SelectWidget.setSelectedWidgetIndex] (SelectWidget.sling:651:2): Not implemented");
 		}
 
 		public void setSelectedWidgetValue(string id) {
@@ -321,7 +329,7 @@ namespace cave.ui
 
 		public string getSelectedWidgetValue() {
 			var index = getSelectedWidgetIndex();
-			if((widgetItems == null) || (index < 0)) {
+			if(widgetItems == null || index < 0) {
 				return(null);
 			}
 			return(widgetItems.getKey(index));

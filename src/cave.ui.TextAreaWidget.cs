@@ -46,6 +46,7 @@ namespace cave.ui
 		private cave.Color widgetTextColor = null;
 		private cave.Color widgetBackgroundColor = null;
 		private string widgetFontFamily = null;
+		private string widgetFontResource = null;
 		private double widgetFontSize = 0.00;
 
 		public TextAreaWidget(cave.GuiApplicationContext context) {
@@ -81,11 +82,18 @@ namespace cave.ui
 		}
 
 		private void updateWidgetFont() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.updateWidgetFont] (TextAreaWidget.sling:244:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.updateWidgetFont] (TextAreaWidget.sling:249:2): Not implemented");
 		}
 
 		public cave.ui.TextAreaWidget setWidgetFontFamily(string family) {
 			widgetFontFamily = family;
+			updateWidgetFont();
+			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
+			return(this);
+		}
+
+		public cave.ui.TextAreaWidget setWidgetFontResource(string res) {
+			widgetFontResource = res;
 			updateWidgetFont();
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
@@ -120,20 +128,20 @@ namespace cave.ui
 
 		public cave.ui.TextAreaWidget setWidgetRows(int row) {
 			this.widgetRows = row;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetRows] (TextAreaWidget.sling:302:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetRows] (TextAreaWidget.sling:315:2): Not implemented");
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
 		}
 
 		public cave.ui.TextAreaWidget setWidgetText(string text) {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetText] (TextAreaWidget.sling:326:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetText] (TextAreaWidget.sling:339:2): Not implemented");
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
 		}
 
 		public cave.ui.TextAreaWidget setWidgetPlaceholder(string placeholder) {
 			widgetPlaceholder = placeholder;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetPlaceholder] (TextAreaWidget.sling:349:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetPlaceholder] (TextAreaWidget.sling:362:2): Not implemented");
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
 		}
@@ -147,10 +155,10 @@ namespace cave.ui
 		}
 
 		public cave.ui.TextAreaWidget setWidgetPadding(int l, int t, int r, int b) {
-			if((((l < 0) || (t < 0)) || (r < 0)) || (b < 0)) {
+			if(l < 0 || t < 0 || r < 0 || b < 0) {
 				return(this);
 			}
-			if((((widgetPaddingLeft == l) && (widgetPaddingTop == t)) && (widgetPaddingRight == r)) && (widgetPaddingBottom == b)) {
+			if(widgetPaddingLeft == l && widgetPaddingTop == t && widgetPaddingRight == r && widgetPaddingBottom == b) {
 				return(this);
 			}
 			widgetPaddingLeft = l;
@@ -162,21 +170,16 @@ namespace cave.ui
 		}
 
 		private void updateWidgetPadding() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.updateWidgetPadding] (TextAreaWidget.sling:398:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.updateWidgetPadding] (TextAreaWidget.sling:411:2): Not implemented");
 		}
 
 		public string getWidgetText() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.getWidgetText] (TextAreaWidget.sling:414:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.getWidgetText] (TextAreaWidget.sling:427:2): Not implemented");
 			return(null);
 		}
 
 		public string getWidgetPlaceholder() {
 			return(widgetPlaceholder);
-		}
-
-		public cave.ui.TextAreaWidget setWidgetFontStyle(string resName) {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextAreaWidget.setWidgetFontStyle] (TextAreaWidget.sling:434:2): Not implemented");
-			return(this);
 		}
 
 		public virtual void setWidgetValue(object value) {

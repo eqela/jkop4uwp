@@ -58,17 +58,17 @@ namespace capex.util
 		}
 
 		public static capex.util.Matrix33 invertMatrix(capex.util.Matrix33 m) {
-			var d = ((((((m.v[0] * m.v[4]) * m.v[8]) + ((m.v[3] * m.v[7]) * m.v[2])) + ((m.v[6] * m.v[1]) * m.v[5])) - ((m.v[0] * m.v[7]) * m.v[5])) - ((m.v[3] * m.v[1]) * m.v[8])) - ((m.v[6] * m.v[4]) * m.v[2]);
+			var d = m.v[0] * m.v[4] * m.v[8] + m.v[3] * m.v[7] * m.v[2] + m.v[6] * m.v[1] * m.v[5] - m.v[0] * m.v[7] * m.v[5] - m.v[3] * m.v[1] * m.v[8] - m.v[6] * m.v[4] * m.v[2];
 			var v = new capex.util.Matrix33();
-			v.v[0] = ((m.v[4] * m.v[8]) - (m.v[7] * m.v[5])) / d;
-			v.v[3] = ((m.v[6] * m.v[5]) - (m.v[3] * m.v[8])) / d;
-			v.v[6] = ((m.v[3] * m.v[7]) - (m.v[6] * m.v[4])) / d;
-			v.v[1] = ((m.v[7] * m.v[2]) - (m.v[1] * m.v[8])) / d;
-			v.v[4] = ((m.v[0] * m.v[8]) - (m.v[6] * m.v[2])) / d;
-			v.v[7] = ((m.v[6] * m.v[1]) - (m.v[0] * m.v[7])) / d;
-			v.v[2] = ((m.v[1] * m.v[5]) - (m.v[4] * m.v[2])) / d;
-			v.v[5] = ((m.v[3] * m.v[2]) - (m.v[0] * m.v[5])) / d;
-			v.v[8] = ((m.v[0] * m.v[4]) - (m.v[3] * m.v[1])) / d;
+			v.v[0] = (m.v[4] * m.v[8] - m.v[7] * m.v[5]) / d;
+			v.v[3] = (m.v[6] * m.v[5] - m.v[3] * m.v[8]) / d;
+			v.v[6] = (m.v[3] * m.v[7] - m.v[6] * m.v[4]) / d;
+			v.v[1] = (m.v[7] * m.v[2] - m.v[1] * m.v[8]) / d;
+			v.v[4] = (m.v[0] * m.v[8] - m.v[6] * m.v[2]) / d;
+			v.v[7] = (m.v[6] * m.v[1] - m.v[0] * m.v[7]) / d;
+			v.v[2] = (m.v[1] * m.v[5] - m.v[4] * m.v[2]) / d;
+			v.v[5] = (m.v[3] * m.v[2] - m.v[0] * m.v[5]) / d;
+			v.v[8] = (m.v[0] * m.v[4] - m.v[3] * m.v[1]) / d;
 			return(v);
 		}
 
@@ -203,21 +203,21 @@ namespace capex.util
 
 		public static capex.util.Matrix33 multiplyMatrix(capex.util.Matrix33 a, capex.util.Matrix33 b) {
 			var matrix33 = new capex.util.Matrix33();
-			matrix33.v[0] = ((a.v[0] * b.v[0]) + (a.v[1] * b.v[3])) + (a.v[2] * b.v[6]);
-			matrix33.v[1] = ((a.v[0] * b.v[1]) + (a.v[1] * b.v[4])) + (a.v[2] * b.v[7]);
-			matrix33.v[2] = ((a.v[0] * b.v[2]) + (a.v[1] * b.v[5])) + (a.v[2] * b.v[8]);
-			matrix33.v[3] = ((a.v[3] * b.v[0]) + (a.v[4] * b.v[3])) + (a.v[5] * b.v[6]);
-			matrix33.v[4] = ((a.v[3] * b.v[1]) + (a.v[4] * b.v[4])) + (a.v[5] * b.v[7]);
-			matrix33.v[5] = ((a.v[3] * b.v[2]) + (a.v[4] * b.v[5])) + (a.v[5] * b.v[8]);
-			matrix33.v[6] = ((a.v[6] * b.v[0]) + (a.v[7] * b.v[3])) + (a.v[8] * b.v[6]);
-			matrix33.v[7] = ((a.v[6] * b.v[1]) + (a.v[7] * b.v[4])) + (a.v[8] * b.v[7]);
-			matrix33.v[8] = ((a.v[6] * b.v[2]) + (a.v[7] * b.v[5])) + (a.v[8] * b.v[8]);
+			matrix33.v[0] = a.v[0] * b.v[0] + a.v[1] * b.v[3] + a.v[2] * b.v[6];
+			matrix33.v[1] = a.v[0] * b.v[1] + a.v[1] * b.v[4] + a.v[2] * b.v[7];
+			matrix33.v[2] = a.v[0] * b.v[2] + a.v[1] * b.v[5] + a.v[2] * b.v[8];
+			matrix33.v[3] = a.v[3] * b.v[0] + a.v[4] * b.v[3] + a.v[5] * b.v[6];
+			matrix33.v[4] = a.v[3] * b.v[1] + a.v[4] * b.v[4] + a.v[5] * b.v[7];
+			matrix33.v[5] = a.v[3] * b.v[2] + a.v[4] * b.v[5] + a.v[5] * b.v[8];
+			matrix33.v[6] = a.v[6] * b.v[0] + a.v[7] * b.v[3] + a.v[8] * b.v[6];
+			matrix33.v[7] = a.v[6] * b.v[1] + a.v[7] * b.v[4] + a.v[8] * b.v[7];
+			matrix33.v[8] = a.v[6] * b.v[2] + a.v[7] * b.v[5] + a.v[8] * b.v[8];
 			return(matrix33);
 		}
 
 		public static capex.util.Vector2 multiplyVector(capex.util.Matrix33 a, capex.util.Vector2 b) {
-			var x = ((a.v[0] * b.x) + (a.v[1] * b.y)) + (a.v[2] * 1.00);
-			var y = ((a.v[3] * b.x) + (a.v[4] * b.y)) + (a.v[5] * 1.00);
+			var x = a.v[0] * b.x + a.v[1] * b.y + a.v[2] * 1.00;
+			var y = a.v[3] * b.x + a.v[4] * b.y + a.v[5] * 1.00;
 			return(capex.util.Vector2.create(x, y));
 		}
 

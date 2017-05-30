@@ -44,7 +44,7 @@ namespace cave.pim
 		}
 
 		public string getPhoneNumberString() {
-			if((phoneNumbers == null) || (cape.Vector.getSize(phoneNumbers) < 1)) {
+			if(phoneNumbers == null || cape.Vector.getSize(phoneNumbers) < 1) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();

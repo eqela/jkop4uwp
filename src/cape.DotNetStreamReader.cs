@@ -38,7 +38,7 @@ namespace cape
 		private System.IO.Stream stream = null;
 
 		public virtual int read(byte[] buf) {
-			if((buf == null) || (stream == null)) {
+			if(buf == null || stream == null) {
 				return(0);
 			}
 			var mb = buf.Length;

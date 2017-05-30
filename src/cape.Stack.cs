@@ -39,7 +39,7 @@ namespace cape
 		public T pop() {
 			var sz = cape.Vector.getSize(data);
 			if(sz < 1) {
-				return((T)(default(T)));
+				return((T)default(T));
 			}
 			var v = cape.Vector.getAt(data, sz - 1);
 			cape.Vector.remove(data, sz - 1);
@@ -49,7 +49,7 @@ namespace cape
 		public T peek() {
 			var sz = cape.Vector.getSize(data);
 			if(sz < 1) {
-				return((T)(default(T)));
+				return((T)default(T));
 			}
 			return(cape.Vector.getAt(data, sz - 1));
 		}

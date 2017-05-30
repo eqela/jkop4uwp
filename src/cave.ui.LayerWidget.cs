@@ -186,7 +186,7 @@ namespace cave.ui
 
 		public override void onWidgetHeightChanged(int height) {
 			base.onWidgetHeightChanged(height);
-			var mh = (height - widgetMarginTop) - widgetMarginBottom;
+			var mh = height - widgetMarginTop - widgetMarginBottom;
 			var array = cave.ui.Widget.getChildren((Windows.UI.Xaml.UIElement)this);
 			if(array != null) {
 				var n = 0;
@@ -202,11 +202,11 @@ namespace cave.ui
 
 		public override void computeWidgetLayout(int widthConstraint) {
 			var wc = widthConstraint;
-			if((wc < 0) && (widgetWidthRequest > 0)) {
+			if(wc < 0 && widgetWidthRequest > 0) {
 				wc = widgetWidthRequest;
 			}
 			if(wc >= 0) {
-				wc = (wc - widgetMarginLeft) - widgetMarginRight;
+				wc = wc - widgetMarginLeft - widgetMarginRight;
 				if(wc < 0) {
 					wc = 0;
 				}
@@ -223,8 +223,8 @@ namespace cave.ui
 						cave.ui.Widget.layout(child, wc);
 						cave.ui.Widget.move(child, widgetMarginLeft, widgetMarginTop);
 						var cw = cave.ui.Widget.getWidth(child);
-						if(((wc < 0) && (widgetMaximumWidthRequest > 0)) && (((cw + widgetMarginLeft) + widgetMarginRight) > widgetMaximumWidthRequest)) {
-							cave.ui.Widget.layout(child, (widgetMaximumWidthRequest - widgetMarginLeft) - widgetMarginRight);
+						if(wc < 0 && widgetMaximumWidthRequest > 0 && cw + widgetMarginLeft + widgetMarginRight > widgetMaximumWidthRequest) {
+							cave.ui.Widget.layout(child, widgetMaximumWidthRequest - widgetMarginLeft - widgetMarginRight);
 							cw = cave.ui.Widget.getWidth(child);
 						}
 						var ch = cave.ui.Widget.getHeight(child);
@@ -239,18 +239,18 @@ namespace cave.ui
 			}
 			var fw = widthConstraint;
 			if(fw < 0) {
-				fw = (mw + widgetMarginLeft) + widgetMarginRight;
+				fw = mw + widgetMarginLeft + widgetMarginRight;
 			}
-			var fh = (mh + widgetMarginTop) + widgetMarginBottom;
+			var fh = mh + widgetMarginTop + widgetMarginBottom;
 			if(widgetHeightRequest > 0) {
 				fh = widgetHeightRequest;
 			}
-			if((widgetMinimumHeightRequest > 0) && (fh < widgetMinimumHeightRequest)) {
+			if(widgetMinimumHeightRequest > 0 && fh < widgetMinimumHeightRequest) {
 				fh = widgetMinimumHeightRequest;
 			}
 			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, fw, fh);
-			mw = (cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this) - widgetMarginLeft) - widgetMarginRight;
-			mh = (cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) - widgetMarginTop) - widgetMarginBottom;
+			mw = cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this) - widgetMarginLeft - widgetMarginRight;
+			mh = cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) - widgetMarginTop - widgetMarginBottom;
 			var array2 = cave.ui.Widget.getChildren((Windows.UI.Xaml.UIElement)this);
 			if(array2 != null) {
 				var n2 = 0;

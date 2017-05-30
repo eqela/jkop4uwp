@@ -48,11 +48,11 @@ namespace capex.data
 					break;
 				}
 				if(quote) {
-					if((c == '\\') && (slash == false)) {
+					if(c == '\\' && slash == false) {
 						slash = true;
 					}
 					else {
-						if((c == '\'') && (slash == false)) {
+						if(c == '\'' && slash == false) {
 							quote = false;
 						}
 						slash = false;
@@ -60,11 +60,11 @@ namespace capex.data
 					sb.append(c);
 				}
 				else if(dquote) {
-					if((c == '\\') && (slash == false)) {
+					if(c == '\\' && slash == false) {
 						slash = true;
 					}
 					else {
-						if((c == '\"') && (slash == false)) {
+						if(c == '\"' && slash == false) {
 							dquote = false;
 						}
 						slash = false;

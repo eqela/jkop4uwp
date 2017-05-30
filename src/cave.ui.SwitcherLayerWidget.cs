@@ -81,7 +81,7 @@ namespace cave.ui
 			if(children != null) {
 				var topmost = cape.Vector.get(children, cape.Vector.getSize(children) - 1);
 				if(topmost != null) {
-					cave.ui.Widget.resizeHeight(topmost, (height - margin) - margin);
+					cave.ui.Widget.resizeHeight(topmost, height - margin - margin);
 				}
 			}
 		}
@@ -94,7 +94,7 @@ namespace cave.ui
 			var childCount = cape.Vector.getSize(children);
 			var wc = -1;
 			if(widthConstraint >= 0) {
-				wc = (widthConstraint - margin) - margin;
+				wc = widthConstraint - margin - margin;
 				if(wc < 0) {
 					wc = 0;
 				}
@@ -109,7 +109,7 @@ namespace cave.ui
 				for(n2 = 0 ; n2 < m ; n2++) {
 					var child = array[n2];
 					if(child != null) {
-						if(n == (childCount - 1)) {
+						if(n == childCount - 1) {
 							cave.ui.Widget.layout(child, wc);
 							mw = cave.ui.Widget.getWidth(child);
 							mh = cave.ui.Widget.getHeight(child);
@@ -123,7 +123,7 @@ namespace cave.ui
 					}
 				}
 			}
-			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, (mw + margin) + margin, (mh + margin) + margin);
+			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, mw + margin + margin, mh + margin + margin);
 		}
 
 		public void removeAllChildren() {

@@ -43,6 +43,7 @@ namespace cave.ui
 		private cave.Color defaultActionItemWidgetTextColor = null;
 		private cave.Color widgetBackgroundColor = null;
 		private System.Collections.Generic.List<Windows.UI.Xaml.UIElement> widgetItems = null;
+		private cave.ui.LayerWidget overlayWidget = null;
 
 		public void addToWidgetItems(Windows.UI.Xaml.UIElement widget) {
 			if(!(widget != null)) {
@@ -99,8 +100,21 @@ namespace cave.ui
 			return((Windows.UI.Xaml.UIElement)this);
 		}
 
+		public void addOverlay(Windows.UI.Xaml.UIElement widget) {
+			overlayWidget.addWidget(widget);
+		}
+
+		public bool removeOverlay() {
+			if(!(overlayWidget != null)) {
+				return(false);
+			}
+			cave.ui.Widget.removeChildrenOf((Windows.UI.Xaml.UIElement)overlayWidget);
+			return(true);
+		}
+
 		public override void initializeWidget() {
 			base.initializeWidget();
+			overlayWidget = new cave.ui.LayerWidget(context);
 			var bgc = widgetBackgroundColor;
 			if(!(bgc != null)) {
 				bgc = defaultActionItemWidgetBackgroundColor;
@@ -120,6 +134,7 @@ namespace cave.ui
 				}
 			}
 			addWidget((Windows.UI.Xaml.UIElement)cave.ui.LayerWidget.forWidget(context, (Windows.UI.Xaml.UIElement)hbox, context.getHeightValue("1mm")));
+			addWidget((Windows.UI.Xaml.UIElement)overlayWidget);
 		}
 
 		public cave.Color getDefaultActionItemWidgetBackgroundColor() {

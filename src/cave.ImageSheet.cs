@@ -68,7 +68,7 @@ namespace cave
 						img = img.scaleToSize(resizeToWidth, resizeToHeight);
 					}
 					frames.Add(img);
-					if((maxImages > 0) && (cape.Vector.getSize(frames) >= maxImages)) {
+					if(maxImages > 0 && cape.Vector.getSize(frames) >= maxImages) {
 						return(frames);
 					}
 				}

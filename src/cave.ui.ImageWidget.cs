@@ -68,10 +68,10 @@ namespace cave.ui
 
 		public void setWidgetImageResource(string resName) {
 			cave.Image img = null;
-			if((cape.String.isEmpty(resName) == false) && (widgetContext != null)) {
+			if(cape.String.isEmpty(resName) == false && widgetContext != null) {
 				img = widgetContext.getResourceImage(resName);
 				if(img == null) {
-					cape.Log.error((cape.LoggingContext)widgetContext, ("Failed to get resource image: `" + resName) + "'");
+					cape.Log.error((cape.LoggingContext)widgetContext, "Failed to get resource image: `" + resName + "'");
 				}
 			}
 			setWidgetImage(img);
@@ -82,12 +82,12 @@ namespace cave.ui
 				cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, widgetImageWidth, widgetImageHeight);
 				return(true);
 			}
-			if(((widthConstraint < 0) && (widgetImageWidth < 1)) && (widgetImageHeight < 1)) {
+			if(widthConstraint < 0 && widgetImageWidth < 1 && widgetImageHeight < 1) {
 				return(false);
 			}
 			var width = -1;
 			var height = -1;
-			if((widgetImageWidth > 0) && (widgetImageHeight > 0)) {
+			if(widgetImageWidth > 0 && widgetImageHeight > 0) {
 				width = widgetImageWidth;
 				height = widgetImageHeight;
 			}
@@ -100,15 +100,15 @@ namespace cave.ui
 			else {
 				width = widthConstraint;
 			}
-			if(((width > 0) && (widthConstraint >= 0)) && (width > widthConstraint)) {
+			if(width > 0 && widthConstraint >= 0 && width > widthConstraint) {
 				width = widthConstraint;
 				height = -1;
 			}
 			if(height < 0) {
-				height = (widgetImage.getPixelHeight() * width) / widgetImage.getPixelWidth();
+				height = widgetImage.getPixelHeight() * width / widgetImage.getPixelWidth();
 			}
 			if(width < 0) {
-				width = (widgetImage.getPixelWidth() * height) / widgetImage.getPixelHeight();
+				width = widgetImage.getPixelWidth() * height / widgetImage.getPixelHeight();
 			}
 			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, width, height);
 			return(true);

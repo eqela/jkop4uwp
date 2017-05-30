@@ -47,7 +47,7 @@ namespace cape
 		}
 
 		private bool makeDataAvailable(long n) {
-			if((n >= bufferStart) && (n < (bufferStart + bufferDataSize))) {
+			if(n >= bufferStart && n < bufferStart + bufferDataSize) {
 				return(true);
 			}
 			if(reader is cape.SeekableReader) {
@@ -63,7 +63,7 @@ namespace cape
 			bufferDataSize = (long)reader.read(buffer);
 			bufferStart = readPos;
 			readPos += bufferDataSize;
-			if((n >= bufferStart) && (n < (bufferStart + bufferDataSize))) {
+			if(n >= bufferStart && n < bufferStart + bufferDataSize) {
 				return(true);
 			}
 			return(false);

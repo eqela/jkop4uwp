@@ -33,10 +33,10 @@ namespace capex.image
 			var w = bmpbuf.getWidth();
 			var h = bmpbuf.getHeight();
 			var srcbuf = bmpbuf.getBuffer();
-			if(((srcbuf == null) || (w < 1)) || (h < 1)) {
+			if(srcbuf == null || w < 1 || h < 1) {
 				return(null);
 			}
-			var desbuf = new byte[(w * h) * 4];
+			var desbuf = new byte[w * h * 4];
 			if(desbuf == null) {
 				return(null);
 			}
@@ -47,22 +47,22 @@ namespace capex.image
 			var y = 0;
 			for(y = 0 ; y < h ; y++) {
 				for(x = 0 ; x < w ; x++) {
-					var sr = (double)(capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (((y * w) + x) * 4) + 0) * 0.21);
-					var sg = (double)(capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (((y * w) + x) * 4) + 1) * 0.72);
-					var sb = (double)(capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (((y * w) + x) * 4) + 2) * 0.07);
-					var sa = (double)capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (((y * w) + x) * 4) + 3);
-					var sbnw = (int)((sr + sg) + sb);
-					cape.Buffer.setByte(desptr, (long)((((y * w) + x) * 4) + 0), (byte)capex.image.ImageFilterUtil.clamp((double)(sbnw * rf)));
-					cape.Buffer.setByte(desptr, (long)((((y * w) + x) * 4) + 1), (byte)capex.image.ImageFilterUtil.clamp((double)(sbnw * gf)));
-					cape.Buffer.setByte(desptr, (long)((((y * w) + x) * 4) + 2), (byte)capex.image.ImageFilterUtil.clamp((double)(sbnw * bf)));
-					cape.Buffer.setByte(desptr, (long)((((y * w) + x) * 4) + 3), (byte)capex.image.ImageFilterUtil.clamp(sa * af));
+					var sr = (double)(capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (y * w + x) * 4 + 0) * 0.21);
+					var sg = (double)(capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (y * w + x) * 4 + 1) * 0.72);
+					var sb = (double)(capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (y * w + x) * 4 + 2) * 0.07);
+					var sa = (double)capex.image.ImageFilterUtil.getSafeByte(srcptr, ss, (y * w + x) * 4 + 3);
+					var sbnw = (int)(sr + sg + sb);
+					cape.Buffer.setByte(desptr, (long)((y * w + x) * 4 + 0), (byte)capex.image.ImageFilterUtil.clamp((double)(sbnw * rf)));
+					cape.Buffer.setByte(desptr, (long)((y * w + x) * 4 + 1), (byte)capex.image.ImageFilterUtil.clamp((double)(sbnw * gf)));
+					cape.Buffer.setByte(desptr, (long)((y * w + x) * 4 + 2), (byte)capex.image.ImageFilterUtil.clamp((double)(sbnw * bf)));
+					cape.Buffer.setByte(desptr, (long)((y * w + x) * 4 + 3), (byte)capex.image.ImageFilterUtil.clamp(sa * af));
 				}
 			}
 			return(capex.image.BitmapBuffer.create(desbuf, w, h));
 		}
 
 		public static capex.image.BitmapBuffer createRedSepia(capex.image.BitmapBuffer imgbuf) {
-			return(capex.image.GreyscaleImage.createGreyscale(imgbuf, (110.00 / 255.00) + 1.00, (66.00 / 255.00) + 1.00, (20.00 / 255.00) + 1.00));
+			return(capex.image.GreyscaleImage.createGreyscale(imgbuf, 110.00 / 255.00 + 1.00, 66.00 / 255.00 + 1.00, 20.00 / 255.00 + 1.00));
 		}
 	}
 }

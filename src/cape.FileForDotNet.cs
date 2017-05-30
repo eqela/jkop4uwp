@@ -126,7 +126,7 @@ namespace cape
 			}
 			var v = new cape.FileForDotNet();
 			if(completePath != null) {
-				v.setCompletePathRaw((completePath + ".") + ext);
+				v.setCompletePathRaw(completePath + "." + ext);
 			}
 			return((cape.File)v);
 		}
@@ -148,11 +148,11 @@ namespace cape
 			if(cape.OS.isWindows()) {
 				var l = cape.String.getLength(x);
 				var c1 = cape.String.getChar(x, 1);
-				if((l == 2) && (c1 == ':')) {
+				if(l == 2 && c1 == ':') {
 					completePath = x + "\\";
 					return;
 				}
-				if(((l == 3) && (c1 == ':')) && (cape.String.getChar(x, 2) == '\\')) {
+				if(l == 3 && c1 == ':' && cape.String.getChar(x, 2) == '\\') {
 					completePath = x;
 					return;
 				}
@@ -168,7 +168,7 @@ namespace cape
 
 		public override cape.File entry(string name) {
 			onError(null);
-			if((object.Equals(name, null)) || (cape.String.getLength(name) < 1)) {
+			if(object.Equals(name, null) || cape.String.getLength(name) < 1) {
 				return((cape.File)this);
 			}
 			var v = new cape.FileForDotNet();
@@ -282,7 +282,7 @@ namespace cape
 					return(false);
 				}
 				if(dest.remove() == false) {
-					onError((("Error when removing `" + dest.getPath()) + "': ") + dest.getLastErrorDescription());
+					onError("Error when removing `" + dest.getPath() + "': " + dest.getLastErrorDescription());
 					return(false);
 				}
 			}
@@ -425,7 +425,7 @@ namespace cape
 
 		public override bool isExecutable() {
 			if(cape.OS.isWindows()) {
-				return((hasExtension("exe") || hasExtension("bat")) || hasExtension("com"));
+				return(hasExtension("exe") || hasExtension("bat") || hasExtension("com"));
 			}
 			return(true);
 		}
@@ -476,7 +476,7 @@ namespace cape
 					ec = GetLastError();
 				}
 				if(v == false) {
-					onError((("Failed to DeleteFileW: `" + ff) + "': ") + cape.String.forInteger(ec));
+					onError("Failed to DeleteFileW: `" + ff + "': " + cape.String.forInteger(ec));
 				}
 			}
 			else {
@@ -503,7 +503,7 @@ namespace cape
 					ec = GetLastError();
 				}
 				if(v == false) {
-					onError((("Failed to RemoveDirectoryW: `" + ff) + "'") + cape.String.forInteger(ec));
+					onError("Failed to RemoveDirectoryW: `" + ff + "'" + cape.String.forInteger(ec));
 				}
 			}
 			else {

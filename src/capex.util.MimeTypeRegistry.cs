@@ -825,7 +825,7 @@ namespace capex.util
 				}
 				v = cape.Map.get(capex.util.MimeTypeRegistry.htMime, cape.String.toLowerCase(mime));
 			}
-			if((object.Equals(v, null)) || (cape.String.getLength(v) < 1)) {
+			if(object.Equals(v, null) || cape.String.getLength(v) < 1) {
 				v = "application/unknown";
 			}
 			return(v);
@@ -837,7 +837,7 @@ namespace capex.util
 
 		public bool add(string pattern, string mimetype) {
 			var v = false;
-			if((object.Equals(pattern, null)) || (object.Equals(mimetype, null))) {
+			if(object.Equals(pattern, null) || object.Equals(mimetype, null)) {
 				;
 			}
 			else if(cape.String.startsWith(pattern, ".") == true) {

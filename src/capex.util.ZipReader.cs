@@ -35,7 +35,7 @@ namespace capex.util
 		}
 
 		public static bool extractZipFileToDirectory(cape.File zipFile, cape.File destDir, System.Action<cape.File> listener = null) {
-			if((zipFile == null) || (destDir == null)) {
+			if(zipFile == null || destDir == null) {
 				return(false);
 			}
 			var zf = capex.util.ZipReader.forFile(zipFile);
@@ -68,7 +68,7 @@ namespace capex.util
 							for(n2 = 0 ; n2 < m2 ; n2++) {
 								var comp = array2[n2];
 								if(comp != null) {
-									if((object.Equals(comp, ".")) || (object.Equals(comp, ".."))) {
+									if(object.Equals(comp, ".") || object.Equals(comp, "..")) {
 										continue;
 									}
 									dd = dd.entry(comp);

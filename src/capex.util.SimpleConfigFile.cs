@@ -61,7 +61,7 @@ namespace capex.util
 		}
 
 		public cape.File getRelativeFile(string fileName) {
-			if((file == null) || (object.Equals(fileName, null))) {
+			if(file == null || object.Equals(fileName, null)) {
 				return(null);
 			}
 			var p = file.getParent();
@@ -241,7 +241,7 @@ namespace capex.util
 					terminator = "\"\"\"";
 					continue;
 				}
-				if(!(object.Equals(tag, null)) && (object.Equals(line, "}"))) {
+				if(!(object.Equals(tag, null)) && object.Equals(line, "}")) {
 					tag = null;
 					continue;
 				}
@@ -258,7 +258,7 @@ namespace capex.util
 					continue;
 				}
 				if(!(object.Equals(tag, null))) {
-					key = ((key + "[") + tag) + "]";
+					key = key + "[" + tag + "]";
 				}
 				data.add((string)key, (string)val);
 			}
@@ -267,7 +267,7 @@ namespace capex.util
 		}
 
 		public virtual bool write(cape.File outfile) {
-			if((outfile == null) || (data == null)) {
+			if(outfile == null || data == null) {
 				return(false);
 			}
 			var os = cape.PrintWriterWrapper.forWriter((cape.Writer)outfile.write());
@@ -280,7 +280,7 @@ namespace capex.util
 				if(kvp == null) {
 					break;
 				}
-				os.println((kvp.key + ": ") + kvp.value);
+				os.println(kvp.key + ": " + kvp.value);
 			}
 			return(true);
 		}

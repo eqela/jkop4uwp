@@ -48,11 +48,11 @@ namespace cape
 				b64i = (int)(cape.Buffer.getByte(buffer, i) >> 2);
 				sb.append(cape.Base64Encoder.toASCIIChar(b64i));
 				b64i = (int)((cape.Buffer.getByte(buffer, i) & 3) << 4);
-				if((i + 1) < size) {
+				if(i + 1 < size) {
 					b64i += (int)(cape.Buffer.getByte(buffer, i + 1) >> 4);
 					sb.append(cape.Base64Encoder.toASCIIChar(b64i));
 					b64i = (int)((cape.Buffer.getByte(buffer, i + 1) & 15) << 2);
-					if((i + 2) < size) {
+					if(i + 2 < size) {
 						b64i += (int)(cape.Buffer.getByte(buffer, i + 2) >> 6);
 						sb.append(cape.Base64Encoder.toASCIIChar(b64i));
 						b64i = (int)(cape.Buffer.getByte(buffer, i + 2) & 63);
@@ -77,7 +77,7 @@ namespace cape
 
 		public static char toASCIIChar(int lookup) {
 			var c = 0;
-			if((lookup < 0) || (lookup > 63)) {
+			if(lookup < 0 || lookup > 63) {
 				return((char)c);
 			}
 			if(lookup <= 25) {

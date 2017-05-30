@@ -24,40 +24,23 @@
 
 namespace cape
 {
-	public class Double
+	public class Double : cape.DoubleObject
 	{
 		public Double() {
 		}
 
-		private class MyDoubleObject : cape.DoubleObject
-		{
-			public MyDoubleObject() {
-			}
-
-			private double value = 0.00;
-
-			public virtual double toDouble() {
-				return(value);
-			}
-
-			public double getValue() {
-				return(value);
-			}
-
-			public cape.Double.MyDoubleObject setValue(double v) {
-				value = v;
-				return(this);
-			}
+		public static cape.Double forValue(double value) {
+			return(cape.Double.asObject(value));
 		}
 
-		public static cape.DoubleObject asObject(double value) {
-			var v = new cape.Double.MyDoubleObject();
+		public static cape.Double asObject(double value) {
+			var v = new cape.Double();
 			v.setValue(value);
-			return((cape.DoubleObject)v);
+			return(v);
 		}
 
 		public static double asDouble(object obj) {
-			if(obj == null) {
+			if(!(obj != null)) {
 				return(0.00);
 			}
 			if(obj is cape.DoubleObject) {
@@ -82,6 +65,25 @@ namespace cape
 				return((double)((cape.CharacterObject)obj).toCharacter());
 			}
 			return(0.00);
+		}
+
+		private double value = 0.00;
+
+		public void add(double amount) {
+			value += amount;
+		}
+
+		public virtual double toDouble() {
+			return(value);
+		}
+
+		public double getValue() {
+			return(value);
+		}
+
+		public cape.Double setValue(double v) {
+			value = v;
+			return(this);
 		}
 	}
 }

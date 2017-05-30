@@ -171,6 +171,7 @@ namespace cave.ui
 		private int formWidth = 0;
 		private int fieldLabelFontSize = 0;
 		private string fieldLabelFontFamily = null;
+		private string fieldLabelFontResource = null;
 		private cave.ui.LayerWidget customFooterWidget = null;
 		private cape.DynamicMap queueData = null;
 		private cave.Color widgetBackgroundColor = null;
@@ -504,7 +505,7 @@ namespace cave.ui
 				container = (cave.ui.CustomContainerWidget)vb1;
 			}
 			if(!(container != null)) {
-				System.Diagnostics.Debug.WriteLine(("Unsupported form declaration container encountered: `" + element.getType()) + "'");
+				System.Diagnostics.Debug.WriteLine("Unsupported form declaration container encountered: `" + element.getType() + "'");
 				return(null);
 			}
 			var array = element.getChildren();
@@ -527,7 +528,12 @@ namespace cave.ui
 							var lw = cave.ui.LabelWidget.forText(context, label);
 							lw.setWidgetTextColor(getAdjustedForegroundColor(child, bgc2));
 							lw.setWidgetFontSize((double)fieldLabelFontSize);
-							lw.setWidgetFontFamily(fieldLabelFontFamily);
+							if(fieldLabelFontResource != null) {
+								lw.setWidgetFontResource(fieldLabelFontResource);
+							}
+							else {
+								lw.setWidgetFontFamily(fieldLabelFontFamily);
+							}
 							var ss = context.getHeightValue("1mm");
 							wbox.addWidget((Windows.UI.Xaml.UIElement)cave.ui.LayerWidget.forWidget(context, (Windows.UI.Xaml.UIElement)lw).setWidgetMarginLeft(ss).setWidgetMarginRight(ss).setWidgetMarginTop(ss));
 							wbox.addWidget(ww, child.getPropertyDouble("weight"));
@@ -554,7 +560,7 @@ namespace cave.ui
 				((cave.ui.VerticalBoxWidget)container).addWidget(child, weight);
 			}
 			else {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.FormWidget.addToContainerWithWeight] (FormWidget.sling:489:2): Tried to add a widget with weight to a container that is not a box. Ignoring weight.");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.FormWidget.addToContainerWithWeight] (FormWidget.sling:495:2): Tried to add a widget with weight to a container that is not a box. Ignoring weight.");
 				container.addWidget(child);
 			}
 		}
@@ -665,7 +671,7 @@ namespace cave.ui
 						}
 					}
 				}
-				if(preserveUnknownValues && (data != null)) {
+				if(preserveUnknownValues && data != null) {
 					preservedFormData = data.duplicateMap();
 				}
 			}
@@ -797,6 +803,15 @@ namespace cave.ui
 
 		public cave.ui.FormWidget setFieldLabelFontFamily(string v) {
 			fieldLabelFontFamily = v;
+			return(this);
+		}
+
+		public string getFieldLabelFontResource() {
+			return(fieldLabelFontResource);
+		}
+
+		public cave.ui.FormWidget setFieldLabelFontResource(string v) {
+			fieldLabelFontResource = v;
 			return(this);
 		}
 

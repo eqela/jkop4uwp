@@ -80,7 +80,7 @@ namespace cave
 		}
 
 		public bool isInside(double xc, double yc, double width, double height) {
-			if((((x >= xc) && (x < (xc + width))) && (y >= yc)) && (y < (yc + height))) {
+			if(x >= xc && x < xc + width && y >= yc && y < yc + height) {
 				return(true);
 			}
 			return(false);

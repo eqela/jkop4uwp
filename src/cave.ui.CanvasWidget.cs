@@ -123,7 +123,7 @@ namespace cave.ui
 			widgetBottomRightRadius = brradius;
 			widgetBottomLeftRadius = blradius;
 			var isRounded = true;
-			if((((widgetTopLeftRadius <= 0.00) && (widgetTopRightRadius <= 0.00)) && (widgetBottomRightRadius <= 0.00)) && (widgetBottomLeftRadius <= 0.00)) {
+			if(widgetTopLeftRadius <= 0.00 && widgetTopRightRadius <= 0.00 && widgetBottomRightRadius <= 0.00 && widgetBottomLeftRadius <= 0.00) {
 				isRounded = false;
 			}
 			System.Diagnostics.Debug.WriteLine("[cave.ui.CanvasWidget.setWidgetRoundingRadius] (CanvasWidget.sling:243:2): Not implemented");

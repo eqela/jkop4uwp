@@ -103,11 +103,11 @@ namespace cape
 		}
 
 		public long asMicroSeconds() {
-			return((long)((this.getSeconds() * 1000000) + this.getMicroSeconds()));
+			return((long)(this.getSeconds() * 1000000 + this.getMicroSeconds()));
 		}
 
 		public static long diff(cape.TimeValue a, cape.TimeValue b) {
-			if((a == null) && (b == null)) {
+			if(a == null && b == null) {
 				return((long)0);
 			}
 			if(a == null) {
@@ -116,7 +116,7 @@ namespace cape
 			if(b == null) {
 				return(a.asMicroSeconds());
 			}
-			var r = ((a.seconds - b.seconds) * 1000000) + (a.microSeconds - b.microSeconds);
+			var r = (a.seconds - b.seconds) * 1000000 + a.microSeconds - b.microSeconds;
 			return(r);
 		}
 

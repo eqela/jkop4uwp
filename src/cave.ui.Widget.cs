@@ -48,7 +48,7 @@ namespace cave.ui
 			if(!(widget != null)) {
 				return(null);
 			}
-			var v = (widget.GetValue(WidgetProperty)) as cave.ui.Widget.MyWidgetInfo;
+			var v = widget.GetValue(WidgetProperty) as cave.ui.Widget.MyWidgetInfo;
 			if(!(v != null)) {
 				v = new cave.ui.Widget.MyWidgetInfo();
 				widget.SetValue(WidgetProperty, v);
@@ -124,11 +124,20 @@ namespace cave.ui
 			if(ccw != null) {
 				ccw.tryInitializeWidget();
 			}
-			var panel = parent as Windows.UI.Xaml.Controls.Panel;
-			if(!(panel != null)) {
-				return;
+			if(parent is Windows.UI.Xaml.Controls.Panel) {
+				var panel = (Windows.UI.Xaml.Controls.Panel)parent;
+				panel.Children.Add(child);
 			}
-			panel.Children.Add(child);
+			else if(parent is Windows.UI.Xaml.Controls.UserControl) {
+				var uc = (Windows.UI.Xaml.Controls.UserControl)parent;
+				var ucc = uc.Content as Windows.UI.Xaml.Controls.ContentControl;
+				if(ucc != null) {
+					ucc.Content = child;
+				}
+			}
+			else {
+				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.addChild] (Widget.sling:179:3): Unsupported parent type when adding a child widget");
+			}
 			var pp = parent as cave.ui.CustomContainerWidget;
 			if(pp != null) {
 				pp.onChildWidgetAdded(child);
@@ -149,7 +158,7 @@ namespace cave.ui
 				return(null);
 			}
 			var pp = parentWidget as cave.ui.CustomContainerWidget;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.removeFromParent] (Widget.sling:201:2): Not implemented.");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.removeFromParent] (Widget.sling:215:2): Not implemented.");
 			if(pp != null) {
 				pp.onChildWidgetRemoved(child);
 			}
@@ -279,7 +288,7 @@ namespace cave.ui
 		public static bool setLayoutSize(Windows.UI.Xaml.UIElement widget, int widthValue, int heightValue) {
 			if(cave.ui.Widget.isRootWidget(widget)) {
 				var ccw = widget as cave.ui.CustomContainerWidget;
-				if((ccw != null) && (ccw.getAllowResize() == false)) {
+				if(ccw != null && ccw.getAllowResize() == false) {
 					return(false);
 				}
 			}
@@ -291,7 +300,7 @@ namespace cave.ui
 			if(height < 0) {
 				height = 0;
 			}
-			if((cave.ui.Widget.getWidth(widget) == width) && (cave.ui.Widget.getHeight(widget) == height)) {
+			if(cave.ui.Widget.getWidth(widget) == width && cave.ui.Widget.getHeight(widget) == height) {
 				return(false);
 			}
 			var wi = cave.ui.Widget.getMyWidgetInfo(widget);
@@ -341,7 +350,7 @@ namespace cave.ui
 				srw = (int)System.Math.Ceiling(widget.DesiredSize.Width);
 				srh = (int)System.Math.Ceiling(widget.DesiredSize.Height);
 				widget.InvalidateMeasure();
-				if((widthConstraint >= 0) && (srw < widthConstraint)) {
+				if(widthConstraint >= 0 && srw < widthConstraint) {
 					srw = widthConstraint;
 				}
 				cave.ui.Widget.setLayoutSize(widget, srw, srh);
@@ -380,19 +389,19 @@ namespace cave.ui
 					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(true);
 				}
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetLongClickHandler] (Widget.sling:870:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetLongClickHandler] (Widget.sling:884:2): Not implemented");
 		}
 
 		public static void setWidgetPointerHandlers(Windows.UI.Xaml.UIElement widget, System.Action<double, double> onStartHandler = null, System.Action<double, double> onTouchHandler = null, System.Action<double, double> onEndHandler = null) {
 			if(widget is cave.ui.CustomContainerWidget) {
-				if(((onStartHandler == null) && (onTouchHandler == null)) && (onEndHandler == null)) {
+				if(onStartHandler == null && onTouchHandler == null && onEndHandler == null) {
 					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(false);
 				}
 				else {
 					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(true);
 				}
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:954:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:968:2): Not implemented");
 		}
 
 		public static void removeChildrenOf(Windows.UI.Xaml.UIElement widget) {
@@ -414,7 +423,7 @@ namespace cave.ui
 				return;
 			}
 			var ccw = widget as cave.ui.CustomContainerWidget;
-			if((ccw != null) && ccw.getWidgetChanged()) {
+			if(ccw != null && ccw.getWidgetChanged()) {
 				return;
 			}
 			if(cave.ui.Widget.isRootWidget(widget)) {
@@ -441,7 +450,7 @@ namespace cave.ui
 			if(!(widget != null)) {
 				return;
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setAlpha] (Widget.sling:1006:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setAlpha] (Widget.sling:1020:2): Not implemented");
 		}
 	}
 }

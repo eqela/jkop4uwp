@@ -48,7 +48,7 @@ namespace capex.util
 		}
 
 		public override bool addFile(cape.File file, string filename) {
-			if((archive == null) || (file == null)) {
+			if(archive == null || file == null) {
 				return(false);
 			}
 			if(System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(archive, file.getPath(), filename) == null) {

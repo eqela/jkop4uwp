@@ -86,7 +86,7 @@ namespace capex.data
 		}
 
 		private string createColumnSelectionString(object[] columns) {
-			if((columns == null) || (columns.Length < 1)) {
+			if(columns == null || columns.Length < 1) {
 				return("*");
 			}
 			var sb = new cape.StringBuilder();
@@ -109,7 +109,7 @@ namespace capex.data
 		}
 
 		private string createOrderByString(object[] order) {
-			if((order == null) || (order.Length < 1)) {
+			if(order == null || order.Length < 1) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -308,7 +308,7 @@ namespace capex.data
 		}
 
 		public virtual capex.data.SQLStatement prepareInsertStatement(string table, cape.DynamicMap data) {
-			if((cape.String.isEmpty(table) || (data == null)) || (data.getCount() < 1)) {
+			if(cape.String.isEmpty(table) || data == null || data.getCount() < 1) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -359,7 +359,7 @@ namespace capex.data
 					var key2 = keys[n3];
 					if(key2 != null) {
 						var o = data.get(key2);
-						if((o is string) || (o is cape.StringObject)) {
+						if(o is string || o is cape.StringObject) {
 							stmt.addParamString(cape.String.asString(o));
 						}
 						else if(o is cape.IntegerObject) {
@@ -388,7 +388,7 @@ namespace capex.data
 		}
 
 		public virtual capex.data.SQLStatement prepareUpdateStatement(string table, cape.DynamicMap criteria, cape.DynamicMap data) {
-			if((cape.String.isEmpty(table) || (data == null)) || (data.getCount() < 1)) {
+			if(cape.String.isEmpty(table) || data == null || data.getCount() < 1) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -411,7 +411,7 @@ namespace capex.data
 				first = false;
 				@params.Add(data.get(key));
 			}
-			if((criteria != null) && (criteria.getCount() > 0)) {
+			if(criteria != null && criteria.getCount() > 0) {
 				sb.append(" WHERE ");
 				first = true;
 				var criterias = criteria.iterateKeys();
@@ -464,7 +464,7 @@ namespace capex.data
 			sb.append("DELETE FROM ");
 			sb.append(table);
 			var @params = new System.Collections.Generic.List<object>();
-			if((criteria != null) && (criteria.getCount() > 0)) {
+			if(criteria != null && criteria.getCount() > 0) {
 				sb.append(" WHERE ");
 				var first = true;
 				var criterias = criteria.iterateKeys();

@@ -39,7 +39,7 @@ namespace capex.text
 			cape.StringBuilder wordBuilder = null;
 			while(it != null) {
 				var c = it.getNextChar();
-				if((((c == ' ') || (c == '\t')) || (c == '\n')) || (c < 1)) {
+				if(c == ' ' || c == '\t' || c == '\n' || c < 1) {
 					if(wordBuilder != null) {
 						var word = wordBuilder.toString();
 						wordBuilder = null;

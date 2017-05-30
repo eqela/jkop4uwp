@@ -47,15 +47,16 @@ namespace cave.ui
 		private string widgetText = null;
 		private double widgetRoundingRadius = 0.00;
 		private cave.Color widgetBackgroundColor = null;
+		private cave.Color widgetPressedBackgroundColor = null;
 		private cave.Color widgetTextColor = null;
 		private int widgetFontSize = 0;
 		private string widgetFontFamily = "Arial";
+		private string widgetFontResource = null;
 		private int widgetPadding = -1;
 		private int widgetPaddingHorizontal = -1;
 
 		public cave.ui.TextButtonWidget setWidgetClickHandler(System.Action handler) {
 			widgetClickHandler = handler;
-			cave.ui.Widget.setWidgetClickHandler((Windows.UI.Xaml.UIElement)this, handler);
 			return(this);
 		}
 
@@ -69,6 +70,25 @@ namespace cave.ui
 			if(!(bgc != null)) {
 				bgc = cave.Color.forRGBDouble(0.60, 0.60, 0.60);
 			}
+			var canvas = cave.ui.CanvasWidget.forColor(context, bgc);
+			canvas.setWidgetRoundingRadius(widgetRoundingRadius);
+			addWidget((Windows.UI.Xaml.UIElement)canvas);
+			var pbgc = widgetPressedBackgroundColor;
+			if(!(pbgc != null)) {
+				pbgc = createDefaultPressColor(bgc);
+			}
+			var cvn = canvas;
+			var c1 = bgc;
+			var c2 = pbgc;
+			var thisWidget = this;
+			cave.ui.Widget.setWidgetPointerHandlers((Windows.UI.Xaml.UIElement)this, (double x, double y) => {
+				cvn.setWidgetColor(c2);
+			}, null, (double x2, double y2) => {
+				if(widgetClickHandler != null && x2 <= cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)thisWidget) && y2 <= cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)thisWidget) && x2 >= 0 && y2 >= 0) {
+					widgetClickHandler();
+				}
+				cvn.setWidgetColor(c1);
+			});
 			var fgc = widgetTextColor;
 			if(!(fgc != null)) {
 				if(bgc.isLightColor()) {
@@ -82,12 +102,14 @@ namespace cave.ui
 			if(padding < 0) {
 				padding = context.getHeightValue("2mm");
 			}
-			var canvas = cave.ui.CanvasWidget.forColor(context, bgc);
-			canvas.setWidgetRoundingRadius(widgetRoundingRadius);
-			addWidget((Windows.UI.Xaml.UIElement)canvas);
 			var label = cave.ui.LabelWidget.forText(context, widgetText);
 			label.setWidgetTextColor(fgc);
-			label.setWidgetFontFamily(widgetFontFamily);
+			if(widgetFontResource != null) {
+				label.setWidgetFontResource(widgetFontResource);
+			}
+			else {
+				label.setWidgetFontFamily(widgetFontFamily);
+			}
 			if(widgetFontSize > 0) {
 				label.setWidgetFontSize((double)widgetFontSize);
 			}
@@ -97,6 +119,16 @@ namespace cave.ui
 				aw.setWidgetMarginRight(widgetPaddingHorizontal);
 			}
 			addWidget((Windows.UI.Xaml.UIElement)aw);
+		}
+
+		private cave.Color createDefaultPressColor(cave.Color bg) {
+			if(!(bg != null)) {
+				return(null);
+			}
+			var r = (int)(bg.getRedInt() * (1 - 0.25));
+			var g = (int)(bg.getGreenInt() * (1 - 0.25));
+			var b = (int)(bg.getBlueInt() * (1 - 0.25));
+			return(cave.Color.forRGB(r, g, b));
 		}
 
 		public string getWidgetText() {
@@ -126,6 +158,15 @@ namespace cave.ui
 			return(this);
 		}
 
+		public cave.Color getWidgetPressedBackgroundColor() {
+			return(widgetPressedBackgroundColor);
+		}
+
+		public cave.ui.TextButtonWidget setWidgetPressedBackgroundColor(cave.Color v) {
+			widgetPressedBackgroundColor = v;
+			return(this);
+		}
+
 		public cave.Color getWidgetTextColor() {
 			return(widgetTextColor);
 		}
@@ -150,6 +191,15 @@ namespace cave.ui
 
 		public cave.ui.TextButtonWidget setWidgetFontFamily(string v) {
 			widgetFontFamily = v;
+			return(this);
+		}
+
+		public string getWidgetFontResource() {
+			return(widgetFontResource);
+		}
+
+		public cave.ui.TextButtonWidget setWidgetFontResource(string v) {
+			widgetFontResource = v;
 			return(this);
 		}
 

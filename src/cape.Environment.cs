@@ -42,7 +42,7 @@ namespace cape
 			if(c0 == sep) {
 				return(true);
 			}
-			if(((cape.Character.isAlpha(c0) && cape.OS.isWindows()) && (cape.String.getChar(path, 1) == ':')) && (cape.String.getChar(path, 2) == '\\')) {
+			if(cape.Character.isAlpha(c0) && cape.OS.isWindows() && cape.String.getChar(path, 1) == ':' && cape.String.getChar(path, 2) == '\\') {
 				return(true);
 			}
 			return(false);

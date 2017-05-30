@@ -24,7 +24,7 @@
 
 namespace cave.ui
 {
-	public class VerticalScrollerWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithLayout, cave.ui.HeightAwareWidget
+	public class VerticalScrollerWidget : Windows.UI.Xaml.Controls.UserControl, cave.ui.WidgetWithLayout, cave.ui.HeightAwareWidget
 	{
 		public VerticalScrollerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
 		}
@@ -40,6 +40,7 @@ namespace cave.ui
 		private bool heightChanged = false;
 
 		public VerticalScrollerWidget(cave.GuiApplicationContext context) {
+			this.Content = new Windows.UI.Xaml.Controls.ScrollViewer();
 		}
 
 		public virtual void onWidgetHeightChanged(int height) {
@@ -87,7 +88,7 @@ namespace cave.ui
 			}
 			var mh2 = mh;
 			var eh = cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this);
-			if((eh > 0) && (mh2 > eh)) {
+			if(eh > 0 && mh2 > eh) {
 				mh2 = eh;
 			}
 			heightChanged = false;

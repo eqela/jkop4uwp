@@ -67,7 +67,7 @@ namespace cape
 		}
 
 		public virtual int read(byte[] buf) {
-			if((buf == null) || (buffer == null)) {
+			if(buf == null || buffer == null) {
 				return(0);
 			}
 			var buffersz = buffer.Length;
@@ -75,7 +75,7 @@ namespace cape
 				return(0);
 			}
 			var size = buf.Length;
-			if(size > (buffersz - pos)) {
+			if(size > buffersz - pos) {
 				size = buffersz - pos;
 			}
 			cape.Buffer.copyFrom(buf, buffer, (long)pos, (long)0, (long)size);

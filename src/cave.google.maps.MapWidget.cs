@@ -46,13 +46,13 @@ namespace cave.google.maps
 				this.lat = lat;
 				this.lon = lon;
 				if(markerObject != null) {
-					System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.MyMapMarker.move] (MapWidget.sling:432:4): Not implemented.");
+					System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.MyMapMarker.move] (MapWidget.sling:435:4): Not implemented.");
 				}
 			}
 
 			public virtual void remove() {
 				if(markerObject != null) {
-					System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.MyMapMarker.remove] (MapWidget.sling:451:4): Not implemented.");
+					System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.MyMapMarker.remove] (MapWidget.sling:454:4): Not implemented.");
 				}
 				removed = true;
 			}
@@ -131,6 +131,7 @@ namespace cave.google.maps
 		private System.Action<double, double> mapClickHandler = null;
 		private System.Collections.Generic.List<cave.google.maps.MapWidget.MyMapMarker> markerQueue = null;
 		private System.Collections.Generic.List<cape.DynamicMap> coordinateQueue = null;
+		private capex.map.GeoLocation centerQueue = null;
 		private bool mapInitialized = false;
 
 		private MapWidget(cave.GuiApplicationContext context) {
@@ -190,11 +191,21 @@ namespace cave.google.maps
 
 		private void doAddMapMarker(cave.google.maps.MapWidget.MyMapMarker marker) {
 			var markerSize = (int)context.getHeightValue("10mm");
-			System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.doAddMapMarker] (MapWidget.sling:668:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.doAddMapMarker] (MapWidget.sling:672:2): Not implemented");
 		}
 
 		public void moveToCenter(double lat, double lon) {
-			System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.moveToCenter] (MapWidget.sling:698:2): Not implemented");
+			centerQueue = new capex.map.GeoLocation().setLatitude(lat).setLongitude(lon);
+			if(mapInitialized) {
+				doMoveToCenter();
+			}
+		}
+
+		public void doMoveToCenter() {
+			if(!(centerQueue != null)) {
+				return;
+			}
+			System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.doMoveToCenter] (MapWidget.sling:710:2): Not implemented");
 		}
 
 		public void zoomToCoordinates(System.Collections.Generic.List<cape.DynamicMap> coors) {
@@ -208,7 +219,7 @@ namespace cave.google.maps
 		}
 
 		public void doZoomToCoordinates() {
-			System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.doZoomToCoordinates] (MapWidget.sling:739:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.google.maps.MapWidget.doZoomToCoordinates] (MapWidget.sling:751:2): Not implemented");
 		}
 
 		public string getWebApiKey() {

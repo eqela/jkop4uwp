@@ -39,7 +39,7 @@ namespace capex.util
 		}
 
 		public static bool matches(capex.util.PaperSize sz, int value) {
-			if((sz != null) && (sz.getValue() == value)) {
+			if(sz != null && sz.getValue() == value) {
 				return(true);
 			}
 			return(false);

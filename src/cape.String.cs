@@ -282,7 +282,7 @@ namespace cape
 			}
 			var sb = new cape.StringBuilder();
 			var n = 0;
-			for(n = 0 ; n < (length - ll) ; n++) {
+			for(n = 0 ; n < length - ll ; n++) {
 				sb.append(ps);
 			}
 			sb.append(r);
@@ -344,7 +344,7 @@ namespace cape
 		/// </summary>
 
 		public static byte[] toBuffer(string str, string charset) {
-			if((object.Equals(str, null)) || (object.Equals(charset, null))) {
+			if(object.Equals(str, null) || object.Equals(charset, null)) {
 				return(null);
 			}
 			var bytes = cape.String.getBytesUnsigned(str, charset);
@@ -365,7 +365,7 @@ namespace cape
 		}
 
 		private static byte[] getBytesUnsigned(string str, string charset) {
-			if((object.Equals(str, null)) || (object.Equals(charset, null))) {
+			if(object.Equals(str, null) || object.Equals(charset, null)) {
 				return(null);
 			}
 			byte[] bytes = null;
@@ -388,7 +388,7 @@ namespace cape
 		}
 
 		private static sbyte[] getBytesSigned(string str, string charset) {
-			if((object.Equals(str, null)) || (object.Equals(charset, null))) {
+			if(object.Equals(str, null) || object.Equals(charset, null)) {
 				return(null);
 			}
 			sbyte[] bytes = null;
@@ -529,7 +529,7 @@ namespace cape
 		/// </summary>
 
 		public static bool equals(string str1, string str2) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(false);
 			}
 			return(str1.Equals(str2));
@@ -543,7 +543,7 @@ namespace cape
 		/// </summary>
 
 		public static bool equalsIgnoreCase(string str1, string str2) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(false);
 			}
 			return(System.String.Compare(str1, str2, true) == 0);
@@ -558,7 +558,7 @@ namespace cape
 		/// </summary>
 
 		public static int compare(string str1, string str2) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(0);
 			}
 			return(System.String.Compare(str1, str2, false));
@@ -570,7 +570,7 @@ namespace cape
 		/// </summary>
 
 		public static int compareToIgnoreCase(string str1, string str2) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(0);
 			}
 			return(System.String.Compare(str1, str2, true));
@@ -731,7 +731,7 @@ namespace cape
 				ss = 0;
 			}
 			var ll = length;
-			if(ll > (strl - start)) {
+			if(ll > strl - start) {
 				ll = strl - start;
 			}
 			return(str.Substring(ss, ll));
@@ -743,7 +743,7 @@ namespace cape
 		/// </summary>
 
 		public static bool contains(string str1, string str2) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(false);
 			}
 			return(str1.Contains(str2));
@@ -756,7 +756,7 @@ namespace cape
 		/// </summary>
 
 		public static bool startsWith(string str1, string str2, int offset = 0) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(false);
 			}
 			string nstr = null;
@@ -796,7 +796,7 @@ namespace cape
 		/// </summary>
 
 		public static bool endsWith(string str1, string str2) {
-			if((object.Equals(str1, null)) || (object.Equals(str2, null))) {
+			if(object.Equals(str1, null) || object.Equals(str2, null)) {
 				return(false);
 			}
 			return(str1.EndsWith(str2));
@@ -888,7 +888,7 @@ namespace cape
 			}
 			var n = 0;
 			while(true) {
-				if((max > 0) && (cape.Vector.getSize(v) >= (max - 1))) {
+				if(max > 0 && cape.Vector.getSize(v) >= max - 1) {
 					cape.Vector.append(v, cape.String.subString(str, n));
 					break;
 				}
@@ -921,7 +921,7 @@ namespace cape
 				if(c < 1) {
 					break;
 				}
-				if((c < '0') || (c > '9')) {
+				if(c < '0' || c > '9') {
 					return(false);
 				}
 			}
@@ -943,7 +943,7 @@ namespace cape
 			var n = 0;
 			for(n = 0 ; n < m ; n++) {
 				var c = cape.String.charAt(str, n);
-				if((c >= '0') && (c <= '9')) {
+				if(c >= '0' && c <= '9') {
 					v = v * 10;
 					v += (int)(c - '0');
 				}
@@ -969,7 +969,7 @@ namespace cape
 			var n = 0;
 			for(n = 0 ; n < m ; n++) {
 				var c = cape.String.charAt(str, n);
-				if((c >= '0') && (c <= '9')) {
+				if(c >= '0' && c <= '9') {
 					v = v * 10;
 					v += (long)(c - '0');
 				}
@@ -994,17 +994,17 @@ namespace cape
 			var n = 0;
 			for(n = 0 ; n < m ; n++) {
 				var c = cape.String.charAt(str, n);
-				if((c >= '0') && (c <= '9')) {
+				if(c >= '0' && c <= '9') {
 					v = v * 16;
 					v += (int)(c - '0');
 				}
-				else if((c >= 'a') && (c <= 'f')) {
+				else if(c >= 'a' && c <= 'f') {
 					v = v * 16;
-					v += (int)((10 + c) - 'a');
+					v += (int)(10 + c - 'a');
 				}
-				else if((c >= 'A') && (c <= 'F')) {
+				else if(c >= 'A' && c <= 'F') {
 					v = v * 16;
-					v += (int)((10 + c) - 'A');
+					v += (int)(10 + c - 'A');
 				}
 				else {
 					break;
@@ -1136,13 +1136,13 @@ namespace cape
 			var c = ' ';
 			var it = cape.String.iterate(str);
 			while((c = it.getNextChar()) > 0) {
-				if((c == '\"') && (quote == false)) {
+				if(c == '\"' && quote == false) {
 					dquote = !dquote;
 				}
-				else if((c == '\'') && (dquote == false)) {
+				else if(c == '\'' && dquote == false) {
 					quote = !quote;
 				}
-				else if(((quote == false) && (dquote == false)) && (c == delim)) {
+				else if(quote == false && dquote == false && c == delim) {
 					if(sb != null) {
 						var r = sb.toString();
 						if(object.Equals(r, null)) {
@@ -1158,7 +1158,7 @@ namespace cape
 					}
 					sb.append(c);
 				}
-				if(((quote == true) || (dquote == true)) && (sb == null)) {
+				if((quote == true || dquote == true) && sb == null) {
 					sb = new cape.StringBuilder();
 				}
 			}
@@ -1227,7 +1227,7 @@ namespace cape
 							}
 							cape.Map.set(flags, o, "true");
 						}
-						if((delim > 0) && (sb.count() > 0)) {
+						if(delim > 0 && sb.count() > 0) {
 							sb.append(delim);
 						}
 						sb.append(o);

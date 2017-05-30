@@ -39,7 +39,7 @@ namespace capex.util
 		}
 
 		public static bool matches(capex.util.PaperOrientation oo, int value) {
-			if((oo != null) && (oo.getValue() == value)) {
+			if(oo != null && oo.getValue() == value) {
 				return(true);
 			}
 			return(false);

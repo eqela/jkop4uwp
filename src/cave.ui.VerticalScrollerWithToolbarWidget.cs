@@ -42,11 +42,11 @@ namespace cave.ui
 			var scroller = cave.ui.VerticalScrollerWidget.forWidget(context, widgetContent);
 			scroller.setOnScrolledHandler((int direction) => {
 				if(autohideToolbar) {
-					if((direction == 0) && (shown == true)) {
+					if(direction == 0 && shown == true) {
 						hideToolbar();
 						shown = false;
 					}
-					else if((direction == 1) && (shown == false)) {
+					else if(direction == 1 && shown == false) {
 						showToolbar();
 						shown = true;
 					}
@@ -72,7 +72,7 @@ namespace cave.ui
 			var targety = cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) - sy;
 			var anim = cave.ui.WidgetAnimation.forDuration(context, (long)250);
 			anim.addCallback((double completion) => {
-				var dy = (int)(y - (completion * sy));
+				var dy = (int)(y - completion * sy);
 				if(dy < targety) {
 					dy = targety;
 				}
@@ -90,7 +90,7 @@ namespace cave.ui
 			var targety = cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this);
 			var anim = cave.ui.WidgetAnimation.forDuration(context, (long)250);
 			anim.addCallback((double completion) => {
-				var dy = (int)(y + (completion * sy));
+				var dy = (int)(y + completion * sy);
 				if(dy > targety) {
 					dy = targety;
 				}

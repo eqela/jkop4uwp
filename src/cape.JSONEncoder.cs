@@ -32,7 +32,7 @@ namespace cape
 		private bool isNewLine = true;
 
 		private void print(string line, int indent, bool startline, bool endline, cape.StringBuilder sb, bool niceFormatting) {
-			if(startline && (isNewLine == false)) {
+			if(startline && isNewLine == false) {
 				if(niceFormatting) {
 					sb.append('\n');
 				}
@@ -253,7 +253,7 @@ namespace cape
 			else if(o is cape.KeyValueListForStrings) {
 				encodeKeyValueList((cape.KeyValueListForStrings)o, indent, sb, niceFormatting);
 			}
-			else if((((o is cape.IntegerObject) || (o is cape.BooleanObject)) || (o is cape.DoubleObject)) || (o is cape.CharacterObject)) {
+			else if(o is cape.IntegerObject || o is cape.BooleanObject || o is cape.DoubleObject || o is cape.CharacterObject) {
 				encodeString(cape.String.asString(o), indent, sb, niceFormatting);
 			}
 			else {

@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+using System;
+
 namespace cave
 {
 	public class GuiApplicationContextForUWP : cave.GuiApplicationContext
@@ -70,11 +72,24 @@ namespace cave
 		}
 
 		public virtual void showMessageDialog(string title, string message) {
-			System.Diagnostics.Debug.WriteLine("--- stub --- cave.GuiApplicationContextForUWP :: showMessageDialog");
+			var dlg = new Windows.UI.Xaml.Controls.ContentDialog() {
+				Title = title,
+				Content = message,
+				SecondaryButtonText = "OK"
+			};
+			dlg.ShowAsync();
 		}
 
-		public virtual void showMessageDialog(string title, string message, System.Action callback) {
-			System.Diagnostics.Debug.WriteLine("--- stub --- cave.GuiApplicationContextForUWP :: showMessageDialog");
+		public async virtual void showMessageDialog(string title, string message, System.Action callback) {
+			var dlg = new Windows.UI.Xaml.Controls.ContentDialog() {
+				Title = title,
+				Content = message,
+				SecondaryButtonText = "OK"
+			};
+			await dlg.ShowAsync();
+			if(callback != null) {
+				callback();
+			}
 		}
 
 		public virtual void showConfirmDialog(string title, string message, System.Action okcallback, System.Action cancelcallback) {
@@ -82,11 +97,24 @@ namespace cave
 		}
 
 		public virtual void showErrorDialog(string message) {
-			System.Diagnostics.Debug.WriteLine("--- stub --- cave.GuiApplicationContextForUWP :: showErrorDialog");
+			var dlg = new Windows.UI.Xaml.Controls.ContentDialog() {
+				Title = "ERROR",
+				Content = message,
+				SecondaryButtonText = "OK"
+			};
+			dlg.ShowAsync();
 		}
 
-		public virtual void showErrorDialog(string message, System.Action callback) {
-			System.Diagnostics.Debug.WriteLine("--- stub --- cave.GuiApplicationContextForUWP :: showErrorDialog");
+		public async virtual void showErrorDialog(string message, System.Action callback) {
+			var dlg = new Windows.UI.Xaml.Controls.ContentDialog() {
+				Title = "ERROR",
+				Content = message,
+				SecondaryButtonText = "OK"
+			};
+			await dlg.ShowAsync();
+			if(callback != null) {
+				callback();
+			}
 		}
 
 		public virtual int getScreenTopMargin() {

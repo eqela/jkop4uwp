@@ -111,7 +111,7 @@ namespace cave
 				if(c < 1) {
 					break;
 				}
-				else if((c >= '0') && (c <= '9')) {
+				else if(c >= '0' && c <= '9') {
 					i *= 10;
 					i += (int)(c - '0');
 				}
@@ -125,7 +125,7 @@ namespace cave
 			if(cape.String.isEmpty(suffix)) {
 				unit = cave.Length.UNIT_POINT;
 			}
-			else if((object.Equals(suffix, "pt")) || (object.Equals(suffix, "px"))) {
+			else if(object.Equals(suffix, "pt") || object.Equals(suffix, "px")) {
 				unit = cave.Length.UNIT_POINT;
 			}
 			else if(object.Equals(suffix, "mm")) {
@@ -150,29 +150,29 @@ namespace cave
 				return((int)value);
 			}
 			if(unit == cave.Length.UNIT_MILLIMETER) {
-				var v = (value * ppi) / 25;
-				if((value > 0) && (v < 1)) {
+				var v = value * ppi / 25;
+				if(value > 0 && v < 1) {
 					v = (double)1;
 				}
 				return((int)v);
 			}
 			if(unit == cave.Length.UNIT_MICROMETER) {
-				var v1 = (value * ppi) / 25000;
-				if((value > 0) && (v1 < 1)) {
+				var v1 = value * ppi / 25000;
+				if(value > 0 && v1 < 1) {
 					v1 = (double)1;
 				}
 				return((int)v1);
 			}
 			if(unit == cave.Length.UNIT_NANOMETER) {
-				var v2 = (value * ppi) / 25000000;
-				if((value > 0) && (v2 < 1)) {
+				var v2 = value * ppi / 25000000;
+				if(value > 0 && v2 < 1) {
 					v2 = (double)1;
 				}
 				return((int)v2);
 			}
 			if(unit == cave.Length.UNIT_INCH) {
 				var v3 = value * ppi;
-				if((value > 0) && (v3 < 1)) {
+				if(value > 0 && v3 < 1) {
 					v3 = (double)1;
 				}
 				return((int)v3);

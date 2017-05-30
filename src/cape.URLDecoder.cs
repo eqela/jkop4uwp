@@ -30,14 +30,14 @@ namespace cape
 		}
 
 		public static int xcharToInteger(char c) {
-			if((c >= '0') && (c <= '9')) {
-				return(((int)c) - '0');
+			if(c >= '0' && c <= '9') {
+				return((int)c - '0');
 			}
-			else if((c >= 'a') && (c <= 'f')) {
-				return((10 + c) - 'a');
+			else if(c >= 'a' && c <= 'f') {
+				return(10 + c - 'a');
 			}
-			else if((c >= 'A') && (c <= 'F')) {
-				return((10 + c) - 'A');
+			else if(c >= 'A' && c <= 'F') {
+				return(10 + c - 'A');
 			}
 			return(0);
 		}
@@ -57,8 +57,8 @@ namespace cape
 				if(x == '%') {
 					var x1 = it.getNextChar();
 					var x2 = it.getNextChar();
-					if((x1 > 0) && (x2 > 0)) {
-						sb.append((char)((cape.URLDecoder.xcharToInteger(x1) * 16) + cape.URLDecoder.xcharToInteger(x2)));
+					if(x1 > 0 && x2 > 0) {
+						sb.append((char)(cape.URLDecoder.xcharToInteger(x1) * 16 + cape.URLDecoder.xcharToInteger(x2)));
 					}
 					else {
 						break;

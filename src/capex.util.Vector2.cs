@@ -64,12 +64,12 @@ namespace capex.util
 		}
 
 		public double distance(capex.util.Vector2 b) {
-			var dist = ((y - b.y) * (y - b.y)) + ((x - b.x) * (x - b.x));
+			var dist = (y - b.y) * (y - b.y) + (x - b.x) * (x - b.x);
 			return(cape.Math.sqrt(dist));
 		}
 
 		public double getLength() {
-			return(cape.Math.sqrt((x * x) + (y * y)));
+			return(cape.Math.sqrt(x * x + y * y));
 		}
 	}
 }

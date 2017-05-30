@@ -139,11 +139,17 @@ namespace capex.data
 			if(tt == capex.data.SQLTableColumnInfo.TYPE_INTEGER_KEY) {
 				sb.append("INTEGER PRIMARY KEY AUTOINCREMENT");
 			}
+			else if(tt == capex.data.SQLTableColumnInfo.TYPE_LONG_KEY) {
+				sb.append("BIGINT PRIMARY KEY AUTOINCREMENT");
+			}
 			else if(tt == capex.data.SQLTableColumnInfo.TYPE_STRING_KEY) {
 				sb.append("TEXT PRIMARY KEY");
 			}
 			else if(tt == capex.data.SQLTableColumnInfo.TYPE_INTEGER) {
 				sb.append("INTEGER");
+			}
+			else if(tt == capex.data.SQLTableColumnInfo.TYPE_LONG) {
+				sb.append("BIGINT");
 			}
 			else if(tt == capex.data.SQLTableColumnInfo.TYPE_STRING) {
 				sb.append("VARCHAR(255)");
@@ -165,7 +171,7 @@ namespace capex.data
 		}
 
 		public override capex.data.SQLStatement prepareCreateTableStatement(string table, System.Collections.Generic.List<capex.data.SQLTableColumnInfo> columns) {
-			if((object.Equals(table, null)) || (columns == null)) {
+			if(object.Equals(table, null) || columns == null) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -204,14 +210,14 @@ namespace capex.data
 		}
 
 		public override capex.data.SQLStatement prepareCreateIndexStatement(string table, string column, bool unique) {
-			if((object.Equals(table, null)) || (object.Equals(column, null))) {
+			if(object.Equals(table, null) || object.Equals(column, null)) {
 				return(null);
 			}
 			var unq = "";
 			if(unique) {
 				unq = "UNIQUE ";
 			}
-			var sql = ((((((((("CREATE " + unq) + "INDEX ") + table) + "_") + column) + " ON ") + table) + " (") + column) + ")";
+			var sql = "CREATE " + unq + "INDEX " + table + "_" + column + " ON " + table + " (" + column + ")";
 			return(prepare(sql));
 		}
 	}

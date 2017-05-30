@@ -93,7 +93,7 @@ namespace capex.text
 			}
 
 			public virtual string toString() {
-				return(("</" + getName()) + ">");
+				return("</" + getName() + ">");
 			}
 
 			public string getName() {
@@ -351,14 +351,14 @@ namespace capex.text
 
 		private void append(cape.StringBuilder sb, int level, string str, bool noIndent, bool noNewLine) {
 			var n = 0;
-			if((singleLine == false) && (noIndent == false)) {
+			if(singleLine == false && noIndent == false) {
 				for(n = 0 ; n < level ; n++) {
 					sb.append(' ');
 					sb.append(' ');
 				}
 			}
 			sb.append(str);
-			if((singleLine == false) && (noNewLine == false)) {
+			if(singleLine == false && noNewLine == false) {
 				sb.append('\n');
 			}
 		}

@@ -88,6 +88,10 @@ namespace capex.data
 			return(addColumn(capex.data.SQLTableColumnInfo.forInteger(name)));
 		}
 
+		public capex.data.SQLTableInfo addLongColumn(string name) {
+			return(addColumn(capex.data.SQLTableColumnInfo.forLong(name)));
+		}
+
 		public capex.data.SQLTableInfo addStringColumn(string name) {
 			return(addColumn(capex.data.SQLTableColumnInfo.forString(name)));
 		}
@@ -102,6 +106,10 @@ namespace capex.data
 
 		public capex.data.SQLTableInfo addIntegerKeyColumn(string name) {
 			return(addColumn(capex.data.SQLTableColumnInfo.forIntegerKey(name)));
+		}
+
+		public capex.data.SQLTableInfo addLongKeyColumn(string name) {
+			return(addColumn(capex.data.SQLTableColumnInfo.forLongKey(name)));
 		}
 
 		public capex.data.SQLTableInfo addDoubleColumn(string name) {

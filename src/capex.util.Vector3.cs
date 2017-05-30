@@ -70,12 +70,12 @@ namespace capex.util
 		}
 
 		public double distance(capex.util.Vector3 b) {
-			var dist = (((y - b.y) * (y - b.y)) + ((x - b.x) * (x - b.x))) + ((z - b.z) * (z - b.z));
+			var dist = (y - b.y) * (y - b.y) + (x - b.x) * (x - b.x) + (z - b.z) * (z - b.z);
 			return(cape.Math.sqrt(dist));
 		}
 
 		public double getLength() {
-			return(cape.Math.sqrt(((x * x) + (y * y)) + (z * z)));
+			return(cape.Math.sqrt(x * x + y * y + z * z));
 		}
 	}
 }

@@ -67,14 +67,14 @@ namespace cave.ui
 				}
 				return;
 			}
-			cape.Log.debug((cape.LoggingContext)context, (("WebImageWidget" + ": Start loading image: `") + url) + "'");
+			cape.Log.debug((cape.LoggingContext)context, "WebImageWidget" + ": Start loading image: `" + url + "'");
 			var img = onStartLoading();
 			var uu = url;
 			var cb = callback;
 			client.query("GET", url, headers, body, (string rcode, cape.KeyValueList<string, string> rheaders, byte[] rbody) => {
 				onEndLoading();
-				if((rbody == null) || (cape.Buffer.getSize(rbody) < 1)) {
-					cape.Log.error((cape.LoggingContext)context, (("WebImageWidget" + ": FAILED loading image: `") + uu) + "'");
+				if(rbody == null || cape.Buffer.getSize(rbody) < 1) {
+					cape.Log.error((cape.LoggingContext)context, "WebImageWidget" + ": FAILED loading image: `" + uu + "'");
 					if(cb != null) {
 						cb(cape.Error.forCode("failedToDownload"));
 					}
@@ -111,7 +111,7 @@ namespace cave.ui
 					}
 					return;
 				}
-				cape.Log.debug((cape.LoggingContext)context, (("WebImageWidget" + ": DONE loading image: `") + uu) + "'");
+				cape.Log.debug((cape.LoggingContext)context, "WebImageWidget" + ": DONE loading image: `" + uu + "'");
 				img.setWidgetImage(imgo);
 			});
 		}

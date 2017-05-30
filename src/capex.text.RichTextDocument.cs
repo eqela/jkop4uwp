@@ -67,7 +67,7 @@ namespace capex.text
 				paragraphs = new System.Collections.Generic.List<capex.text.RichTextParagraph>();
 			}
 			cape.Vector.append(paragraphs, rtp);
-			if(((object.Equals(getTitle(), null)) && (rtp is capex.text.RichTextStyledParagraph)) && ((rtp as capex.text.RichTextStyledParagraph).getHeading() == 1)) {
+			if(object.Equals(getTitle(), null) && rtp is capex.text.RichTextStyledParagraph && (rtp as capex.text.RichTextStyledParagraph).getHeading() == 1) {
 				setTitle((rtp as capex.text.RichTextStyledParagraph).getTextContent());
 			}
 			return(this);

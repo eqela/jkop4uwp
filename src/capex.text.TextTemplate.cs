@@ -112,12 +112,12 @@ namespace capex.text
 		}
 
 		private System.Collections.Generic.List<object> tokenizeString(string inputdata, System.Collections.Generic.List<cape.File> includeDirs) {
-			if((object.Equals(markerBegin, null)) || (object.Equals(markerEnd, null))) {
+			if(object.Equals(markerBegin, null) || object.Equals(markerEnd, null)) {
 				cape.Log.error(logContext, "No template markers were given");
 				return(null);
 			}
-			if((cape.String.getLength(markerBegin) != 2) || (cape.String.getLength(markerEnd) != 2)) {
-				cape.Log.error(logContext, ((("Invalid template markers: `" + markerBegin) + "' and `") + markerEnd) + "'");
+			if(cape.String.getLength(markerBegin) != 2 || cape.String.getLength(markerEnd) != 2) {
+				cape.Log.error(logContext, "Invalid template markers: `" + markerBegin + "' and `" + markerEnd + "'");
 				return(null);
 			}
 			var mb1 = cape.String.charAt(markerBegin, 0);
@@ -135,7 +135,7 @@ namespace capex.text
 					break;
 				}
 				if(tag != null) {
-					if((pc == me1) && (tag.count() > 2)) {
+					if(pc == me1 && tag.count() > 2) {
 						tag.append(pc);
 						tag.append(c);
 						if(c == me2) {
@@ -166,18 +166,18 @@ namespace capex.text
 											}
 										}
 									}
-									if((ff == null) || (ff.isFile() == false)) {
-										cape.Log.warning(logContext, ("Included file was not found: `" + fileName) + "'");
+									if(ff == null || ff.isFile() == false) {
+										cape.Log.warning(logContext, "Included file was not found: `" + fileName + "'");
 									}
 									else {
 										var cc = ff.getContentsString("UTF-8");
 										if(object.Equals(cc, null)) {
-											cape.Log.warning(logContext, ("Failed to read included file: `" + ff.getPath()) + "'");
+											cape.Log.warning(logContext, "Failed to read included file: `" + ff.getPath() + "'");
 										}
 										else {
 											var nt = capex.text.TextTemplate.forString(cc, markerBegin, markerEnd, type, includeDirs);
 											if(nt == null) {
-												cape.Log.warning(logContext, ("Failed to read included template file: `" + ff.getPath()) + "'");
+												cape.Log.warning(logContext, "Failed to read included template file: `" + ff.getPath() + "'");
 											}
 											else {
 												var array = nt.getTokens();
@@ -243,7 +243,7 @@ namespace capex.text
 				data = null;
 			}
 			if(tag != null) {
-				cape.Log.error(logContext, ("Unfinished tag: `" + tag.toString()) + "'");
+				cape.Log.error(logContext, "Unfinished tag: `" + tag.toString() + "'");
 				return(null);
 			}
 			return(v);
@@ -342,7 +342,7 @@ namespace capex.text
 		}
 
 		public object getVariableValue(cape.DynamicMap vars, string varname) {
-			if((vars == null) || (object.Equals(varname, null))) {
+			if(vars == null || object.Equals(varname, null)) {
 				return(null);
 			}
 			var vv = vars.get(varname);
@@ -367,7 +367,7 @@ namespace capex.text
 						}
 						var vv2o = cc.get(vv2);
 						cc = vv2o as cape.DynamicMap;
-						if(((cc == null) && (vv2o != null)) && (vv2o is cape.JSONObject)) {
+						if(cc == null && vv2o != null && vv2o is cape.JSONObject) {
 							cc = ((cape.JSONObject)vv2o).toJsonObject() as cape.DynamicMap;
 						}
 					}
@@ -448,8 +448,8 @@ namespace capex.text
 				var varname = cape.Vector.get(tag, 1);
 				var inword = cape.Vector.get(tag, 2);
 				var origvar = substituteVariables(cape.Vector.get(tag, 3), vars);
-				if((cape.String.isEmpty(varname) || cape.String.isEmpty(origvar)) || !(object.Equals(inword, "in"))) {
-					cape.Log.error(logContext, ("Invalid for tag: `" + cape.String.combine(tag, ' ')) + "'");
+				if(cape.String.isEmpty(varname) || cape.String.isEmpty(origvar) || !(object.Equals(inword, "in"))) {
+					cape.Log.error(logContext, "Invalid for tag: `" + cape.String.combine(tag, ' ') + "'");
 					return(false);
 				}
 				var index = 0;
@@ -461,7 +461,7 @@ namespace capex.text
 					for(n = 0 ; n < m ; n++) {
 						var o = vv[n];
 						if(o != null) {
-							if((index % 2) == 0) {
+							if(index % 2 == 0) {
 								vars.set("__for_parity", (object)"even");
 							}
 							else {
@@ -524,11 +524,11 @@ namespace capex.text
 				if(!(object.Equals(rvalue, null))) {
 					rvalue = substituteVariables(rvalue, vars);
 				}
-				if(((object.Equals(lvalue, null)) || cape.String.isEmpty(@operator)) || (object.Equals(rvalue, null))) {
-					cape.Log.error(logContext, ("Invalid if tag: `" + cape.String.combine(tag, ' ')) + "'");
+				if(object.Equals(lvalue, null) || cape.String.isEmpty(@operator) || object.Equals(rvalue, null)) {
+					cape.Log.error(logContext, "Invalid if tag: `" + cape.String.combine(tag, ' ') + "'");
 					return(false);
 				}
-				if(((object.Equals(@operator, "==")) || (object.Equals(@operator, "="))) || (object.Equals(@operator, "is"))) {
+				if(object.Equals(@operator, "==") || object.Equals(@operator, "=") || object.Equals(@operator, "is")) {
 					if(!(object.Equals(rvalue, lvalue))) {
 						return(true);
 					}
@@ -537,7 +537,7 @@ namespace capex.text
 					}
 					return(true);
 				}
-				if((object.Equals(@operator, "!=")) || (object.Equals(@operator, "not"))) {
+				if(object.Equals(@operator, "!=") || object.Equals(@operator, "not")) {
 					if(object.Equals(rvalue, lvalue)) {
 						return(true);
 					}
@@ -546,7 +546,7 @@ namespace capex.text
 					}
 					return(true);
 				}
-				cape.Log.error(logContext, ((("Unknown operator `" + @operator) + "' in if tag: `") + cape.String.combine(tag, ' ')) + "'");
+				cape.Log.error(logContext, "Unknown operator `" + @operator + "' in if tag: `" + cape.String.combine(tag, ' ') + "'");
 				return(false);
 			}
 			return(false);
@@ -584,7 +584,7 @@ namespace capex.text
 						}
 						if(object.Equals(tagname, "end")) {
 							blockctr--;
-							if((blockctr == 0) && (blockdata != null)) {
+							if(blockctr == 0 && blockdata != null) {
 								if(handleBlock(vars, blocktag, blockdata, result, includeDirs) == false) {
 									cape.Log.error(logContext, "Handling of a block failed");
 									continue;
@@ -594,7 +594,7 @@ namespace capex.text
 							}
 						}
 						if(blockctr > 0) {
-							if((object.Equals(tagname, "for")) || (object.Equals(tagname, "if"))) {
+							if(object.Equals(tagname, "for") || object.Equals(tagname, "if")) {
 								blockctr++;
 							}
 							if(blockdata == null) {
@@ -603,11 +603,11 @@ namespace capex.text
 							blockdata.Add(o);
 							continue;
 						}
-						if((o is string) || (o is cape.StringObject)) {
+						if(o is string || o is cape.StringObject) {
 							result.append(cape.String.asString(o));
 							continue;
 						}
-						if((object.Equals(tagname, "=")) || (object.Equals(tagname, "printstring"))) {
+						if(object.Equals(tagname, "=") || object.Equals(tagname, "printstring")) {
 							var varname = substituteVariables(cape.Vector.get(words, 1), vars);
 							if(cape.String.isEmpty(varname) == false) {
 								var vv = getVariableValueString(vars, varname);
@@ -661,7 +661,7 @@ namespace capex.text
 										if(it == null) {
 											continue;
 										}
-										if((n > 2) && (hasSlash == false)) {
+										if(n > 2 && hasSlash == false) {
 											result.append('/');
 											hasSlash = true;
 										}
@@ -738,20 +738,20 @@ namespace capex.text
 									var dir = includeDirs[n4];
 									if(dir != null) {
 										ff = cape.FileInstance.forRelativePath(filename, dir);
-										if((ff != null) && ff.isFile()) {
+										if(ff != null && ff.isFile()) {
 											break;
 										}
 									}
 								}
 							}
-							if((ff == null) || (ff.isFile() == false)) {
-								cape.Log.error(logContext, ("Unable to find file to import: `" + filename) + "'");
+							if(ff == null || ff.isFile() == false) {
+								cape.Log.error(logContext, "Unable to find file to import: `" + filename + "'");
 								continue;
 							}
-							cape.Log.debug(logContext, ("Attempting to import file: `" + ff.getPath()) + "'");
+							cape.Log.debug(logContext, "Attempting to import file: `" + ff.getPath() + "'");
 							var content = ff.getContentsString("UTF-8");
 							if(cape.String.isEmpty(content)) {
-								cape.Log.error(logContext, ("Unable to read import file: `" + ff.getPath()) + "'");
+								cape.Log.error(logContext, "Unable to read import file: `" + ff.getPath() + "'");
 								continue;
 							}
 							if(object.Equals(type, "html")) {
@@ -760,11 +760,11 @@ namespace capex.text
 							else if(object.Equals(type, "template")) {
 								var t = capex.text.TextTemplate.forString(content, markerBegin, markerEnd, this.type, includeDirs);
 								if(t == null) {
-									cape.Log.error(logContext, ("Failed to parse imported template file: `" + ff.getPath()) + "'");
+									cape.Log.error(logContext, "Failed to parse imported template file: `" + ff.getPath() + "'");
 									continue;
 								}
 								if(doExecute(t.getTokens(), vars, result, includeDirs) == false) {
-									cape.Log.error(logContext, ("Failed to process imported template file: `" + ff.getPath()) + "'");
+									cape.Log.error(logContext, "Failed to process imported template file: `" + ff.getPath() + "'");
 									continue;
 								}
 								content = null;
@@ -773,7 +773,7 @@ namespace capex.text
 								;
 							}
 							else {
-								cape.Log.error(logContext, ("Unknown type for import: `" + type) + "'. Ignoring the import.");
+								cape.Log.error(logContext, "Unknown type for import: `" + type + "'. Ignoring the import.");
 								continue;
 							}
 							if(cape.String.isEmpty(content) == false) {
@@ -820,7 +820,7 @@ namespace capex.text
 								vars.set(varname4, getVariableValue(vars, vv3));
 							}
 						}
-						else if((object.Equals(tagname, "for")) || (object.Equals(tagname, "if"))) {
+						else if(object.Equals(tagname, "for") || object.Equals(tagname, "if")) {
 							if(blockctr == 0) {
 								blocktag = words;
 							}
@@ -872,7 +872,7 @@ namespace capex.text
 				if(cape.String.isEmpty(text)) {
 					return;
 				}
-				result.append(((("<a href=\"" + path) + "\"><span>") + text) + "</span></a>");
+				result.append("<a href=\"" + path + "\"><span>" + text + "</span></a>");
 				return;
 			}
 		}

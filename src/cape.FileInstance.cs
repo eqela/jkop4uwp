@@ -30,7 +30,7 @@ namespace cape
 		}
 
 		public static cape.File forPath(string path) {
-			if((object.Equals(path, null)) || (cape.String.getLength(path) < 1)) {
+			if(object.Equals(path, null) || cape.String.getLength(path) < 1) {
 				return((cape.File)new cape.FileInvalid());
 			}
 			return(cape.FileForDotNet.forPath(path));
@@ -48,12 +48,12 @@ namespace cape
 			}
 			var sep = cape.Environment.getPathSeparator();
 			if(sep != '/') {
-				if((cape.String.indexOf(path, sep) < 0) && (cape.String.indexOf(path, '/') >= 0)) {
+				if(cape.String.indexOf(path, sep) < 0 && cape.String.indexOf(path, '/') >= 0) {
 					sep = '/';
 				}
 			}
 			else if(alwaysSupportWindowsPathnames) {
-				if((cape.String.indexOf(path, sep) < 0) && (cape.String.indexOf(path, '\\') >= 0)) {
+				if(cape.String.indexOf(path, sep) < 0 && cape.String.indexOf(path, '\\') >= 0) {
 					sep = '\\';
 				}
 			}

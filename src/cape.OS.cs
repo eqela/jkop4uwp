@@ -95,7 +95,7 @@ namespace cape
 				}
 				return(false);
 			}
-			if(((object.Equals(id, "posix")) || (object.Equals(id, "linux"))) || (object.Equals(id, "unix"))) {
+			if(object.Equals(id, "posix") || object.Equals(id, "linux") || object.Equals(id, "unix")) {
 				if(cape.FileInstance.forPath("/bin/sh").isFile()) {
 					return(true);
 				}

@@ -158,10 +158,10 @@ namespace capex.net
 
 			public void update() {
 				remove();
-				if(!((socket != null) && (master != null))) {
+				if(!(socket != null && master != null)) {
 					return;
 				}
-				if((rrl == null) && (wrl == null)) {
+				if(rrl == null && wrl == null) {
 					return;
 				}
 				if(rrl != null) {
@@ -174,7 +174,7 @@ namespace capex.net
 			}
 
 			public virtual void remove() {
-				if((added == false) || (master == null)) {
+				if(added == false || master == null) {
 					return;
 				}
 				cape.Vector.removeValue(master.readlist, this);

@@ -71,10 +71,10 @@ namespace capex.crypto
 			cindex = 0;
 			nsize = 0;
 			var v = false;
-			if((reader != null) && (reader is cape.SeekableReader)) {
+			if(reader != null && reader is cape.SeekableReader) {
 				v = ((cape.SeekableReader)reader).setCurrentPosition((long)ss);
 			}
-			if(v && (rem > 0)) {
+			if(v && rem > 0) {
 				var bb = cape.Buffer.allocate((long)rem);
 				if(read(bb) != rem) {
 					v = false;
@@ -84,14 +84,14 @@ namespace capex.crypto
 		}
 
 		public virtual long getCurrentPosition() {
-			if((reader != null) && (reader is cape.SeekableReader)) {
+			if(reader != null && reader is cape.SeekableReader) {
 				return(((cape.SeekableReader)reader).getCurrentPosition());
 			}
 			return((long)-1);
 		}
 
 		public virtual int read(byte[] buf) {
-			if((buf == null) || (cape.Buffer.getSize(buf) < 1)) {
+			if(buf == null || cape.Buffer.getSize(buf) < 1) {
 				return(0);
 			}
 			var ptr = buf;
@@ -102,7 +102,7 @@ namespace capex.crypto
 			var bs = cipher.getBlockSize();
 			while(v < cape.Buffer.getSize(buf)) {
 				var x = bs;
-				if((v + x) > cape.Buffer.getSize(buf)) {
+				if(v + x > cape.Buffer.getSize(buf)) {
 					x = (int)(cape.Buffer.getSize(buf) - v);
 				}
 				var r = readBlock(ptr, v, x);

@@ -58,13 +58,13 @@ namespace cave.ui
 				wcs = context.getWidthValue("25mm");
 			}
 			var adjustWcs = false;
-			var mywidth = (widthConstraint - widgetMargin) - widgetMargin;
+			var mywidth = widthConstraint - widgetMargin - widgetMargin;
 			if(widthConstraint < 0) {
 				cols = childCount;
 			}
 			else {
 				cols = (int)cape.Math.floor((double)((mywidth + widgetSpacing) / (wcs + widgetSpacing)));
-				if((minimumCols > 0) && (cols < minimumCols)) {
+				if(minimumCols > 0 && cols < minimumCols) {
 					cols = minimumCols;
 					adjustWcs = true;
 				}
@@ -73,16 +73,16 @@ namespace cave.ui
 				}
 			}
 			if(adjustWcs) {
-				wcs = ((mywidth + widgetSpacing) / cols) - widgetSpacing;
+				wcs = (mywidth + widgetSpacing) / cols - widgetSpacing;
 			}
-			if((maximumCols > 0) && (cols > maximumCols)) {
+			if(maximumCols > 0 && cols > maximumCols) {
 				cols = maximumCols;
 			}
 			rows = (int)cape.Math.floor((double)(childCount / cols));
-			if((childCount % cols) > 0) {
+			if(childCount % cols > 0) {
 				rows++;
 			}
-			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, ((widgetMargin + (cols * wcs)) + ((cols - 1) * widgetSpacing)) + widgetMargin, ((widgetMargin + (rows * wcs)) + ((rows - 1) * widgetSpacing)) + widgetMargin);
+			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, widgetMargin + cols * wcs + (cols - 1) * widgetSpacing + widgetMargin, widgetMargin + rows * wcs + (rows - 1) * widgetSpacing + widgetMargin);
 			var cx = 0;
 			var x = widgetMargin;
 			var y = widgetMargin;

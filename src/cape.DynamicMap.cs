@@ -48,7 +48,7 @@ namespace cape
 					if(key == null) {
 						break;
 					}
-					if((key is string) == false) {
+					if(key is string == false) {
 						continue;
 					}
 					v.set((string)key, cape.Map.getValue(map, (string)key));

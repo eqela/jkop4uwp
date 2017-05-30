@@ -72,22 +72,22 @@ namespace cape
 
 		public K getKey(int index) {
 			if(values == null) {
-				return((K)(default(K)));
+				return((K)default(K));
 			}
 			var kvp = cape.Vector.get(values, index);
 			if(kvp == null) {
-				return((K)(default(K)));
+				return((K)default(K));
 			}
 			return(kvp.key);
 		}
 
 		public V getValue(int index) {
 			if(values == null) {
-				return((V)(default(V)));
+				return((V)default(V));
 			}
 			var kvp = cape.Vector.get(values, index);
 			if(kvp == null) {
-				return((V)(default(V)));
+				return((V)default(V));
 			}
 			return(kvp.value);
 		}

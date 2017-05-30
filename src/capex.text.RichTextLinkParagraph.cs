@@ -78,7 +78,7 @@ namespace capex.text
 			if(popup) {
 				targetblank = " target=\"_blank\"";
 			}
-			return(((((("<p class=\"link\"><a href=\"" + href) + "\"") + targetblank) + ">") + tt) + "</a></p>\n");
+			return("<p class=\"link\"><a href=\"" + href + "\"" + targetblank + ">" + tt + "</a></p>\n");
 		}
 
 		public string getLink() {

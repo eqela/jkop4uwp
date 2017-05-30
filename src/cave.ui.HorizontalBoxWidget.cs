@@ -54,7 +54,7 @@ namespace cave.ui
 		protected int widgetMarginRight = 0;
 		protected int widgetMarginTop = 0;
 		protected int widgetMarginBottom = 0;
-		private int fixedWidgetHeight = 0;
+		private int widgetFixedHeight = 0;
 
 		public HorizontalBoxWidget(cave.GuiApplicationContext ctx) : base(ctx) {
 			children = new System.Collections.Generic.List<cave.ui.HorizontalBoxWidget.MyChildEntry>();
@@ -112,7 +112,7 @@ namespace cave.ui
 		public override void computeWidgetLayout(int widthConstraint) {
 			var totalWeight = 0.00;
 			var highest = 0;
-			var availableWidth = (widthConstraint - widgetMarginLeft) - widgetMarginRight;
+			var availableWidth = widthConstraint - widgetMarginLeft - widgetMarginRight;
 			var childCount = 0;
 			if(children != null) {
 				var n = 0;
@@ -135,7 +135,7 @@ namespace cave.ui
 					}
 				}
 			}
-			if((childCount > 1) && (widgetSpacing > 0)) {
+			if(childCount > 1 && widgetSpacing > 0) {
 				availableWidth -= (childCount - 1) * widgetSpacing;
 			}
 			if(children != null) {
@@ -145,7 +145,7 @@ namespace cave.ui
 					var child1 = children[n2];
 					if(child1 != null) {
 						if(child1.weight > 0.00) {
-							var ww = (int)((availableWidth * child1.weight) / totalWeight);
+							var ww = (int)(availableWidth * child1.weight / totalWeight);
 							cave.ui.Widget.layout(child1.widget, ww);
 							var height1 = cave.ui.Widget.getHeight(child1.widget);
 							if(height1 > highest) {
@@ -157,8 +157,8 @@ namespace cave.ui
 			}
 			var realHighest = highest;
 			highest += widgetMarginTop + widgetMarginBottom;
-			if(fixedWidgetHeight > 0) {
-				highest = fixedWidgetHeight;
+			if(widgetFixedHeight > 0) {
+				highest = widgetFixedHeight;
 			}
 			if(widthConstraint < 0) {
 				var totalWidth = widthConstraint - availableWidth;
@@ -179,7 +179,7 @@ namespace cave.ui
 					if(child2 != null) {
 						var ww1 = 0;
 						if(child2.weight > 0.00) {
-							ww1 = (int)((availableWidth * child2.weight) / totalWeight);
+							ww1 = (int)(availableWidth * child2.weight / totalWeight);
 							cave.ui.Widget.move(child2.widget, x, widgetMarginTop);
 							cave.ui.Widget.layout(child2.widget, ww1);
 							cave.ui.Widget.resizeHeight(child2.widget, realHighest);
@@ -206,7 +206,7 @@ namespace cave.ui
 				for(n = 0 ; n < m ; n++) {
 					var child = array[n];
 					if(child != null) {
-						cave.ui.Widget.resizeHeight(child, (height - widgetMarginTop) - widgetMarginBottom);
+						cave.ui.Widget.resizeHeight(child, height - widgetMarginTop - widgetMarginBottom);
 					}
 				}
 			}
@@ -233,6 +233,10 @@ namespace cave.ui
 			return((cave.ui.CustomContainerWidget)addWidget(widget, 0.00));
 		}
 
+		public void removeAllChildren() {
+			cave.ui.Widget.removeChildrenOf((Windows.UI.Xaml.UIElement)this);
+		}
+
 		public cave.ui.HorizontalBoxWidget addWidget(Windows.UI.Xaml.UIElement widget, double weight) {
 			if(widget != null) {
 				var ee = new cave.ui.HorizontalBoxWidget.MyChildEntry();
@@ -253,12 +257,12 @@ namespace cave.ui
 			return(this);
 		}
 
-		public int getFixedWidgetHeight() {
-			return(fixedWidgetHeight);
+		public int getWidgetFixedHeight() {
+			return(widgetFixedHeight);
 		}
 
-		public cave.ui.HorizontalBoxWidget setFixedWidgetHeight(int v) {
-			fixedWidgetHeight = v;
+		public cave.ui.HorizontalBoxWidget setWidgetFixedHeight(int v) {
+			widgetFixedHeight = v;
 			return(this);
 		}
 	}

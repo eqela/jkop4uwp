@@ -66,7 +66,7 @@ namespace cape
 					break;
 				}
 				var c = iterator.getCurrentChar();
-				if((((c == ' ') || (c == '\t')) || (c == '\r')) || (c == '\n')) {
+				if(c == ' ' || c == '\t' || c == '\r' || c == '\n') {
 					iterator.moveToNextChar();
 					continue;
 				}
@@ -86,7 +86,7 @@ namespace cape
 		private string acceptString() {
 			skipSpaces();
 			var ss = iterator.getCurrentChar();
-			if((ss != '\'') && (ss != '\"')) {
+			if(ss != '\'' && ss != '\"') {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -107,7 +107,7 @@ namespace cape
 		private cape.BooleanObject acceptBoolean() {
 			skipSpaces();
 			var ss = iterator.getCurrentChar();
-			if((ss != 't') && (ss != 'f')) {
+			if(ss != 't' && ss != 'f') {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -120,7 +120,7 @@ namespace cape
 			while(true) {
 				var c = iterator.getNextChar();
 				btc++;
-				if((((((c != 'a') && (c != 'l')) && (c != 's')) && (c != 'e')) && (c != 'r')) && (c != 'u')) {
+				if(c != 'a' && c != 'l' && c != 's' && c != 'e' && c != 'r' && c != 'u') {
 					iterator.moveToNextChar();
 					btc++;
 					break;
@@ -133,10 +133,10 @@ namespace cape
 				}
 			}
 			var v = sb.toString();
-			if((li == 4) && (object.Equals("true", v))) {
+			if(li == 4 && object.Equals("true", v)) {
 				return(cape.Boolean.asObject(true));
 			}
-			if((li == 5) && (object.Equals("false", v))) {
+			if(li == 5 && object.Equals("false", v)) {
 				return(cape.Boolean.asObject(false));
 			}
 			var i = 0;
@@ -150,14 +150,14 @@ namespace cape
 		private object acceptNumber() {
 			skipSpaces();
 			var ss = iterator.getCurrentChar();
-			if((((ss != '-') && (ss != '+')) && (ss != '.')) && ((ss < '0') || (ss > '9'))) {
+			if(ss != '-' && ss != '+' && ss != '.' && (ss < '0' || ss > '9')) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
 			sb.append(ss);
 			while(true) {
 				var c = iterator.getNextChar();
-				if((c != '.') && ((c < '0') || (c > '9'))) {
+				if(c != '.' && (c < '0' || c > '9')) {
 					break;
 				}
 				sb.append(c);
@@ -181,7 +181,7 @@ namespace cape
 			while(true) {
 				var c = iterator.getNextChar();
 				btc++;
-				if((c != 'u') && (c != 'l')) {
+				if(c != 'u' && c != 'l') {
 					iterator.moveToNextChar();
 					btc++;
 					break;

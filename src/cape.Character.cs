@@ -57,53 +57,53 @@ namespace cape
 		}
 
 		public static char toUppercase(char c) {
-			if((c >= 'a') && (c <= 'z')) {
-				return((char)((c - 'a') + 'A'));
+			if(c >= 'a' && c <= 'z') {
+				return((char)(c - 'a' + 'A'));
 			}
 			return(c);
 		}
 
 		public static char toLowercase(char c) {
-			if((c >= 'A') && (c <= 'Z')) {
-				return((char)((c - 'A') + 'a'));
+			if(c >= 'A' && c <= 'Z') {
+				return((char)(c - 'A' + 'a'));
 			}
 			return(c);
 		}
 
 		public static bool isDigit(char c) {
-			return((c >= '0') && (c <= '9'));
+			return(c >= '0' && c <= '9');
 		}
 
 		public static bool isLowercaseAlpha(char c) {
-			return((c >= 'a') && (c <= 'z'));
+			return(c >= 'a' && c <= 'z');
 		}
 
 		public static bool isUppercaseAlpha(char c) {
-			return((c >= 'A') && (c <= 'Z'));
+			return(c >= 'A' && c <= 'Z');
 		}
 
 		public static bool isHexDigit(char c) {
-			return((((c >= 'a') && (c <= 'f')) || ((c >= 'A') && (c <= 'F'))) || ((c >= '0') && (c <= '9')));
+			return(c >= 'a' && c <= 'f' || c >= 'A' && c <= 'F' || c >= '0' && c <= '9');
 		}
 
 		public static bool isAlnum(char c) {
-			return((((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'))) || ((c >= '0') && (c <= '9')));
+			return(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9');
 		}
 
 		public static bool isAlpha(char c) {
-			return(((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
+			return(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z');
 		}
 
 		public static bool isAlphaNumeric(char c) {
-			return((((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'))) || ((c >= '0') && (c <= '9')));
+			return(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9');
 		}
 
 		public static bool isLowercaseAlphaNumeric(char c) {
-			return(((c >= 'a') && (c <= 'z')) || ((c >= '0') && (c <= '9')));
+			return(c >= 'a' && c <= 'z' || c >= '0' && c <= '9');
 		}
 
 		public static bool isUppercaseAlphaNumeric(char c) {
-			return(((c >= 'A') && (c <= 'Z')) || ((c >= '0') && (c <= '9')));
+			return(c >= 'A' && c <= 'Z' || c >= '0' && c <= '9');
 		}
 	}
 }

@@ -221,7 +221,7 @@ namespace cave.ui
 
 		public cave.ui.FormDeclaration.Element endVerticalContainer() {
 			var cc = stack.peek();
-			if((cc != null) && cc.isType("VerticalContainer")) {
+			if(cc != null && cc.isType("VerticalContainer")) {
 				stack.pop();
 			}
 			return(cc);
@@ -236,7 +236,7 @@ namespace cave.ui
 
 		public cave.ui.FormDeclaration.Element endHorizontalContainer() {
 			var cc = stack.peek();
-			if((cc != null) && cc.isType("HorizontalContainer")) {
+			if(cc != null && cc.isType("HorizontalContainer")) {
 				stack.pop();
 			}
 			return(cc);
@@ -254,7 +254,7 @@ namespace cave.ui
 
 		public cave.ui.FormDeclaration.Element endGroup() {
 			var cc = stack.peek();
-			if((cc != null) && cc.isType("GroupContainer")) {
+			if(cc != null && cc.isType("GroupContainer")) {
 				stack.pop();
 			}
 			return(cc);
@@ -271,7 +271,7 @@ namespace cave.ui
 
 		public cave.ui.FormDeclaration.Element endTab() {
 			var cc = stack.peek();
-			if((cc != null) && cc.isType("TabContainer")) {
+			if(cc != null && cc.isType("TabContainer")) {
 				stack.pop();
 			}
 			return(cc);

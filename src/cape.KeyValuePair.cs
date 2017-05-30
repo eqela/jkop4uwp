@@ -34,7 +34,7 @@ namespace cape
 			value = v;
 		}
 
-		public K key = (K)(default(K));
-		public V value = (V)(default(V));
+		public K key = (K)default(K);
+		public V value = (V)default(V);
 	}
 }

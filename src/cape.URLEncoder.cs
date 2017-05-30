@@ -40,13 +40,13 @@ namespace cape
 				if(c < 1) {
 					break;
 				}
-				if((((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'))) || ((c >= '0') && (c <= '9'))) {
+				if(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9') {
 					sb.append(c);
 				}
-				else if(((((c == '-') || (c == '.')) || (c == '_')) || (c == '~')) && (encodeUnreservedChars == false)) {
+				else if((c == '-' || c == '.' || c == '_' || c == '~') && encodeUnreservedChars == false) {
 					sb.append(c);
 				}
-				else if((c == ' ') && (percentOnly == false)) {
+				else if(c == ' ' && percentOnly == false) {
 					sb.append('+');
 				}
 				else {

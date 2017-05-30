@@ -55,6 +55,7 @@ namespace cave.ui
 		private int widgetPaddingRight = 0;
 		private int widgetPaddingBottom = 0;
 		private string widgetFontFamily = null;
+		private string widgetFontResource = null;
 		private double widgetFontSize = 0.00;
 		private cave.Color widgetTextColor = null;
 		private cave.Color widgetBackgroundColor = null;
@@ -110,7 +111,7 @@ namespace cave.ui
 
 		public cave.ui.TextInputWidget setWidgetType(int type) {
 			widgetType = type;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.setWidgetType] (TextInputWidget.sling:404:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.setWidgetType] (TextInputWidget.sling:405:2): Not implemented");
 			return(this);
 		}
 
@@ -120,19 +121,19 @@ namespace cave.ui
 
 		public cave.ui.TextInputWidget setWidgetText(string text) {
 			widgetText = text;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.setWidgetText] (TextInputWidget.sling:433:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.setWidgetText] (TextInputWidget.sling:434:2): Not implemented");
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
 		}
 
 		public string getWidgetText() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.getWidgetText] (TextInputWidget.sling:451:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.getWidgetText] (TextInputWidget.sling:452:2): Not implemented");
 			return(null);
 		}
 
 		public cave.ui.TextInputWidget setWidgetPlaceholder(string placeholder) {
 			widgetPlaceholder = placeholder;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.setWidgetPlaceholder] (TextInputWidget.sling:473:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.setWidgetPlaceholder] (TextInputWidget.sling:474:2): Not implemented");
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
 		}
@@ -150,10 +151,10 @@ namespace cave.ui
 		}
 
 		public cave.ui.TextInputWidget setWidgetPadding(int l, int t, int r, int b) {
-			if((((l < 0) || (t < 0)) || (r < 0)) || (b < 0)) {
+			if(l < 0 || t < 0 || r < 0 || b < 0) {
 				return(this);
 			}
-			if((((widgetPaddingLeft == l) && (widgetPaddingTop == t)) && (widgetPaddingRight == r)) && (widgetPaddingBottom == b)) {
+			if(widgetPaddingLeft == l && widgetPaddingTop == t && widgetPaddingRight == r && widgetPaddingBottom == b) {
 				return(this);
 			}
 			widgetPaddingLeft = l;
@@ -166,11 +167,18 @@ namespace cave.ui
 		}
 
 		private void updateWidgetPadding() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.updateWidgetPadding] (TextInputWidget.sling:529:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.updateWidgetPadding] (TextInputWidget.sling:530:2): Not implemented");
 		}
 
 		public cave.ui.TextInputWidget setWidgetFontFamily(string family) {
 			widgetFontFamily = family;
+			updateWidgetFont();
+			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
+			return(this);
+		}
+
+		public cave.ui.TextInputWidget setWidgetFontResource(string res) {
+			widgetFontResource = res;
 			updateWidgetFont();
 			cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);
 			return(this);
@@ -184,7 +192,7 @@ namespace cave.ui
 		}
 
 		private void updateWidgetFont() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.updateWidgetFont] (TextInputWidget.sling:570:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.TextInputWidget.updateWidgetFont] (TextInputWidget.sling:583:2): Not implemented");
 		}
 
 		public virtual void setWidgetValue(object value) {

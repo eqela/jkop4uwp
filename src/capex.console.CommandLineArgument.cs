@@ -62,14 +62,14 @@ namespace capex.console
 		}
 
 		public bool isFlag(string text) {
-			if(!(object.Equals(text, null)) && (object.Equals(text, flag))) {
+			if(!(object.Equals(text, null)) && object.Equals(text, flag)) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isOption(string text) {
-			if(!(object.Equals(text, null)) && (object.Equals(text, key))) {
+			if(!(object.Equals(text, null)) && object.Equals(text, key)) {
 				return(true);
 			}
 			return(false);
@@ -99,7 +99,7 @@ namespace capex.console
 		}
 
 		public void reportAsUnsupported(cape.LoggingContext ctx) {
-			cape.Log.error(ctx, ("Unsupported command line parameter: `" + arg) + "'");
+			cape.Log.error(ctx, "Unsupported command line parameter: `" + arg + "'");
 		}
 	}
 }

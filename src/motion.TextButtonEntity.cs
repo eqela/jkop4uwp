@@ -114,7 +114,7 @@ namespace motion
 
 		public override void layoutSprites(double x, double y) {
 			boxSprite.move(x, y);
-			textSprite.move((x + (boxSprite.getWidth() / 2)) - (textSprite.getWidth() / 2), (y + (boxSprite.getHeight() / 2)) - (textSprite.getHeight() / 2));
+			textSprite.move(x + boxSprite.getWidth() / 2 - textSprite.getWidth() / 2, y + boxSprite.getHeight() / 2 - textSprite.getHeight() / 2);
 		}
 
 		public virtual void onClicked() {
@@ -132,12 +132,12 @@ namespace motion
 				return(false);
 			}
 			if(pressed) {
-				if(pressed && (@event.action == cave.PointerEvent.CANCEL)) {
+				if(pressed && @event.action == cave.PointerEvent.CANCEL) {
 					pressed = false;
 					onPressedChanged();
 					return(false);
 				}
-				if(pressed && (@event.action == cave.PointerEvent.UP)) {
+				if(pressed && @event.action == cave.PointerEvent.UP) {
 					pressed = false;
 					onPressedChanged();
 					onClicked();

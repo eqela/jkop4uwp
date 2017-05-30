@@ -39,6 +39,7 @@ namespace cave.ui
 		private cave.ui.CanvasWidget widgetContainerBackgroundColor = null;
 		private Windows.UI.Xaml.UIElement widgetContent = null;
 		private int animationDestY = 0;
+		private System.Action popupAnimationEndHandler = null;
 
 		public PopupWidget(cave.GuiApplicationContext ctx) : base(ctx) {
 			widgetContext = ctx;
@@ -98,7 +99,7 @@ namespace cave.ui
 				parent = cave.ui.Widget.getParent(parent);
 			}
 			if(parentLayer == null) {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.PopupWidget.showPopup] (PopupWidget.sling:123:3): No LayerWidget was found in the widget tree. Cannot show popup!");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.PopupWidget.showPopup] (PopupWidget.sling:124:3): No LayerWidget was found in the widget tree. Cannot show popup!");
 				return;
 			}
 			parentLayer.addWidget((Windows.UI.Xaml.UIElement)this);
@@ -115,10 +116,12 @@ namespace cave.ui
 				}
 				cave.ui.Widget.setAlpha((Windows.UI.Xaml.UIElement)widgetContainerBackgroundColor, bgf);
 				cave.ui.Widget.setAlpha(widgetContent, completion);
-				cave.ui.Widget.move(widgetContent, cave.ui.Widget.getX(widgetContent), (int)(animationDestY + ((1.00 - completion) * ay)));
+				cave.ui.Widget.move(widgetContent, cave.ui.Widget.getX(widgetContent), (int)(animationDestY + (1.00 - completion) * ay));
 			});
 			anim.setEndListener(() => {
-				;
+				if(popupAnimationEndHandler != null) {
+					popupAnimationEndHandler();
+				}
 			});
 			anim.start();
 		}
@@ -127,6 +130,15 @@ namespace cave.ui
 			var anim = cave.ui.WidgetAnimation.forDuration(context, (long)300);
 			anim.addFadeOut((Windows.UI.Xaml.UIElement)this, true);
 			anim.start();
+		}
+
+		public System.Action getPopupAnimationEndHandler() {
+			return(popupAnimationEndHandler);
+		}
+
+		public cave.ui.PopupWidget setPopupAnimationEndHandler(System.Action v) {
+			popupAnimationEndHandler = v;
+			return(this);
 		}
 	}
 }

@@ -43,13 +43,13 @@ namespace cape
 			else if(ascii == 47) {
 				c = 63;
 			}
-			else if((ascii >= 48) && (ascii <= 57)) {
+			else if(ascii >= 48 && ascii <= 57) {
 				c = (int)(ascii + 4);
 			}
-			else if((ascii >= 65) && (ascii <= 90)) {
+			else if(ascii >= 65 && ascii <= 90) {
 				c = (int)(ascii - 65);
 			}
-			else if((ascii >= 97) && (ascii <= 122)) {
+			else if(ascii >= 97 && ascii <= 122) {
 				c = (int)(ascii - 71);
 			}
 			return(c);

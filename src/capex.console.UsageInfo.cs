@@ -156,7 +156,7 @@ namespace capex.console
 						else if(o is capex.console.UsageInfo.Option) {
 							var name = ((capex.console.UsageInfo.Option)o).name;
 							var value = ((capex.console.UsageInfo.Option)o).value;
-							var ll2 = (((1 + cape.String.getLength(name)) + 2) + cape.String.getLength(value)) + 1;
+							var ll2 = 1 + cape.String.getLength(name) + 2 + cape.String.getLength(value) + 1;
 							if(ll2 > longest) {
 								longest = ll2;
 							}
@@ -173,7 +173,7 @@ namespace capex.console
 				for(n2 = 0 ; n2 < m2 ; n2++) {
 					var o1 = data[n2];
 					if(o1 != null) {
-						if((o1 is string) || (o1 is cape.StringObject)) {
+						if(o1 is string || o1 is cape.StringObject) {
 							if(db == false) {
 								sb.append('\n');
 							}
@@ -208,7 +208,7 @@ namespace capex.console
 						else if(o1 is capex.console.UsageInfo.Option) {
 							var p2 = (capex.console.UsageInfo.Option)o1;
 							sb.append("  ");
-							sb.append(cape.String.padToLength(((("-" + p2.name) + "=[") + p2.value) + "]", longest, -1, ' '));
+							sb.append(cape.String.padToLength("-" + p2.name + "=[" + p2.value + "]", longest, -1, ' '));
 							if(cape.String.isEmpty(p2.description) == false) {
 								sb.append(" - ");
 								sb.append(p2.description);

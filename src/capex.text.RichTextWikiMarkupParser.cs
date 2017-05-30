@@ -240,12 +240,12 @@ namespace capex.text
 				if(cape.String.startsWith(line, "#") == false) {
 					var it = cape.String.iterate(line);
 					var c = ' ';
-					if((sb.count() > 0) && (pc != ' ')) {
+					if(sb.count() > 0 && pc != ' ') {
 						sb.append(' ');
 						pc = ' ';
 					}
 					while((c = it.getNextChar()) > 0) {
-						if((((c == ' ') || (c == '\t')) || (c == '\r')) || (c == '\n')) {
+						if(c == ' ' || c == '\t' || c == '\r' || c == '\n') {
 							if(pc == ' ') {
 								continue;
 							}

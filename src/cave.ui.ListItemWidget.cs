@@ -61,7 +61,7 @@ namespace cave.ui
 		public void onGetData() {
 			cave.ui.Widget.removeChildrenOf((Windows.UI.Xaml.UIElement)list);
 			startDataQuery((System.Collections.Generic.List<cape.DynamicMap> response) => {
-				if(!(response != null) || (cape.Vector.getSize(response) < 1)) {
+				if(!(response != null) || cape.Vector.getSize(response) < 1) {
 					onNoDataReceived();
 					return;
 				}

@@ -58,7 +58,7 @@ namespace cave.ui
 			addCallback((double completion) => {
 				cave.ui.Widget.setAlpha(ff, 1.00 - completion);
 				cave.ui.Widget.setAlpha(tt, completion);
-				if(rf && (completion >= 1.00)) {
+				if(rf && completion >= 1.00) {
 					cave.ui.Widget.removeFromParent(ff);
 				}
 			});
@@ -78,7 +78,7 @@ namespace cave.ui
 			var ra = removeAfter;
 			addCallback((double completion) => {
 				cave.ui.Widget.setAlpha(ff, 1.00 - completion);
-				if(ra && (completion >= 1.00)) {
+				if(ra && completion >= 1.00) {
 					cave.ui.Widget.removeFromParent(ff);
 				}
 			});
@@ -90,7 +90,7 @@ namespace cave.ui
 			addCallback((double completion) => {
 				var r = cape.Math.remainder(completion, 1.00);
 				if(r < 0.50) {
-					cave.ui.Widget.setAlpha(ff, 1.00 - (r * 2));
+					cave.ui.Widget.setAlpha(ff, 1.00 - r * 2);
 				}
 				else {
 					cave.ui.Widget.setAlpha(ff, (r - 0.50) * 2);
@@ -113,9 +113,9 @@ namespace cave.ui
 		}
 
 		public bool onProgress(long elapsedTime) {
-			var completion = ((double)elapsedTime) / ((double)duration);
+			var completion = (double)elapsedTime / (double)duration;
 			tick(completion);
-			if(((shouldLoop == false) && (completion >= 1.00)) || shouldStop) {
+			if(shouldLoop == false && completion >= 1.00 || shouldStop) {
 				onAnimationEnded();
 				return(false);
 			}

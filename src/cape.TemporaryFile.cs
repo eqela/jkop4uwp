@@ -38,15 +38,15 @@ namespace cape
 			if(tmpdir == null) {
 				tmpdir = cape.Environment.getTemporaryDirectory();
 			}
-			if((tmpdir == null) || (tmpdir.isDirectory() == false)) {
+			if(tmpdir == null || tmpdir.isDirectory() == false) {
 				return(null);
 			}
 			cape.File v = null;
 			var n = 0;
 			var rnd = new cape.Random();
 			while(n < 100) {
-				var id = ("_tmp_" + cape.String.forInteger((int)cape.SystemClock.asSeconds())) + cape.String.forInteger((int)(rnd.nextInt() % 1000000));
-				if((object.Equals(extension, null)) || (cape.String.getLength(extension) < 1)) {
+				var id = "_tmp_" + cape.String.forInteger((int)cape.SystemClock.asSeconds()) + cape.String.forInteger((int)(rnd.nextInt() % 1000000));
+				if(object.Equals(extension, null) || cape.String.getLength(extension) < 1) {
 					id = id + extension;
 				}
 				v = tmpdir.entry(id);
@@ -56,7 +56,7 @@ namespace cape
 				}
 				n++;
 			}
-			if((v != null) && (v.isFile() == false)) {
+			if(v != null && v.isFile() == false) {
 				v = null;
 			}
 			return(v);

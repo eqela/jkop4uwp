@@ -45,7 +45,7 @@ namespace cape
 		}
 
 		public override bool moveToNextByte() {
-			if((currentPosition + 1) >= cape.Buffer.getSize(buffer)) {
+			if(currentPosition + 1 >= cape.Buffer.getSize(buffer)) {
 				return(false);
 			}
 			currentPosition++;

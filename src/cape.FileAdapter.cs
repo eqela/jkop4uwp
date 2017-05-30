@@ -95,7 +95,7 @@ namespace cape
 				lastErrorDescription = null;
 			}
 			else if(pp != null) {
-				lastErrorDescription = (pp + ": ") + v;
+				lastErrorDescription = pp + ": " + v;
 			}
 			else {
 				lastErrorDescription = v;
@@ -134,7 +134,7 @@ namespace cape
 				return(false);
 			}
 			var path = getPath();
-			if((path != null) && (object.Equals(path, file.getPath()))) {
+			if(path != null && object.Equals(path, file.getPath())) {
 				return(true);
 			}
 			return(false);
@@ -145,7 +145,7 @@ namespace cape
 			if(!(finfo != null)) {
 				return(true);
 			}
-			if((finfo.isDirectory() == false) || (finfo.isLink() == true)) {
+			if(finfo.isDirectory() == false || finfo.isLink() == true) {
 				return(remove());
 			}
 			var it = entries();
@@ -214,12 +214,12 @@ namespace cape
 				return((cape.File)this);
 			}
 			var bn = baseName();
-			return(getSibling((bn + ".") + ext));
+			return(getSibling(bn + "." + ext));
 		}
 
 		public virtual cape.File asExecutable() {
 			if(cape.OS.isWindows()) {
-				if(((hasExtension("exe") == false) && (hasExtension("bat") == false)) && (hasExtension("com") == false)) {
+				if(hasExtension("exe") == false && hasExtension("bat") == false && hasExtension("com") == false) {
 					var exe = withExtension("exe");
 					if(exe.isFile()) {
 						return(exe);
@@ -355,10 +355,10 @@ namespace cape
 			else {
 				dest.remove();
 			}
-			if((reader != null) && (reader is cape.Closable)) {
+			if(reader != null && reader is cape.Closable) {
 				((cape.Closable)reader).close();
 			}
-			if((writer != null) && (writer is cape.Closable)) {
+			if(writer != null && writer is cape.Closable) {
 				((cape.Closable)writer).close();
 			}
 			return(v);

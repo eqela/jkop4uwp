@@ -34,7 +34,7 @@ namespace capex.image
 		private int height = 0;
 
 		public static capex.image.BitmapBuffer create(byte[] b, int w, int h) {
-			if((((b == null) || (cape.Buffer.getSize(b) < 4)) || (w < 1)) || (h < 1)) {
+			if(b == null || cape.Buffer.getSize(b) < 4 || w < 1 || h < 1) {
 				return(null);
 			}
 			return(new capex.image.BitmapBuffer().setBuffer(b).setWidth(w).setHeight(h));

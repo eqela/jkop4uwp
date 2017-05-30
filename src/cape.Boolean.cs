@@ -88,7 +88,7 @@ namespace cape
 			}
 			if(obj is string) {
 				var str = cape.String.toLowerCase((string)obj);
-				if((object.Equals(str, "yes")) || (object.Equals(str, "true"))) {
+				if(object.Equals(str, "yes") || object.Equals(str, "true")) {
 					return(true);
 				}
 				return(false);
@@ -97,7 +97,7 @@ namespace cape
 				var str1 = ((cape.StringObject)obj).toString();
 				if(!(object.Equals(str1, null))) {
 					str1 = cape.String.toLowerCase(str1);
-					if((object.Equals(str1, "yes")) || (object.Equals(str1, "true"))) {
+					if(object.Equals(str1, "yes") || object.Equals(str1, "true")) {
 						return(true);
 					}
 				}
@@ -110,7 +110,7 @@ namespace cape
 				return(true);
 			}
 			if(obj is cape.CharacterObject) {
-				if(((int)((cape.CharacterObject)obj).toCharacter()) == 0) {
+				if((int)((cape.CharacterObject)obj).toCharacter() == 0) {
 					return(false);
 				}
 				return(true);

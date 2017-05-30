@@ -115,7 +115,7 @@ namespace cave.ui
 		}
 
 		private void applyValueToWidgets() {
-			if(((dayBox == null) || (monthBox == null)) || (yearBox == null)) {
+			if(dayBox == null || monthBox == null || yearBox == null) {
 				return;
 			}
 			if(object.Equals(value, null)) {
@@ -136,7 +136,7 @@ namespace cave.ui
 		}
 
 		private void getValueFromWidgets() {
-			if(((dayBox == null) || (monthBox == null)) || (yearBox == null)) {
+			if(dayBox == null || monthBox == null || yearBox == null) {
 				return;
 			}
 			var year = cape.String.asString(yearBox.getWidgetValue());

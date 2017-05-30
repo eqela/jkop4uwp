@@ -53,6 +53,14 @@ namespace capex.data
 			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_INTEGER_KEY));
 		}
 
+		public static capex.data.SQLTableColumnInfo forLongKey(string name) {
+			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_LONG_KEY));
+		}
+
+		public static capex.data.SQLTableColumnInfo forLong(string name) {
+			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_LONG));
+		}
+
 		public static capex.data.SQLTableColumnInfo forDouble(string name) {
 			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_DOUBLE));
 		}
@@ -68,6 +76,8 @@ namespace capex.data
 		public const int TYPE_DOUBLE = 4;
 		public const int TYPE_BLOB = 5;
 		public const int TYPE_STRING_KEY = 6;
+		public const int TYPE_LONG = 7;
+		public const int TYPE_LONG_KEY = 8;
 		private string name = null;
 		private int type = 0;
 

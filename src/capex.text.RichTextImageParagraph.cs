@@ -34,19 +34,19 @@ namespace capex.text
 
 		public override string toMarkup() {
 			if(width >= 100) {
-				return(("@image " + filename) + "\n");
+				return("@image " + filename + "\n");
 			}
 			if(width >= 75) {
-				return(("@image75 " + filename) + "\n");
+				return("@image75 " + filename + "\n");
 			}
 			if(width >= 50) {
-				return(("@image50 " + filename) + "\n");
+				return("@image50 " + filename + "\n");
 			}
-			return(("@image25 " + filename) + "\n");
+			return("@image25 " + filename + "\n");
 		}
 
 		public override string toText() {
-			return(("[image:" + filename) + "]\n");
+			return("[image:" + filename + "]\n");
 		}
 
 		public override cape.DynamicMap toJson() {
@@ -71,7 +71,7 @@ namespace capex.text
 			else {
 				sb.append("<div class=\"img25\">");
 			}
-			sb.append(("<img src=\"" + capex.text.HTMLString.sanitize(filename)) + "\" />");
+			sb.append("<img src=\"" + capex.text.HTMLString.sanitize(filename) + "\" />");
 			sb.append("</div>\n");
 			return(sb.toString());
 		}

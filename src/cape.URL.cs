@@ -100,7 +100,7 @@ namespace cape
 			if(path != null) {
 				sb.append(cape.String.replace(path, ' ', '+'));
 			}
-			if((rawQueryParameters != null) && (rawQueryParameters.count() > 0)) {
+			if(rawQueryParameters != null && rawQueryParameters.count() > 0) {
 				var first = true;
 				cape.Iterator<string> it = cape.Map.iterateKeys(queryParameters);
 				while(it != null) {
@@ -222,7 +222,7 @@ namespace cape
 			var css = cape.String.indexOf(str, "://");
 			if(css >= 0) {
 				scheme = cape.String.subString(str, 0, css);
-				if((cape.String.indexOf(scheme, ':') >= 0) || (cape.String.indexOf(scheme, '/') >= 0)) {
+				if(cape.String.indexOf(scheme, ':') >= 0 || cape.String.indexOf(scheme, '/') >= 0) {
 					scheme = null;
 				}
 				else {

@@ -85,7 +85,7 @@ namespace cape
 		}
 
 		public static byte[] getSubBuffer(byte[] buffer, long offset, long size = (long)-1, bool alwaysNewBuffer = false) {
-			if(((alwaysNewBuffer == false) && (offset == 0)) && (size < 0)) {
+			if(alwaysNewBuffer == false && offset == 0 && size < 0) {
 				return(buffer);
 			}
 			var bsz = cape.Buffer.getSize(buffer);
@@ -93,7 +93,7 @@ namespace cape
 			if(sz < 0) {
 				sz = bsz - offset;
 			}
-			if(((alwaysNewBuffer == false) && (offset == 0)) && (sz == bsz)) {
+			if(alwaysNewBuffer == false && offset == 0 && sz == bsz) {
 				return(buffer);
 			}
 			if(sz < 1) {
@@ -160,7 +160,7 @@ namespace cape
 			if(buffer == null) {
 				return((long)0);
 			}
-			return((long)(buffer.Length));
+			return((long)buffer.Length);
 		}
 
 		public static byte getByte(byte[] buffer, long offset) {
@@ -184,7 +184,7 @@ namespace cape
 		}
 
 		public static byte[] append(byte[] original, byte[] toAppend, long size = (long)-1) {
-			if((toAppend == null) || (size == 0)) {
+			if(toAppend == null || size == 0) {
 				return(original);
 			}
 			var sz = size;
@@ -200,7 +200,7 @@ namespace cape
 		}
 
 		public static byte[] forHexString(string str) {
-			if((object.Equals(str, null)) || ((cape.String.getLength(str) % 2) != 0)) {
+			if(object.Equals(str, null) || cape.String.getLength(str) % 2 != 0) {
 				return(null);
 			}
 			cape.StringBuilder sb = null;
@@ -215,7 +215,7 @@ namespace cape
 				if(sb == null) {
 					sb = new cape.StringBuilder();
 				}
-				if((((c >= 'a') && (c <= 'f')) || ((c >= 'A') && (c <= 'F'))) || ((c >= '0') && (c <= '9'))) {
+				if(c >= 'a' && c <= 'f' || c >= 'A' && c <= 'F' || c >= '0' && c <= '9') {
 					sb.append(c);
 					if(sb.count() == 2) {
 						cape.Buffer.setByte(b, (long)n++, (byte)cape.String.toIntegerFromHex(sb.toString()));

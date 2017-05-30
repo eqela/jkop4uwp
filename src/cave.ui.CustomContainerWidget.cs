@@ -90,10 +90,10 @@ namespace cave.ui
 
 		public void togglePointerEventHandling(bool active) {
 			if(active) {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.CustomContainerWidget.togglePointerEventHandling] (CustomContainerWidget.sling:178:3): Not implemented");
+				;
 			}
 			else {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.CustomContainerWidget.togglePointerEventHandling] (CustomContainerWidget.sling:192:3): Not implemented");
+				;
 			}
 		}
 
@@ -105,7 +105,7 @@ namespace cave.ui
 		}
 
 		public bool hasSize() {
-			if((cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this) > 0) || (cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) > 0)) {
+			if(cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this) > 0 || cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) > 0) {
 				return(true);
 			}
 			return(false);
@@ -149,8 +149,8 @@ namespace cave.ui
 		}
 
 		public virtual bool layoutWidget(int widthConstraint, bool force) {
-			if((force || widgetChanged) || (widthConstraint != lastWidthConstraint)) {
-				if(((force == false) && (widgetChanged == false)) && ((widthConstraint >= 0) && (widthConstraint == lastLayoutWidth))) {
+			if(force || widgetChanged || widthConstraint != lastWidthConstraint) {
+				if(force == false && widgetChanged == false && widthConstraint >= 0 && widthConstraint == lastLayoutWidth) {
 					;
 				}
 				else {
@@ -178,7 +178,7 @@ namespace cave.ui
 		public void executeLayout() {
 			isLayoutScheduled = false;
 			var ww = cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this);
-			if((ww == 0) && allowResize) {
+			if(ww == 0 && allowResize) {
 				ww = -1;
 			}
 			cave.ui.Widget.layout((Windows.UI.Xaml.UIElement)this, ww);

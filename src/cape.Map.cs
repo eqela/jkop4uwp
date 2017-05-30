@@ -60,7 +60,7 @@ namespace cape
 		}
 
 		public static V get<K, V>(System.Collections.Generic.Dictionary<K,V> map, K key, V ddf) {
-			if((map == null) || (key == null)) {
+			if(map == null || key == null) {
 				return(ddf);
 			}
 			if(cape.Map.containsKey(map, key) == false) {
@@ -74,10 +74,10 @@ namespace cape
 		}
 
 		public static V getValue<K, V>(System.Collections.Generic.Dictionary<K,V> map, K key) {
-			if((map == null) || (key == null)) {
-				return((V)(default(V)));
+			if(map == null || key == null) {
+				return((V)default(V));
 			}
-			var v = (V)(default(V));
+			var v = (V)default(V);
 			try {
 				v = map[key];
 			}
@@ -88,7 +88,7 @@ namespace cape
 		}
 
 		public static bool set<K, V>(System.Collections.Generic.Dictionary<K,V> data, K key, V val) {
-			if((data == null) || (key == null)) {
+			if(data == null || key == null) {
 				return(false);
 			}
 			data[key] = val;
@@ -100,7 +100,7 @@ namespace cape
 		}
 
 		public static void remove<K, V>(System.Collections.Generic.Dictionary<K,V> data, K key) {
-			if((data == null) || (key == null)) {
+			if(data == null || key == null) {
 				return;
 			}
 			data.Remove(key);
@@ -114,14 +114,14 @@ namespace cape
 		}
 
 		public static bool containsKey<K, V>(System.Collections.Generic.Dictionary<K,V> data, K key) {
-			if((data == null) || (key == null)) {
+			if(data == null || key == null) {
 				return(false);
 			}
 			return(data.ContainsKey(key));
 		}
 
 		public static bool containsValue<K, V>(System.Collections.Generic.Dictionary<K,V> data, V val) {
-			if((data == null) || (val == null)) {
+			if(data == null || val == null) {
 				return(false);
 			}
 			return(data.ContainsValue(val));

@@ -134,6 +134,7 @@
     <Compile Include="cape.ArrayObject.cs" />
     <Compile Include="cape.Base64Decoder.cs" />
     <Compile Include="cape.Base64Encoder.cs" />
+    <Compile Include="cape.BinaryReader.cs" />
     <Compile Include="cape.Boolean.cs" />
     <Compile Include="cape.BooleanIterator.cs" />
     <Compile Include="cape.BooleanObject.cs" />
@@ -353,6 +354,7 @@
     <Compile Include="cave.ui.CanvasWidget.cs" />
     <Compile Include="cave.ui.CheckBoxWidget.cs" />
     <Compile Include="cave.ui.CustomContainerWidget.cs" />
+    <Compile Include="cave.ui.DataGridWidget.cs" />
     <Compile Include="cave.ui.DateSelectorWidget.cs" />
     <Compile Include="cave.ui.DisplayAwareWidget.cs" />
     <Compile Include="cave.ui.FileInputWidget.cs" />
@@ -379,6 +381,7 @@
     <Compile Include="cave.ui.PopupMenu.cs" />
     <Compile Include="cave.ui.PopupWidget.cs" />
     <Compile Include="cave.ui.RadioButtonGroupWidget.cs" />
+    <Compile Include="cave.ui.RadioButtonWidget.cs" />
     <Compile Include="cave.ui.ResizeAwareWidget.cs" />
     <Compile Include="cave.ui.ScreenAwareWidget.cs" />
     <Compile Include="cave.ui.ScreenForWidget.cs" />

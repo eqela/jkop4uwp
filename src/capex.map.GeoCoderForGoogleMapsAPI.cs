@@ -50,14 +50,14 @@ namespace capex.map
 				return(false);
 			}
 			var list = listener;
-			client.query("GET", ((((host + apiKey) + "&latlng=") + cape.String.forDouble(latitude)) + ",") + cape.String.forDouble(longitude), null, null, (string statusCode, cape.KeyValueList<string, string> headers, byte[] body) => {
+			client.query("GET", host + apiKey + "&latlng=" + cape.String.forDouble(latitude) + "," + cape.String.forDouble(longitude), null, null, (string statusCode, cape.KeyValueList<string, string> headers, byte[] body) => {
 				var data = cape.JSONParser.parse(body) as cape.DynamicMap;
 				if(data == null) {
 					list.onQueryAddressErrorReceived(cape.Error.forCode("invalidResponseFromGoogleMapsAPI"));
 					return;
 				}
 				var results = data.getDynamicVector("results");
-				if((results == null) || (results.getSize() < 1)) {
+				if(results == null || results.getSize() < 1) {
 					list.onQueryAddressErrorReceived(cape.Error.forCode("noResultFound"));
 					return;
 				}
@@ -72,7 +72,7 @@ namespace capex.map
 								continue;
 							}
 							var addressComponents = result.getDynamicVector("address_components");
-							if((addressComponents == null) || (addressComponents.getSize() < 1)) {
+							if(addressComponents == null || addressComponents.getSize() < 1) {
 								list.onQueryAddressErrorReceived(cape.Error.forCode("noaddressComponentsFound"));
 								return;
 							}
@@ -88,7 +88,7 @@ namespace capex.map
 											continue;
 										}
 										var types = addressComponent.getDynamicVector("types");
-										if((types == null) || (types.getSize() < 1)) {
+										if(types == null || types.getSize() < 1) {
 											continue;
 										}
 										var array3 = types.toVector();
@@ -170,14 +170,14 @@ namespace capex.map
 				return(false);
 			}
 			var list = listener;
-			client.query("GET", ((host + apiKey) + "&address=") + cape.URLEncoder.encode(address), null, null, (string statusCode, cape.KeyValueList<string, string> headers, byte[] body) => {
+			client.query("GET", host + apiKey + "&address=" + cape.URLEncoder.encode(address), null, null, (string statusCode, cape.KeyValueList<string, string> headers, byte[] body) => {
 				var data = cape.JSONParser.parse(body) as cape.DynamicMap;
 				if(data == null) {
 					list.onQueryLocationErrorReceived(cape.Error.forCode("invalidResponseFromGoogleMapsAPI"));
 					return;
 				}
 				var results = data.getDynamicVector("results");
-				if((results == null) || (results.getSize() < 1)) {
+				if(results == null || results.getSize() < 1) {
 					list.onQueryLocationErrorReceived(cape.Error.forCode("noResultFound"));
 					return;
 				}

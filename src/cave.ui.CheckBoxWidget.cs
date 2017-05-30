@@ -38,39 +38,59 @@ namespace cave.ui
 		private cave.GuiApplicationContext widgetContext = null;
 		private string widgetText = null;
 		private cave.Color widgetTextColor = null;
+		private string widgetFontResource = null;
+		private string widgetFontFamily = null;
 		private System.Action widgetCheckHandler = null;
 
 		public CheckBoxWidget(cave.GuiApplicationContext context) {
 			widgetContext = context;
+			widgetFontFamily = "Arial";
 			widgetTextColor = cave.Color.black();
 			setWidgetTextColor(widgetTextColor);
 		}
 
 		public void setWidgetText(string text) {
 			widgetText = text;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.setWidgetText] (CheckBoxWidget.sling:120:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.setWidgetText] (CheckBoxWidget.sling:123:2): Not implemented");
 		}
 
 		public string getWidgetText() {
 			return(widgetText);
 		}
 
-		public void setWidgetTextColor(cave.Color color) {
+		public cave.ui.CheckBoxWidget setWidgetTextColor(cave.Color color) {
 			widgetTextColor = color;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.setWidgetTextColor] (CheckBoxWidget.sling:144:2): Not implemented");
+			updateWidgetFont();
+			return(this);
 		}
 
 		public cave.Color getWidgetTextColor() {
 			return(widgetTextColor);
 		}
 
+		public cave.ui.CheckBoxWidget setWidgetFontFamily(string font) {
+			widgetFontFamily = font;
+			updateWidgetFont();
+			return(this);
+		}
+
+		public cave.ui.CheckBoxWidget setWidgetFontResource(string res) {
+			widgetFontResource = res;
+			updateWidgetFont();
+			return(this);
+		}
+
+		private void updateWidgetFont() {
+			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.updateWidgetFont] (CheckBoxWidget.sling:184:2): Not implemented");
+		}
+
 		public bool getWidgetChecked() {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.getWidgetChecked] (CheckBoxWidget.sling:165:2): Not implemented.");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.getWidgetChecked] (CheckBoxWidget.sling:200:2): Not implemented.");
 			return(false);
 		}
 
 		public void setWidgetChecked(bool x) {
-			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.setWidgetChecked] (CheckBoxWidget.sling:194:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.CheckBoxWidget.setWidgetChecked] (CheckBoxWidget.sling:229:2): Not implemented");
 		}
 
 		public virtual void setWidgetValue(object value) {

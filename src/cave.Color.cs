@@ -148,21 +148,21 @@ namespace cave
 		}
 
 		public bool isWhite() {
-			if(((red + green) + blue) >= 3.00) {
+			if(red + green + blue >= 3.00) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isBlack() {
-			if(((red + green) + blue) <= 0) {
+			if(red + green + blue <= 0) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isLightColor() {
-			if(((red + green) + blue) >= 1.50) {
+			if(red + green + blue >= 1.50) {
 				return(true);
 			}
 			return(false);
@@ -173,14 +173,14 @@ namespace cave
 		}
 
 		private int hexCharToInt(char c) {
-			if((c >= '0') && (c <= '9')) {
-				return(((int)c) - ((int)'0'));
+			if(c >= '0' && c <= '9') {
+				return((int)c - (int)'0');
 			}
-			if((c >= 'a') && (c <= 'f')) {
-				return((10 + ((int)c)) - ((int)'a'));
+			if(c >= 'a' && c <= 'f') {
+				return(10 + (int)c - (int)'a');
 			}
-			if((c >= 'A') && (c <= 'F')) {
-				return((10 + ((int)c)) - ((int)'A'));
+			if(c >= 'A' && c <= 'F') {
+				return(10 + (int)c - (int)'A');
 			}
 			return(0);
 		}
@@ -193,7 +193,7 @@ namespace cave
 			if(cape.String.getLength(hx) < 2) {
 				return(c0);
 			}
-			return((c0 * 16) + hexCharToInt(cape.String.charAt(hx, 1)));
+			return(c0 * 16 + hexCharToInt(cape.String.charAt(hx, 1)));
 		}
 
 		public bool parse(string s) {
@@ -208,7 +208,7 @@ namespace cave
 			alpha = 1.00;
 			if(cape.String.charAt(s, 0) == '#') {
 				var slength = cape.String.getLength(s);
-				if((slength == 7) || (slength == 9)) {
+				if(slength == 7 || slength == 9) {
 					red = (double)(hexDigitToInt(cape.String.getSubString(s, 1, 2)) / 255.00);
 					green = (double)(hexDigitToInt(cape.String.getSubString(s, 3, 2)) / 255.00);
 					blue = (double)(hexDigitToInt(cape.String.getSubString(s, 5, 2)) / 255.00);
@@ -292,7 +292,7 @@ namespace cave
 			var n = 0;
 			for(n = 0 ; n < m ; n++) {
 				var c = cape.String.charAt(str, n);
-				if((c >= '0') && (c <= '9')) {
+				if(c >= '0' && c <= '9') {
 					v = v * 10;
 					v += (int)(c - '0');
 				}
@@ -313,14 +313,14 @@ namespace cave
 					f = 0.80;
 				}
 				else if(cape.String.endsWith(arg, "%")) {
-					f = ((double)decimalStringToInteger(arg)) / 100.00;
+					f = (double)decimalStringToInteger(arg) / 100.00;
 				}
 			}
 			var v = new cave.Color();
 			if(f > 1.00) {
-				v.setRed(red + ((1.00 - red) * (f - 1.00)));
-				v.setGreen(green + ((1.00 - green) * (f - 1.00)));
-				v.setBlue(blue + ((1.00 - blue) * (f - 1.00)));
+				v.setRed(red + (1.00 - red) * (f - 1.00));
+				v.setGreen(green + (1.00 - green) * (f - 1.00));
+				v.setBlue(blue + (1.00 - blue) * (f - 1.00));
 			}
 			else if(f < 1.00) {
 				v.setRed(red * f);
@@ -338,19 +338,19 @@ namespace cave
 
 		public int toRGBAInt32() {
 			var v = (int)0;
-			v |= ((int)(((int)(red * 255)) & 255)) << 24;
-			v |= ((int)(((int)(green * 255)) & 255)) << 16;
-			v |= ((int)(((int)(blue * 255)) & 255)) << 8;
-			v |= (int)(((int)(alpha * 255)) & 255);
+			v |= (int)((int)(red * 255) & 255) << 24;
+			v |= (int)((int)(green * 255) & 255) << 16;
+			v |= (int)((int)(blue * 255) & 255) << 8;
+			v |= (int)((int)(alpha * 255) & 255);
 			return(v);
 		}
 
 		public int toARGBInt32() {
 			var v = (int)0;
-			v |= ((int)(((int)(alpha * 255)) & 255)) << 24;
-			v |= ((int)(((int)(red * 255)) & 255)) << 16;
-			v |= ((int)(((int)(green * 255)) & 255)) << 8;
-			v |= (int)(((int)(blue * 255)) & 255);
+			v |= (int)((int)(alpha * 255) & 255) << 24;
+			v |= (int)((int)(red * 255) & 255) << 16;
+			v |= (int)((int)(green * 255) & 255) << 8;
+			v |= (int)((int)(blue * 255) & 255);
 			return(v);
 		}
 

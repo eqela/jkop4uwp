@@ -39,7 +39,7 @@ namespace capex.text
 				delim = "-- ";
 			}
 			else {
-				delim = ("-- " + id) + " --";
+				delim = "-- " + id + " --";
 			}
 			sb.append(delim);
 			sb.append('\n');
@@ -71,7 +71,7 @@ namespace capex.text
 				ids = " " + capex.text.HTMLString.sanitize(id);
 			}
 			var content = capex.text.RichTextStyledParagraph.forString(text);
-			return(((("<div class=\"block" + ids) + "\">") + content.toHtml(refs)) + "</div>");
+			return("<div class=\"block" + ids + "\">" + content.toHtml(refs) + "</div>");
 		}
 
 		public string getId() {

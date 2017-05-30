@@ -39,7 +39,7 @@ namespace capex.text
 				delim = "---";
 			}
 			else {
-				delim = ("--- " + id) + " ---";
+				delim = "--- " + id + " ---";
 			}
 			sb.append(delim);
 			sb.append('\n');
@@ -68,7 +68,7 @@ namespace capex.text
 		public override string toHtml(capex.text.RichTextDocumentReferenceResolver refs) {
 			var ids = "";
 			if(cape.String.isEmpty(id) == false) {
-				ids = (" id=\"" + capex.text.HTMLString.sanitize(id)) + "\"";
+				ids = " id=\"" + capex.text.HTMLString.sanitize(id) + "\"";
 			}
 			var codeo = "";
 			var codec = "";
@@ -76,7 +76,7 @@ namespace capex.text
 				codeo = "<code>";
 				codec = "</code>";
 			}
-			return(((((("<pre" + ids) + ">") + codeo) + capex.text.HTMLString.sanitize(text)) + codec) + "</pre>");
+			return("<pre" + ids + ">" + codeo + capex.text.HTMLString.sanitize(text) + codec + "</pre>");
 		}
 
 		public string getId() {

@@ -87,7 +87,7 @@ namespace capex.text
 			if(cape.String.isEmpty(reftitle)) {
 				reftitle = href;
 			}
-			return(((("<p class=\"reference\"><a href=\"" + capex.text.HTMLString.sanitize(href)) + "\">") + capex.text.HTMLString.sanitize(reftitle)) + "</a></p>\n");
+			return("<p class=\"reference\"><a href=\"" + capex.text.HTMLString.sanitize(href) + "\">" + capex.text.HTMLString.sanitize(reftitle) + "</a></p>\n");
 		}
 
 		public string getReference() {

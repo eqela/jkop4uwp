@@ -45,7 +45,7 @@ namespace capex.crypto
 		}
 
 		public static byte[] encryptBuffer(byte[] data, capex.crypto.BlockCipher cipher) {
-			if((cipher == null) || (data == null)) {
+			if(cipher == null || data == null) {
 				return(null);
 			}
 			var bw = new cape.BufferWriter();
@@ -65,7 +65,7 @@ namespace capex.crypto
 		}
 
 		public static byte[] decryptBuffer(byte[] data, capex.crypto.BlockCipher cipher) {
-			if((cipher == null) || (data == null)) {
+			if(cipher == null || data == null) {
 				return(null);
 			}
 			var br = cape.BufferReader.forBuffer(data);

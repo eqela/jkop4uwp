@@ -114,7 +114,7 @@ namespace cave.ui
 
 		public virtual void onKeyEvent(cave.KeyEvent @event) {
 			if(@event.isKeyPress(cave.KeyEvent.KEY_BACK)) {
-				if((widgetStack != null) && (widgetStack.getSize() > 1)) {
+				if(widgetStack != null && widgetStack.getSize() > 1) {
 					if(popWidget() != null) {
 						@event.consume();
 					}
@@ -147,7 +147,7 @@ namespace cave.ui
 				return;
 			}
 			var handler = getMenuHandler();
-			if((widgetStack != null) && (widgetStack.getSize() > 1)) {
+			if(widgetStack != null && widgetStack.getSize() > 1) {
 				actionBar.configureLeftButton(backImageResourceName, () => {
 					popWidget();
 				});
@@ -175,7 +175,7 @@ namespace cave.ui
 		}
 
 		private void enableFixedSidebar() {
-			if(((sidebarWidget == null) || (sidebarSlotLeft == null)) || sidebarIsFixed) {
+			if(sidebarWidget == null || sidebarSlotLeft == null || sidebarIsFixed) {
 				return;
 			}
 			hideSidebarWidget(false);
@@ -185,7 +185,7 @@ namespace cave.ui
 		}
 
 		private void disableFixedSidebar() {
-			if(sidebarIsDisplayed || (sidebarIsFixed == false)) {
+			if(sidebarIsDisplayed || sidebarIsFixed == false) {
 				return;
 			}
 			cave.ui.Widget.removeFromParent(sidebarWidget);
@@ -195,7 +195,7 @@ namespace cave.ui
 
 		private int updateSidebarWidthRequest(int sz) {
 			var v = 0;
-			if(((sidebarIsFixed == false) && sidebarIsDisplayed) && (sidebarWidget != null)) {
+			if(sidebarIsFixed == false && sidebarIsDisplayed && sidebarWidget != null) {
 				var layer = cave.ui.Widget.getParent(sidebarWidget) as cave.ui.LayerWidget;
 				if(layer != null) {
 					v = (int)(0.80 * sz);
@@ -216,7 +216,7 @@ namespace cave.ui
 		}
 
 		public void displaySidebarWidget(bool animated = true) {
-			if((sidebarIsFixed || sidebarIsDisplayed) || (sidebarWidget == null)) {
+			if(sidebarIsFixed || sidebarIsDisplayed || sidebarWidget == null) {
 				return;
 			}
 			if(dimWidget == null) {
@@ -240,7 +240,7 @@ namespace cave.ui
 				cave.ui.Widget.setAlpha(dimWidget, 0.00);
 				var anim = cave.ui.WidgetAnimation.forDuration(context, (long)250);
 				anim.addCallback((double completion) => {
-					var dx = (int)(sx + ((0 - sx) * completion));
+					var dx = (int)(sx + (0 - sx) * completion);
 					if(dx > 0) {
 						dx = 0;
 					}
@@ -301,11 +301,11 @@ namespace cave.ui
 					actionBar.configureRightButton(appIcon, getAppMenuHandler());
 				}
 			}
-			if((actionBar != null) && (actionBarIsFloating == false)) {
+			if(actionBar != null && actionBarIsFloating == false) {
 				mainContainer.addWidget((Windows.UI.Xaml.UIElement)actionBar);
 			}
 			contentArea = new cave.ui.SwitcherLayerWidget(context);
-			if((actionBar != null) && (actionBarIsFloating == true)) {
+			if(actionBar != null && actionBarIsFloating == true) {
 				var ll = new cave.ui.LayerWidget(context);
 				ll.addWidget((Windows.UI.Xaml.UIElement)contentArea);
 				ll.addWidget((Windows.UI.Xaml.UIElement)cave.ui.VerticalBoxWidget.forContext(context).addWidget((Windows.UI.Xaml.UIElement)actionBar, 0.00).addWidget((Windows.UI.Xaml.UIElement)new cave.ui.CustomContainerWidget(context), 1.00));
@@ -339,19 +339,19 @@ namespace cave.ui
 			}
 			Windows.UI.Xaml.UIElement widget = null;
 			var widgets = cave.ui.Widget.getChildren((Windows.UI.Xaml.UIElement)contentArea);
-			if((widgets != null) && (cape.Vector.getSize(widgets) > 0)) {
+			if(widgets != null && cape.Vector.getSize(widgets) > 0) {
 				widget = cape.Vector.get(widgets, cape.Vector.getSize(widgets) - 1);
 			}
-			if((widget != null) && (widget is cave.ui.DisplayAwareWidget)) {
+			if(widget != null && widget is cave.ui.DisplayAwareWidget) {
 				((cave.ui.DisplayAwareWidget)widget).onWidgetDisplayed();
 			}
-			if((widget != null) && (widget is cave.ui.TitledWidget)) {
+			if(widget != null && widget is cave.ui.TitledWidget) {
 				updateWidgetTitle(((cave.ui.TitledWidget)widget).getWidgetTitle());
 			}
 			else {
 				updateWidgetTitle("");
 			}
-			if((widget != null) && (widget is cave.ui.ActionBarControlWidget)) {
+			if(widget != null && widget is cave.ui.ActionBarControlWidget) {
 				if(!(actionBar != null)) {
 					return;
 				}
@@ -382,7 +382,7 @@ namespace cave.ui
 		}
 
 		public bool pushWidget(Windows.UI.Xaml.UIElement widget) {
-			if((contentArea == null) || (widget == null)) {
+			if(contentArea == null || widget == null) {
 				return(false);
 			}
 			widgetStack.push(widget);

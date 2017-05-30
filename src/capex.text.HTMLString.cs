@@ -33,7 +33,7 @@ namespace capex.text
 			if(object.Equals(str, null)) {
 				return(null);
 			}
-			if(((cape.String.indexOf(str, '<') < 0) && (cape.String.indexOf(str, '>') < 0)) && (cape.String.indexOf(str, '&') < 0)) {
+			if(cape.String.indexOf(str, '<') < 0 && cape.String.indexOf(str, '>') < 0 && cape.String.indexOf(str, '&') < 0) {
 				return(str);
 			}
 			var it = cape.String.iterate(str);

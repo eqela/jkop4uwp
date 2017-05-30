@@ -130,7 +130,7 @@ namespace cave.ui
 		public override void computeWidgetLayout(int widthConstraint) {
 			var wc = -1;
 			if(widthConstraint >= 0) {
-				wc = (widthConstraint - widgetMarginLeft) - widgetMarginRight;
+				wc = widthConstraint - widgetMarginLeft - widgetMarginRight;
 				if(wc < 0) {
 					wc = 0;
 				}
@@ -151,7 +151,7 @@ namespace cave.ui
 							cave.ui.Widget.layout(widget, -1);
 						}
 						var cw = cave.ui.Widget.getWidth(widget);
-						if((wc >= 0) && (cw > wc)) {
+						if(wc >= 0 && cw > wc) {
 							cave.ui.Widget.layout(widget, wc);
 							cw = cave.ui.Widget.getWidth(widget);
 						}
@@ -165,20 +165,20 @@ namespace cave.ui
 					}
 				}
 			}
-			var mywidth = (mw + widgetMarginLeft) + widgetMarginRight;
+			var mywidth = mw + widgetMarginLeft + widgetMarginRight;
 			if(widthConstraint >= 0) {
 				mywidth = widthConstraint;
 			}
-			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, mywidth, (mh + widgetMarginTop) + widgetMarginBottom);
+			cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, mywidth, mh + widgetMarginTop + widgetMarginBottom);
 			updateChildWidgetLocations();
 		}
 
 		private void handleEntry(cave.ui.AlignWidget.MyChildEntry entry) {
-			var w = (cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this) - widgetMarginLeft) - widgetMarginRight;
-			var h = (cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) - widgetMarginTop) - widgetMarginBottom;
+			var w = cave.ui.Widget.getWidth((Windows.UI.Xaml.UIElement)this) - widgetMarginLeft - widgetMarginRight;
+			var h = cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this) - widgetMarginTop - widgetMarginBottom;
 			var cw = cave.ui.Widget.getWidth(entry.widget);
 			var ch = cave.ui.Widget.getHeight(entry.widget);
-			if((cw > w) || (ch > h)) {
+			if(cw > w || ch > h) {
 				if(cw > w) {
 					cw = w;
 				}
@@ -186,8 +186,8 @@ namespace cave.ui
 					ch = h;
 				}
 			}
-			var dx = (int)(widgetMarginLeft + ((w - cw) * entry.alignX));
-			var dy = (int)(widgetMarginTop + ((h - ch) * entry.alignY));
+			var dx = (int)(widgetMarginLeft + (w - cw) * entry.alignX);
+			var dy = (int)(widgetMarginTop + (h - ch) * entry.alignY);
 			cave.ui.Widget.move(entry.widget, dx, dy);
 		}
 
@@ -231,7 +231,7 @@ namespace cave.ui
 			if(child == null) {
 				return;
 			}
-			if((child.alignX != alignX) || (child.alignY != alignY)) {
+			if(child.alignX != alignX || child.alignY != alignY) {
 				child.alignX = alignX;
 				child.alignY = alignY;
 				cave.ui.Widget.onChanged((Windows.UI.Xaml.UIElement)this);

@@ -86,17 +86,17 @@ namespace capex.util
 			if(v == false) {
 				file.remove();
 			}
-			if((reader != null) && (reader is cape.Closable)) {
+			if(reader != null && reader is cape.Closable) {
 				((cape.Closable)reader).close();
 			}
-			if((writer != null) && (writer is cape.Closable)) {
+			if(writer != null && writer is cape.Closable) {
 				((cape.Closable)writer).close();
 			}
 			return(v);
 		}
 
 		public cape.File writeToDir(cape.File dir, bool fullPath = true, bool overwrite = true) {
-			if((dir == null) || (object.Equals(name, null))) {
+			if(dir == null || object.Equals(name, null)) {
 				return(null);
 			}
 			cape.File path = null;
@@ -109,7 +109,7 @@ namespace capex.util
 				else {
 					nn = cape.String.subString(name, r + 1);
 				}
-				if((object.Equals(nn, null)) || (cape.String.getLength(nn) < 1)) {
+				if(object.Equals(nn, null) || cape.String.getLength(nn) < 1) {
 					return(null);
 				}
 				path = dir.entry(nn);
@@ -123,7 +123,7 @@ namespace capex.util
 					for(n = 0 ; n < m ; n++) {
 						var x = array[n];
 						if(x != null) {
-							if(!(object.Equals(x, null)) && (cape.String.getLength(x) > 0)) {
+							if(!(object.Equals(x, null)) && cape.String.getLength(x) > 0) {
 								path = path.entry(x);
 							}
 						}

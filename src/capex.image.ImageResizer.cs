@@ -30,7 +30,7 @@ namespace capex.image
 		}
 
 		public static int li(double src1, double src2, double a) {
-			return((int)((a * src2) + ((1 - a) * src1)));
+			return((int)(a * src2 + (1 - a) * src1));
 		}
 
 		public static double bilinearInterpolation(int q11, int q21, int q12, int q22, double tx, double ty) {
@@ -38,10 +38,10 @@ namespace capex.image
 		}
 
 		public static capex.image.BitmapBuffer resizeBilinear(capex.image.BitmapBuffer bmpbuf, int anw, int anh) {
-			if((anw == 0) || (anh == 0)) {
+			if(anw == 0 || anh == 0) {
 				return(null);
 			}
-			if((anw < 0) && (anh < 0)) {
+			if(anw < 0 && anh < 0) {
 				return(bmpbuf);
 			}
 			var src = bmpbuf.getBuffer();
@@ -51,26 +51,26 @@ namespace capex.image
 			var sz = (int)cape.Buffer.getSize(src);
 			var ow = bmpbuf.getWidth();
 			var oh = bmpbuf.getHeight();
-			if((ow == anw) && (oh == anh)) {
+			if(ow == anw && oh == anh) {
 				return(bmpbuf);
 			}
-			if(sz != ((ow * oh) * 4)) {
+			if(sz != ow * oh * 4) {
 				return(null);
 			}
 			var nw = anw;
 			var nh = anh;
 			var scaler = 1.00;
 			if(nw < 0) {
-				scaler = ((double)nh) / ((double)oh);
+				scaler = (double)nh / (double)oh;
 			}
 			else if(nh < 0) {
-				scaler = ((double)nw) / ((double)ow);
+				scaler = (double)nw / (double)ow;
 			}
 			if(scaler != 1.00) {
-				nw = (int)(((double)ow) * scaler);
-				nh = (int)(((double)oh) * scaler);
+				nw = (int)((double)ow * scaler);
+				nh = (int)((double)oh * scaler);
 			}
-			var dest = new byte[(nw * nh) * 4];
+			var dest = new byte[nw * nh * 4];
 			if(dest == null) {
 				return(null);
 			}
@@ -86,10 +86,10 @@ namespace capex.image
 					var pty = (double)(dy * stepy);
 					var ix = (int)ptx;
 					var iy = (int)pty;
-					var q11i = ((iy * ow) + ix) * 4;
-					var q21i = ((iy * ow) + (ix + 1)) * 4;
-					var q12i = (((iy + 1) * ow) + ix) * 4;
-					var q22i = (((iy + 1) * ow) + (ix + 1)) * 4;
+					var q11i = (iy * ow + ix) * 4;
+					var q21i = (iy * ow + ix + 1) * 4;
+					var q12i = ((iy + 1) * ow + ix) * 4;
+					var q22i = ((iy + 1) * ow + ix + 1) * 4;
 					var rq11 = capex.image.ImageFilterUtil.getSafeByte(srcp, sz, q11i + 0);
 					var gq11 = capex.image.ImageFilterUtil.getSafeByte(srcp, sz, q11i + 1);
 					var bq11 = capex.image.ImageFilterUtil.getSafeByte(srcp, sz, q11i + 2);
@@ -110,10 +110,10 @@ namespace capex.image
 					var resg = (int)capex.image.ImageResizer.bilinearInterpolation(gq11, gq21, gq12, gq22, ptx - ix, pty - iy);
 					var resb = (int)capex.image.ImageResizer.bilinearInterpolation(bq11, bq21, bq12, bq22, ptx - ix, pty - iy);
 					var resa = (int)capex.image.ImageResizer.bilinearInterpolation(aq11, aq21, aq12, aq22, ptx - ix, pty - iy);
-					cape.Buffer.setByte(desp, (long)((((dy * nw) + dx) * 4) + 0), (byte)resr);
-					cape.Buffer.setByte(desp, (long)((((dy * nw) + dx) * 4) + 1), (byte)resg);
-					cape.Buffer.setByte(desp, (long)((((dy * nw) + dx) * 4) + 2), (byte)resb);
-					cape.Buffer.setByte(desp, (long)((((dy * nw) + dx) * 4) + 3), (byte)resa);
+					cape.Buffer.setByte(desp, (long)((dy * nw + dx) * 4 + 0), (byte)resr);
+					cape.Buffer.setByte(desp, (long)((dy * nw + dx) * 4 + 1), (byte)resg);
+					cape.Buffer.setByte(desp, (long)((dy * nw + dx) * 4 + 2), (byte)resb);
+					cape.Buffer.setByte(desp, (long)((dy * nw + dx) * 4 + 3), (byte)resa);
 				}
 			}
 			return(capex.image.BitmapBuffer.create(dest, nw, nh));
@@ -122,29 +122,29 @@ namespace capex.image
 		public static void untransformCoords(capex.util.Matrix33 m, int ix, int iy, double[] tu, double[] tv, double[] tw) {
 			var x = (double)(ix + 0.50);
 			var y = (double)(iy + 0.50);
-			tu[0] = ((m.v[0] * (x + 0)) + (m.v[3] * (y + 0))) + m.v[6];
-			tv[0] = ((m.v[1] * (x + 0)) + (m.v[4] * (y + 0))) + m.v[7];
-			tw[0] = ((m.v[2] * (x + 0)) + (m.v[5] * (y + 0))) + m.v[8];
-			tu[1] = ((m.v[0] * (x - 1)) + (m.v[3] * (y + 0))) + m.v[6];
-			tv[1] = ((m.v[1] * (x - 1)) + (m.v[4] * (y + 0))) + m.v[7];
-			tw[1] = ((m.v[2] * (x - 1)) + (m.v[5] * (y + 0))) + m.v[8];
-			tu[2] = ((m.v[0] * (x + 0)) + (m.v[3] * (y - 1))) + m.v[6];
-			tv[2] = ((m.v[1] * (x + 0)) + (m.v[4] * (y - 1))) + m.v[7];
-			tw[2] = ((m.v[2] * (x + 0)) + (m.v[5] * (y - 1))) + m.v[8];
-			tu[3] = ((m.v[0] * (x + 1)) + (m.v[3] * (y + 0))) + m.v[6];
-			tv[3] = ((m.v[1] * (x + 1)) + (m.v[4] * (y + 0))) + m.v[7];
-			tw[3] = ((m.v[2] * (x + 1)) + (m.v[5] * (y + 0))) + m.v[8];
-			tu[4] = ((m.v[0] * (x + 0)) + (m.v[3] * (y + 1))) + m.v[6];
-			tv[4] = ((m.v[1] * (x + 0)) + (m.v[4] * (y + 1))) + m.v[7];
-			tw[4] = ((m.v[2] * (x + 0)) + (m.v[5] * (y + 1))) + m.v[8];
+			tu[0] = m.v[0] * (x + 0) + m.v[3] * (y + 0) + m.v[6];
+			tv[0] = m.v[1] * (x + 0) + m.v[4] * (y + 0) + m.v[7];
+			tw[0] = m.v[2] * (x + 0) + m.v[5] * (y + 0) + m.v[8];
+			tu[1] = m.v[0] * (x - 1) + m.v[3] * (y + 0) + m.v[6];
+			tv[1] = m.v[1] * (x - 1) + m.v[4] * (y + 0) + m.v[7];
+			tw[1] = m.v[2] * (x - 1) + m.v[5] * (y + 0) + m.v[8];
+			tu[2] = m.v[0] * (x + 0) + m.v[3] * (y - 1) + m.v[6];
+			tv[2] = m.v[1] * (x + 0) + m.v[4] * (y - 1) + m.v[7];
+			tw[2] = m.v[2] * (x + 0) + m.v[5] * (y - 1) + m.v[8];
+			tu[3] = m.v[0] * (x + 1) + m.v[3] * (y + 0) + m.v[6];
+			tv[3] = m.v[1] * (x + 1) + m.v[4] * (y + 0) + m.v[7];
+			tw[3] = m.v[2] * (x + 1) + m.v[5] * (y + 0) + m.v[8];
+			tu[4] = m.v[0] * (x + 0) + m.v[3] * (y + 1) + m.v[6];
+			tv[4] = m.v[1] * (x + 0) + m.v[4] * (y + 1) + m.v[7];
+			tw[4] = m.v[2] * (x + 0) + m.v[5] * (y + 1) + m.v[8];
 		}
 
 		public static void normalizeCoords(int count, double[] tu, double[] tv, double[] tw, double[] su, double[] sv) {
 			var i = 0;
 			for(i = 0 ; i < count ; i++) {
 				if(tw[i] != 0.00) {
-					su[i] = (tu[i] / tw[i]) - 0.50;
-					sv[i] = (tv[i] / tw[i]) - 0.50;
+					su[i] = tu[i] / tw[i] - 0.50;
+					sv[i] = tv[i] / tw[i] - 0.50;
 				}
 				else {
 					su[i] = tu[i];
@@ -171,23 +171,23 @@ namespace capex.image
 		}
 
 		public static bool superSampleDtest(double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3) {
-			return((((((((cape.Math.abs(x0 - x1) > cape.Math.M_SQRT2) || (cape.Math.abs(x1 - x2) > cape.Math.M_SQRT2)) || (cape.Math.abs(x2 - x3) > cape.Math.M_SQRT2)) || (cape.Math.abs(x3 - x0) > cape.Math.M_SQRT2)) || (cape.Math.abs(y0 - y1) > cape.Math.M_SQRT2)) || (cape.Math.abs(y1 - y2) > cape.Math.M_SQRT2)) || (cape.Math.abs(y2 - y3) > cape.Math.M_SQRT2)) || (cape.Math.abs(y3 - y0) > cape.Math.M_SQRT2));
+			return(cape.Math.abs(x0 - x1) > cape.Math.M_SQRT2 || cape.Math.abs(x1 - x2) > cape.Math.M_SQRT2 || cape.Math.abs(x2 - x3) > cape.Math.M_SQRT2 || cape.Math.abs(x3 - x0) > cape.Math.M_SQRT2 || cape.Math.abs(y0 - y1) > cape.Math.M_SQRT2 || cape.Math.abs(y1 - y2) > cape.Math.M_SQRT2 || cape.Math.abs(y2 - y3) > cape.Math.M_SQRT2 || cape.Math.abs(y3 - y0) > cape.Math.M_SQRT2);
 		}
 
 		public static bool supersampleTest(double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3) {
 			capex.image.ImageResizer.initFixedUnit();
-			return((((((((cape.Math.abs(x0 - x1) > capex.image.ImageResizer.unit) || (cape.Math.abs(x1 - x2) > capex.image.ImageResizer.unit)) || (cape.Math.abs(x2 - x3) > capex.image.ImageResizer.unit)) || (cape.Math.abs(x3 - x0) > capex.image.ImageResizer.unit)) || (cape.Math.abs(y0 - y1) > capex.image.ImageResizer.unit)) || (cape.Math.abs(y1 - y2) > capex.image.ImageResizer.unit)) || (cape.Math.abs(y2 - y3) > capex.image.ImageResizer.unit)) || (cape.Math.abs(y3 - y0) > capex.image.ImageResizer.unit));
+			return(cape.Math.abs(x0 - x1) > capex.image.ImageResizer.unit || cape.Math.abs(x1 - x2) > capex.image.ImageResizer.unit || cape.Math.abs(x2 - x3) > capex.image.ImageResizer.unit || cape.Math.abs(x3 - x0) > capex.image.ImageResizer.unit || cape.Math.abs(y0 - y1) > capex.image.ImageResizer.unit || cape.Math.abs(y1 - y2) > capex.image.ImageResizer.unit || cape.Math.abs(y2 - y3) > capex.image.ImageResizer.unit || cape.Math.abs(y3 - y0) > capex.image.ImageResizer.unit);
 		}
 
 		public static int lerp(int v1, int v2, int r) {
 			capex.image.ImageResizer.initFixedUnit();
-			return(((v1 * (capex.image.ImageResizer.unit - r)) + (v2 * r)) >> capex.image.ImageResizer.FIXED_SHIFT);
+			return(v1 * (capex.image.ImageResizer.unit - r) + v2 * r >> capex.image.ImageResizer.FIXED_SHIFT);
 		}
 
 		public static void sampleBi(capex.image.RGBAPixelIntegerBuffer pixels, int x, int y, int[] color) {
 			capex.image.ImageResizer.initFixedUnit();
-			var xscale = x & (capex.image.ImageResizer.unit - 1);
-			var yscale = y & (capex.image.ImageResizer.unit - 1);
+			var xscale = x & capex.image.ImageResizer.unit - 1;
+			var yscale = y & capex.image.ImageResizer.unit - 1;
 			var x0 = x >> capex.image.ImageResizer.FIXED_SHIFT;
 			var y0 = y >> capex.image.ImageResizer.FIXED_SHIFT;
 			var x1 = x0 + 1;
@@ -200,7 +200,7 @@ namespace capex.image
 			color[3] = capex.image.ImageResizer.lerp(capex.image.ImageResizer.lerp(c0[3], c1[3], yscale), capex.image.ImageResizer.lerp(c2[3], c3[3], yscale), xscale);
 			if(color[3] != 0) {
 				for(i = 0 ; i < 3 ; i++) {
-					color[i] = capex.image.ImageResizer.lerp(capex.image.ImageResizer.lerp((c0[i] * c0[3]) / 255, (c1[i] * c1[3]) / 255, yscale), capex.image.ImageResizer.lerp((c2[i] * c2[3]) / 255, (c3[i] * c3[3]) / 255, yscale), xscale);
+					color[i] = capex.image.ImageResizer.lerp(capex.image.ImageResizer.lerp(c0[i] * c0[3] / 255, c1[i] * c1[3] / 255, yscale), capex.image.ImageResizer.lerp(c2[i] * c2[3] / 255, c3[i] * c3[3] / 255, yscale), xscale);
 				}
 			}
 			else {
@@ -211,7 +211,7 @@ namespace capex.image
 		}
 
 		public static void getSample(capex.image.RGBAPixelIntegerBuffer pixels, int xc, int yc, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3, int cciv, int level, int[] color) {
-			if((level == 0) || (capex.image.ImageResizer.supersampleTest((double)x0, (double)y0, (double)x1, (double)y1, (double)x2, (double)y2, (double)x3, (double)y3) == false)) {
+			if(level == 0 || capex.image.ImageResizer.supersampleTest((double)x0, (double)y0, (double)x1, (double)y1, (double)x2, (double)y2, (double)x3, (double)y3) == false) {
 				var i = 0;
 				var c = new int[4];
 				capex.image.ImageResizer.sampleBi(pixels, xc, yc, c);
@@ -273,7 +273,7 @@ namespace capex.image
 			cape.Buffer.setByte(dest.getBuf(), (long)3, (byte)aa);
 			if(aa != 0) {
 				for(i = 0 ; i < 3 ; i++) {
-					cape.Buffer.setByte(dest.getBuf(), (long)i, (byte)(((c[i] / cc) * 255) / aa));
+					cape.Buffer.setByte(dest.getBuf(), (long)i, (byte)(c[i] / cc * 255 / aa));
 				}
 			}
 			else {
@@ -284,7 +284,7 @@ namespace capex.image
 		}
 
 		public static double drawableTransformCubic(double x, int jm1, int j, int jp1, int jp2) {
-			return((double)(j + ((0.50 * x) * ((jp1 - jm1) + (x * (((((2.00 * jm1) - (5.00 * j)) + (4.00 * jp1)) - jp2) + (x * (((3.00 * (j - jp1)) + jp2) - jm1))))))));
+			return((double)(j + 0.50 * x * (jp1 - jm1 + x * (2.00 * jm1 - 5.00 * j + 4.00 * jp1 - jp2 + x * (3.00 * (j - jp1) + jp2 - jm1)))));
 		}
 
 		public class IndexMovingBuffer
@@ -345,7 +345,7 @@ namespace capex.image
 			dest.setBuf(br);
 			du = su - iu;
 			dv = sv - iv;
-			aval = capex.image.ImageResizer.drawableTransformCubic(dv, capex.image.ImageResizer.cubicRow(du, dest.move(3 + (stride * 0))), capex.image.ImageResizer.cubicRow(du, dest.move(3 + (stride * 1))), capex.image.ImageResizer.cubicRow(du, dest.move(3 + (stride * 2))), capex.image.ImageResizer.cubicRow(du, dest.move(3 + (stride * 3))));
+			aval = capex.image.ImageResizer.drawableTransformCubic(dv, capex.image.ImageResizer.cubicRow(du, dest.move(3 + stride * 0)), capex.image.ImageResizer.cubicRow(du, dest.move(3 + stride * 1)), capex.image.ImageResizer.cubicRow(du, dest.move(3 + stride * 2)), capex.image.ImageResizer.cubicRow(du, dest.move(3 + stride * 3)));
 			if(aval <= 0) {
 				arecip = 0.00;
 				cape.Buffer.setByte(dest.getBuf(), (long)3, (byte)0);
@@ -359,16 +359,16 @@ namespace capex.image
 				cape.Buffer.setByte(dest.getBuf(), (long)3, (byte)((int)cape.Math.rint(aval)));
 			}
 			for(i = 0 ; i < 3 ; i++) {
-				var v = (int)cape.Math.rint(arecip * capex.image.ImageResizer.drawableTransformCubic(dv, capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + (stride * 0)), dest.move(3 + (stride * 0))), capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + (stride * 1)), dest.move(3 + (stride * 1))), capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + (stride * 2)), dest.move(3 + (stride * 2))), capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + (stride * 3)), dest.move(3 + (stride * 3)))));
+				var v = (int)cape.Math.rint(arecip * capex.image.ImageResizer.drawableTransformCubic(dv, capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + stride * 0), dest.move(3 + stride * 0)), capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + stride * 1), dest.move(3 + stride * 1)), capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + stride * 2), dest.move(3 + stride * 2)), capex.image.ImageResizer.cubicScaledRow(du, dest.move(i + stride * 3), dest.move(3 + stride * 3))));
 				cape.Buffer.setByte(dest.getBuf(), (long)i, (byte)capex.image.ImageFilterUtil.clamp((double)v));
 			}
 		}
 
 		public static capex.image.BitmapBuffer resizeBicubic(capex.image.BitmapBuffer bb, int anw, int anh) {
-			if((anw == 0) || (anh == 0)) {
+			if(anw == 0 || anh == 0) {
 				return(null);
 			}
-			if((anw < 0) && (anh < 0)) {
+			if(anw < 0 && anh < 0) {
 				return(bb);
 			}
 			var sb = bb.getBuffer();
@@ -381,21 +381,21 @@ namespace capex.image
 			var nw = anw;
 			var nh = anh;
 			if(nw < 0) {
-				scaler = ((double)nh) / ((double)h);
+				scaler = (double)nh / (double)h;
 			}
 			else if(nh < 0) {
-				scaler = ((double)nw) / ((double)w);
+				scaler = (double)nw / (double)w;
 			}
 			if(scaler != 1.00) {
-				nw = (int)(((double)w) * scaler);
-				nh = (int)(((double)h) * scaler);
+				nw = (int)((double)w * scaler);
+				nh = (int)((double)h * scaler);
 			}
-			var v = new byte[(nw * nh) * 4];
+			var v = new byte[nw * nh * 4];
 			capex.image.ImageResizer.IndexMovingBuffer destp = null;
 			destp.setBuf(v);
 			var y = 0;
-			var sx = ((double)nw) / ((double)w);
-			var sy = ((double)nh) / ((double)h);
+			var sx = (double)nw / (double)w;
+			var sy = (double)nh / (double)h;
 			var matrix = capex.util.Matrix33.forScale(sx, sy);
 			matrix = capex.util.Matrix33.invertMatrix(matrix);
 			var uinc = matrix.v[0];

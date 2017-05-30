@@ -41,7 +41,7 @@ namespace cape
 		}
 
 		public bool nextBoolean() {
-			if((nextInt() % 2) == 0) {
+			if(nextInt() % 2 == 0) {
 				return(false);
 			}
 			return(true);

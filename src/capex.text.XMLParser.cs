@@ -40,8 +40,12 @@ namespace capex.text
 					break;
 				}
 				if(o is capex.text.XMLParser.StartElement) {
+					var name = ((capex.text.XMLParser.StartElement)o).getName();
+					if(root == null && object.Equals(name, "?xml")) {
+						continue;
+					}
 					var nn = new cape.DynamicMap();
-					nn.set("name", (object)((capex.text.XMLParser.StartElement)o).getName());
+					nn.set("name", (object)name);
 					nn.set("attributes", (object)((capex.text.XMLParser.StartElement)o).getParams());
 					if(root == null) {
 						root = nn;
@@ -79,16 +83,33 @@ namespace capex.text
 			return(root);
 		}
 
-		public class StartElement
+		public class Value
 		{
-			public StartElement() {
+			public Value() {
+			}
+
+			private int position = 0;
+
+			public int getPosition() {
+				return(position);
+			}
+
+			public capex.text.XMLParser.Value setPosition(int v) {
+				position = v;
+				return(this);
+			}
+		}
+
+		public class StartElement : capex.text.XMLParser.Value
+		{
+			public StartElement() : base() {
 			}
 
 			private string name = null;
 			private cape.DynamicMap @params = null;
 
 			public string getParam(string pname) {
-				if(@params == null) {
+				if(!(@params != null)) {
 					return(null);
 				}
 				return(@params.getString(pname));
@@ -113,9 +134,9 @@ namespace capex.text
 			}
 		}
 
-		public class EndElement
+		public class EndElement : capex.text.XMLParser.Value
 		{
-			public EndElement() {
+			public EndElement() : base() {
 			}
 
 			private string name = null;
@@ -130,9 +151,9 @@ namespace capex.text
 			}
 		}
 
-		public class CharacterData
+		public class CharacterData : capex.text.XMLParser.Value
 		{
-			public CharacterData() {
+			public CharacterData() : base() {
 			}
 
 			private string data = null;
@@ -147,9 +168,9 @@ namespace capex.text
 			}
 		}
 
-		public class Comment
+		public class Comment : capex.text.XMLParser.Value
 		{
-			public Comment() {
+			public Comment() : base() {
 			}
 
 			private string text = null;
@@ -165,7 +186,7 @@ namespace capex.text
 		}
 
 		private cape.CharacterIterator it = null;
-		private object nextQueue = null;
+		private capex.text.XMLParser.Value nextQueue = null;
 		private string cdataStart = "![CDATA[";
 		private string commentStart = "!--";
 		private cape.StringBuilder tag = null;
@@ -173,13 +194,14 @@ namespace capex.text
 		private cape.StringBuilder cdata = null;
 		private cape.StringBuilder comment = null;
 		private bool ignoreWhiteSpace = false;
+		private int currentPosition = 0;
 
 		public static capex.text.XMLParser forFile(cape.File file) {
-			if(file == null) {
+			if(!(file != null)) {
 				return(null);
 			}
 			var reader = file.read();
-			if(reader == null) {
+			if(!(reader != null)) {
 				return(null);
 			}
 			var v = new capex.text.XMLParser();
@@ -188,7 +210,7 @@ namespace capex.text
 		}
 
 		public static capex.text.XMLParser forString(string @string) {
-			if(object.Equals(@string, null)) {
+			if(!(@string != null)) {
 				return(null);
 			}
 			var v = new capex.text.XMLParser();
@@ -197,7 +219,7 @@ namespace capex.text
 		}
 
 		public static capex.text.XMLParser forIterator(cape.CharacterIterator it) {
-			if(it == null) {
+			if(!(it != null)) {
 				return(null);
 			}
 			var v = new capex.text.XMLParser();
@@ -205,16 +227,19 @@ namespace capex.text
 			return(v);
 		}
 
-		private object onTagString(string tagstring) {
+		private capex.text.XMLParser.Value onTagString(string tagstring, int pos) {
 			if(cape.String.charAt(tagstring, 0) == '/') {
-				return((object)new capex.text.XMLParser.EndElement().setName(cape.String.subString(tagstring, 1)));
+				var v = new capex.text.XMLParser.EndElement();
+				v.setPosition(pos);
+				v.setName(cape.String.subString(tagstring, 1));
+				return((capex.text.XMLParser.Value)v);
 			}
 			var element = new cape.StringBuilder();
 			var @params = new cape.DynamicMap();
 			var it = new cape.CharacterIteratorForString(tagstring);
 			var c = ' ';
 			while((c = it.getNextChar()) > 0) {
-				if(((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) || (c == '/')) {
+				if(c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '/') {
 					if(element.count() > 0) {
 						break;
 					}
@@ -223,17 +248,17 @@ namespace capex.text
 					element.append(c);
 				}
 			}
-			while((c > 0) && (c != '/')) {
+			while(c > 0 && c != '/') {
 				var pname = new cape.StringBuilder();
 				var pval = new cape.StringBuilder();
-				while((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) {
+				while(c == ' ' || c == '\t' || c == '\n' || c == '\r') {
 					c = it.getNextChar();
 				}
-				while((((((c > 0) && (c != ' ')) && (c != '\t')) && (c != '\n')) && (c != '\r')) && (c != '=')) {
+				while(c > 0 && c != ' ' && c != '\t' && c != '\n' && c != '\r' && c != '=') {
 					pname.append(c);
 					c = it.getNextChar();
 				}
-				while((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) {
+				while(c == ' ' || c == '\t' || c == '\n' || c == '\r') {
 					c = it.getNextChar();
 				}
 				if(c != '=') {
@@ -241,22 +266,22 @@ namespace capex.text
 				}
 				else {
 					c = it.getNextChar();
-					while((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) {
+					while(c == ' ' || c == '\t' || c == '\n' || c == '\r') {
 						c = it.getNextChar();
 					}
 					if(c != '\"') {
 						;
-						while(((((c > 0) && (c != ' ')) && (c != '\t')) && (c != '\n')) && (c != '\r')) {
+						while(c > 0 && c != ' ' && c != '\t' && c != '\n' && c != '\r') {
 							pval.append(c);
 							c = it.getNextChar();
 						}
-						while((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) {
+						while(c == ' ' || c == '\t' || c == '\n' || c == '\r') {
 							c = it.getNextChar();
 						}
 					}
 					else {
 						c = it.getNextChar();
-						while((c > 0) && (c != '\"')) {
+						while(c > 0 && c != '\"') {
 							pval.append(c);
 							c = it.getNextChar();
 						}
@@ -266,7 +291,7 @@ namespace capex.text
 						else {
 							c = it.getNextChar();
 						}
-						while((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) {
+						while(c == ' ' || c == '\t' || c == '\n' || c == '\r') {
 							c = it.getNextChar();
 						}
 					}
@@ -277,9 +302,16 @@ namespace capex.text
 			}
 			var els = element.toString();
 			if(c == '/') {
-				nextQueue = (object)new capex.text.XMLParser.EndElement().setName(els);
+				var e = new capex.text.XMLParser.EndElement();
+				e.setName(els);
+				e.setPosition(pos);
+				nextQueue = (capex.text.XMLParser.Value)e;
 			}
-			return((object)new capex.text.XMLParser.StartElement().setName(els).setParams(@params));
+			var v1 = new capex.text.XMLParser.StartElement();
+			v1.setPosition(pos);
+			v1.setName(els);
+			v1.setParams(@params);
+			return((capex.text.XMLParser.Value)v1);
 		}
 
 		private bool isOnlyWhiteSpace(string str) {
@@ -292,7 +324,7 @@ namespace capex.text
 				var m = array.Length;
 				for(n = 0 ; n < m ; n++) {
 					var c = array[n];
-					if((((c == ' ') || (c == '\t')) || (c == '\n')) || (c == '\r')) {
+					if(c == ' ' || c == '\t' || c == '\n' || c == '\r') {
 						;
 					}
 					else {
@@ -303,14 +335,45 @@ namespace capex.text
 			return(true);
 		}
 
-		public object next() {
+		private char getNextChar() {
+			if(!(it != null)) {
+				return('\0');
+			}
+			var v = it.getNextChar();
+			if(v > 0) {
+				currentPosition++;
+			}
+			return(v);
+		}
+
+		public void moveToPreviousChar() {
+			if(!(it != null)) {
+				return;
+			}
+			if(currentPosition > 0) {
+				currentPosition--;
+				it.moveToPreviousChar();
+			}
+		}
+
+		public capex.text.XMLParser.Value peek() {
+			if(nextQueue != null) {
+				return(nextQueue);
+			}
+			nextQueue = next();
+			return(nextQueue);
+		}
+
+		public capex.text.XMLParser.Value next() {
 			if(nextQueue != null) {
 				var v = nextQueue;
 				nextQueue = null;
 				return(v);
 			}
+			var pos = currentPosition;
 			while(it.hasEnded() == false) {
-				var nxb = it.getNextChar();
+				var cbp = currentPosition;
+				var nxb = getNextChar();
 				if(nxb < 1) {
 					continue;
 				}
@@ -318,14 +381,14 @@ namespace capex.text
 					if(nxb == '>') {
 						var ts = tag.toString();
 						tag = null;
-						return(onTagString(ts));
+						return(onTagString(ts, pos));
 					}
 					tag.append(nxb);
-					if(((nxb == '[') && (tag.count() == cape.String.getLength(cdataStart))) && cape.String.equals(cdataStart, tag.toString())) {
+					if(nxb == '[' && tag.count() == cape.String.getLength(cdataStart) && cape.String.equals(cdataStart, tag.toString())) {
 						tag = null;
 						cdata = new cape.StringBuilder();
 					}
-					else if(((nxb == '-') && (tag.count() == cape.String.getLength(commentStart))) && cape.String.equals(commentStart, tag.toString())) {
+					else if(nxb == '-' && tag.count() == cape.String.getLength(commentStart) && cape.String.equals(commentStart, tag.toString())) {
 						tag = null;
 						comment = new cape.StringBuilder();
 					}
@@ -335,22 +398,25 @@ namespace capex.text
 					var c1 = ' ';
 					var c2 = ' ';
 					if(c0 == ']') {
-						c1 = it.getNextChar();
+						c1 = getNextChar();
 						if(c1 == ']') {
-							c2 = it.getNextChar();
+							c2 = getNextChar();
 							if(c2 == '>') {
 								var dd = cdata.toString();
 								cdata = null;
-								return((object)new capex.text.XMLParser.CharacterData().setData(dd));
+								var v1 = new capex.text.XMLParser.CharacterData();
+								v1.setPosition(pos);
+								v1.setData(dd);
+								return((capex.text.XMLParser.Value)v1);
 							}
 							else {
-								it.moveToPreviousChar();
-								it.moveToPreviousChar();
+								moveToPreviousChar();
+								moveToPreviousChar();
 								cdata.append(c0);
 							}
 						}
 						else {
-							it.moveToPreviousChar();
+							moveToPreviousChar();
 							cdata.append(c0);
 						}
 					}
@@ -363,22 +429,25 @@ namespace capex.text
 					var c11 = ' ';
 					var c21 = ' ';
 					if(c01 == '-') {
-						c11 = it.getNextChar();
+						c11 = getNextChar();
 						if(c11 == '-') {
-							c21 = it.getNextChar();
+							c21 = getNextChar();
 							if(c21 == '>') {
 								var ct = comment.toString();
 								comment = null;
-								return((object)new capex.text.XMLParser.Comment().setText(ct));
+								var v2 = new capex.text.XMLParser.Comment();
+								v2.setPosition(pos);
+								v2.setText(ct);
+								return((capex.text.XMLParser.Value)v2);
 							}
 							else {
-								it.moveToPreviousChar();
-								it.moveToPreviousChar();
+								moveToPreviousChar();
+								moveToPreviousChar();
 								comment.append(c01);
 							}
 						}
 						else {
-							it.moveToPreviousChar();
+							moveToPreviousChar();
 							comment.append(c01);
 						}
 					}
@@ -390,14 +459,18 @@ namespace capex.text
 					if(def != null) {
 						var cd = def.toString();
 						def = null;
-						if(ignoreWhiteSpace && !(object.Equals(cd, null))) {
+						if(ignoreWhiteSpace && cd != null) {
 							if(isOnlyWhiteSpace(cd)) {
 								cd = null;
+								pos = cbp;
 							}
 						}
-						if(!(object.Equals(cd, null))) {
-							it.moveToPreviousChar();
-							return((object)new capex.text.XMLParser.CharacterData().setData(cd));
+						if(cd != null) {
+							moveToPreviousChar();
+							var v3 = new capex.text.XMLParser.CharacterData();
+							v3.setPosition(pos);
+							v3.setData(cd);
+							return((capex.text.XMLParser.Value)v3);
 						}
 					}
 					tag = new cape.StringBuilder();
