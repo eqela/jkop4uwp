@@ -401,7 +401,17 @@ namespace cave.ui
 					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(true);
 				}
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:968:2): Not implemented");
+			if(onStartHandler != null) {
+				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:969:3): setWidgetPointerHandlers/onStartHandler: Not implemented");
+			}
+			if(onTouchHandler != null) {
+				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:972:3): setWidgetPointerHandlers/onStartHandler: Not implemented");
+			}
+			if(onEndHandler != null) {
+				cave.ui.Widget.setWidgetClickHandler(widget, () => {
+					onEndHandler((double)0, (double)0);
+				});
+			}
 		}
 
 		public static void removeChildrenOf(Windows.UI.Xaml.UIElement widget) {
@@ -450,7 +460,7 @@ namespace cave.ui
 			if(!(widget != null)) {
 				return;
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setAlpha] (Widget.sling:1020:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setAlpha] (Widget.sling:1033:2): Not implemented");
 		}
 	}
 }
