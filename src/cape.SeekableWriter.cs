@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface SeekableWriter : cape.Writer
 	{
 		bool setCurrentPosition(long n);

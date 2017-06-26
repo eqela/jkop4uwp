@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.photo
-{
+namespace cave.photo {
 	public class Camera
 	{
 		public static bool isSupported() {

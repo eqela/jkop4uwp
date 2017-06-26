@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
+namespace capex.data {
 	public class SQLTableColumnInfo
 	{
 		public SQLTableColumnInfo() {
@@ -53,11 +52,11 @@ namespace capex.data
 			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_INTEGER_KEY));
 		}
 
-		public static capex.data.SQLTableColumnInfo forLongKey(string name) {
+		public static capex.data.SQLTableColumnInfo forLongIntegerKey(string name) {
 			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_LONG_KEY));
 		}
 
-		public static capex.data.SQLTableColumnInfo forLong(string name) {
+		public static capex.data.SQLTableColumnInfo forLongInteger(string name) {
 			return(new capex.data.SQLTableColumnInfo().setName(name).setType(capex.data.SQLTableColumnInfo.TYPE_LONG));
 		}
 

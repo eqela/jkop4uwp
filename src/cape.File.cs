@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface File
 	{
 		cape.File entry(string name);

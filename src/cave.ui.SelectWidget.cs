@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class SelectWidget : Windows.UI.Xaml.Controls.ComboBox, cave.ui.WidgetWithValue
 	{
 		public SelectWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

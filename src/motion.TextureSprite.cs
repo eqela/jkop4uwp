@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public interface TextureSprite : motion.Sprite
 	{
 		void setTexture(motion.Texture texture);

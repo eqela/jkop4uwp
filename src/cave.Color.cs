@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public class Color
 	{
 		private static cave.Color colorBlack = null;
@@ -53,6 +52,9 @@ namespace cave
 			}
 			if(o is cave.Color) {
 				return((cave.Color)o);
+			}
+			if(o is string) {
+				return(cave.Color.instance((string)o));
 			}
 			return(null);
 		}

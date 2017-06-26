@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.map
-{
+namespace capex.map {
 	public interface GeoCoderLocationListener
 	{
 		void onQueryLocationCompleted(capex.map.GeoLocation location);

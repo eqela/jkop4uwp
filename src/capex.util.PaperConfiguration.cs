@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class PaperConfiguration
 	{
 		public PaperConfiguration() {

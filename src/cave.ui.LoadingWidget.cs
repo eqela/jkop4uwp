@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class LoadingWidget : cave.ui.LayerWidget
 	{
 		public LoadingWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

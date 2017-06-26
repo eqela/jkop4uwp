@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class CheckBoxWidget : Windows.UI.Xaml.Controls.CheckBox, cave.ui.WidgetWithValue
 	{
 		public CheckBoxWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

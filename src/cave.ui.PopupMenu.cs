@@ -22,20 +22,71 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class PopupMenu
 	{
 		public PopupMenu() {
 		}
 
-		public static void showBelow(Windows.UI.Xaml.UIElement widget, cave.ui.Menu menu) {
-			if(!(widget != null)) {
+		private class MyContainer : cave.ui.CustomContainerWidget
+		{
+			public MyContainer(cave.GuiApplicationContext ctx) : base(ctx) {
+			}
+
+			public MyContainer() : base() {
+			}
+
+			private Windows.UI.Xaml.UIElement widget = null;
+
+			public override void onWidgetHeightChanged(int height) {
+				var array = cave.ui.Widget.getChildren((Windows.UI.Xaml.UIElement)this);
+				if(array != null) {
+					var n = 0;
+					var m = array.Count;
+					for(n = 0 ; n < m ; n++) {
+						var child = array[n];
+						if(child != null) {
+							cave.ui.Widget.move(child, cave.ui.Widget.getAbsoluteX(widget), cave.ui.Widget.getAbsoluteY(widget));
+						}
+					}
+				}
+			}
+
+			public override void computeWidgetLayout(int widthConstraint) {
+				var array = cave.ui.Widget.getChildren((Windows.UI.Xaml.UIElement)this);
+				if(array != null) {
+					var n = 0;
+					var m = array.Count;
+					for(n = 0 ; n < m ; n++) {
+						var child = array[n];
+						if(child != null) {
+							cave.ui.Widget.layout(child, widthConstraint);
+							cave.ui.Widget.move(child, cave.ui.Widget.getAbsoluteX(widget), cave.ui.Widget.getAbsoluteY(widget));
+						}
+					}
+				}
+				cave.ui.Widget.setLayoutSize((Windows.UI.Xaml.UIElement)this, widthConstraint, cave.ui.Widget.getHeight((Windows.UI.Xaml.UIElement)this));
+			}
+
+			public Windows.UI.Xaml.UIElement getWidget() {
+				return(widget);
+			}
+
+			public cave.ui.PopupMenu.MyContainer setWidget(Windows.UI.Xaml.UIElement v) {
+				widget = v;
+				return(this);
+			}
+		}
+
+		public static void showBelow(cave.GuiApplicationContext ctx, Windows.UI.Xaml.UIElement w, cave.ui.Menu menu) {
+			if(!(w != null)) {
 				return;
 			}
 			if(!(menu != null)) {
 				return;
 			}
+			var widget = w;
+			var context = ctx;
 			var pm = new Windows.UI.Xaml.Controls.MenuFlyout();
 			var array = menu.getEntries();
 			if(array != null) {

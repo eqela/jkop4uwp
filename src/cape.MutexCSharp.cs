@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class MutexCSharp : cape.Mutex
 	{
 		public MutexCSharp() : base() {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class Stack<T>
 	{
 		private System.Collections.Generic.List<T> data = null;

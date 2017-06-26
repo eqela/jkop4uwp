@@ -22,22 +22,19 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class JSONEncoder
 	{
 		public JSONEncoder() {
 		}
 
 		private bool isNewLine = true;
+		private cape.StringBuilder mysb = null;
 
 		private void print(string line, int indent, bool startline, bool endline, cape.StringBuilder sb, bool niceFormatting) {
 			if(startline && isNewLine == false) {
 				if(niceFormatting) {
 					sb.append('\n');
-				}
-				else {
-					sb.append(' ');
 				}
 				isNewLine = true;
 			}
@@ -50,9 +47,6 @@ namespace cape
 			if(endline) {
 				if(niceFormatting) {
 					sb.append('\n');
-				}
-				else {
-					sb.append(' ');
 				}
 				isNewLine = true;
 			}
@@ -84,17 +78,20 @@ namespace cape
 		private void encodeDynamicVector(cape.DynamicVector cc, int indent, cape.StringBuilder sb, bool niceFormatting) {
 			print("[", indent, false, true, sb, niceFormatting);
 			var first = true;
-			var it = cc.iterate();
-			while(it != null) {
-				var o = it.next();
-				if(o == null) {
-					break;
+			var array = cc.toVector();
+			if(array != null) {
+				var n = 0;
+				var m = array.Count;
+				for(n = 0 ; n < m ; n++) {
+					var o = array[n];
+					if(o != null) {
+						if(first == false) {
+							print(",", indent, false, true, sb, niceFormatting);
+						}
+						encodeObject(o, indent + 1, sb, niceFormatting);
+						first = false;
+					}
 				}
-				if(first == false) {
-					print(",", indent, false, true, sb, niceFormatting);
-				}
-				encodeObject(o, indent + 1, sb, niceFormatting);
-				first = false;
 			}
 			print("]", indent, true, false, sb, niceFormatting);
 		}
@@ -122,26 +119,28 @@ namespace cape
 		private void encodeMap(System.Collections.Generic.Dictionary<object,object> map, int indent, cape.StringBuilder sb, bool niceFormatting) {
 			print("{", indent, false, true, sb, niceFormatting);
 			var first = true;
-			System.Collections.Generic.List<object> keys = cape.Map.getKeys(map);
-			if(keys != null) {
-				var n = 0;
-				var m = keys.Count;
-				for(n = 0 ; n < m ; n++) {
-					var keyo = keys[n];
-					if(keyo != null) {
-						var key = cape.String.asString(keyo);
-						if(!(key != null)) {
-							continue;
-						}
-						if(!first) {
-							print(",", indent, false, true, sb, niceFormatting);
-						}
-						encodeString(key, indent + 1, sb, niceFormatting);
-						sb.append(" : ");
-						encodeObject(map[keyo], indent + 1, sb, niceFormatting);
-						first = false;
-					}
+			cape.Iterator<object> it = cape.Map.iterateKeys(map);
+			while(it != null) {
+				var keyo = it.next();
+				if(!(keyo != null)) {
+					break;
 				}
+				var key = cape.String.asString(keyo);
+				if(!(key != null)) {
+					continue;
+				}
+				if(!first) {
+					print(",", indent, false, true, sb, niceFormatting);
+				}
+				encodeString(key, indent + 1, sb, niceFormatting);
+				if(niceFormatting) {
+					sb.append(" : ");
+				}
+				else {
+					sb.append(':');
+				}
+				encodeObject(map[keyo], indent + 1, sb, niceFormatting);
+				first = false;
 			}
 			print("}", indent, true, false, sb, niceFormatting);
 		}
@@ -149,22 +148,24 @@ namespace cape
 		private void encodeDynamicMap(cape.DynamicMap map, int indent, cape.StringBuilder sb, bool niceFormatting) {
 			print("{", indent, false, true, sb, niceFormatting);
 			var first = true;
-			var keys = map.getKeys();
-			if(keys != null) {
-				var n = 0;
-				var m = keys.Count;
-				for(n = 0 ; n < m ; n++) {
-					var key = keys[n];
-					if(key != null) {
-						if(first == false) {
-							print(",", indent, false, true, sb, niceFormatting);
-						}
-						encodeString(key, indent + 1, sb, niceFormatting);
-						sb.append(" : ");
-						encodeObject(map.get(key), indent + 1, sb, niceFormatting);
-						first = false;
-					}
+			var it = map.iterateKeys();
+			while(it != null) {
+				var key = it.next();
+				if(!(key != null)) {
+					break;
 				}
+				if(first == false) {
+					print(",", indent, false, true, sb, niceFormatting);
+				}
+				encodeString(key, indent + 1, sb, niceFormatting);
+				if(niceFormatting) {
+					sb.append(" : ");
+				}
+				else {
+					sb.append(':');
+				}
+				encodeObject(map.get(key), indent + 1, sb, niceFormatting);
+				first = false;
 			}
 			print("}", indent, true, false, sb, niceFormatting);
 		}
@@ -182,7 +183,12 @@ namespace cape
 					print(",", indent, false, true, sb, niceFormatting);
 				}
 				encodeString(pair.key, indent + 1, sb, niceFormatting);
-				sb.append(" : ");
+				if(niceFormatting) {
+					sb.append(" : ");
+				}
+				else {
+					sb.append(':');
+				}
 				encodeString(pair.value, indent + 1, sb, niceFormatting);
 				first = false;
 			}
@@ -190,21 +196,31 @@ namespace cape
 		}
 
 		private void encodeString(string s, int indent, cape.StringBuilder sb, bool niceFormatting) {
-			var mysb = new cape.StringBuilder();
+			if(mysb == null) {
+				mysb = new cape.StringBuilder();
+			}
+			else {
+				mysb.clear();
+			}
 			mysb.append('\"');
-			var it = new cape.CharacterIteratorForString(s);
-			while(true) {
-				var c = it.getNextChar();
-				if(c < 1) {
-					break;
+			if(cape.String.indexOf(s, '\"') >= 0 || cape.String.indexOf(s, '\\') >= 0) {
+				var it = cape.String.iterate(s);
+				while(true) {
+					var c = it.getNextChar();
+					if(c < 1) {
+						break;
+					}
+					if(c == '\"') {
+						mysb.append('\\');
+					}
+					else if(c == '\\') {
+						mysb.append('\\');
+					}
+					mysb.append(c);
 				}
-				if(c == '\"') {
-					mysb.append('\\');
-				}
-				else if(c == '\\') {
-					mysb.append('\\');
-				}
-				mysb.append(c);
+			}
+			else {
+				mysb.append(s);
 			}
 			mysb.append('\"');
 			print(mysb.toString(), indent, false, false, sb, niceFormatting);
@@ -226,11 +242,17 @@ namespace cape
 			else if(o is byte[]) {
 				encodeString(cape.Base64Encoder.encode((byte[])o), indent, sb, niceFormatting);
 			}
+			else if(o is string) {
+				encodeString((string)o, indent, sb, niceFormatting);
+			}
 			else if(o is cape.DynamicMap) {
 				encodeDynamicMap((cape.DynamicMap)o, indent, sb, niceFormatting);
 			}
-			else if(o is string) {
-				encodeString((string)o, indent, sb, niceFormatting);
+			else if(o is cape.DynamicVector) {
+				encodeDynamicVector((cape.DynamicVector)o, indent, sb, niceFormatting);
+			}
+			else if(o is cape.KeyValueListForStrings) {
+				encodeKeyValueList((cape.KeyValueListForStrings)o, indent, sb, niceFormatting);
 			}
 			else if(o is cape.StringObject) {
 				encodeString(((cape.StringObject)o).toString(), indent, sb, niceFormatting);
@@ -246,14 +268,7 @@ namespace cape
 				System.Collections.Generic.List<object> vv = ((cape.VectorObject<object>)o).toVector();
 				encodeVector(vv, indent, sb, niceFormatting);
 			}
-			else if(o is cape.DynamicVector) {
-				System.Collections.Generic.List<object> vv1 = ((cape.VectorObject<object>)o).toVector();
-				encodeDynamicVector(cape.DynamicVector.forObjectVector(vv1), indent, sb, niceFormatting);
-			}
-			else if(o is cape.KeyValueListForStrings) {
-				encodeKeyValueList((cape.KeyValueListForStrings)o, indent, sb, niceFormatting);
-			}
-			else if(o is cape.IntegerObject || o is cape.BooleanObject || o is cape.DoubleObject || o is cape.CharacterObject) {
+			else if(o is cape.IntegerObject || o is cape.LongIntegerObject || o is cape.BooleanObject || o is cape.DoubleObject || o is cape.CharacterObject) {
 				encodeString(cape.String.asString(o), indent, sb, niceFormatting);
 			}
 			else {
@@ -265,6 +280,30 @@ namespace cape
 			var sb = new cape.StringBuilder();
 			new cape.JSONEncoder().encodeObject(o, 0, sb, niceFormatting);
 			return(sb.toString());
+		}
+
+		public static void encodeStringToBuilder(string s, cape.StringBuilder sb) {
+			sb.append('\"');
+			if(cape.String.indexOf(s, '\"') >= 0 || cape.String.indexOf(s, '\\') >= 0) {
+				var it = cape.String.iterate(s);
+				while(true) {
+					var c = it.getNextChar();
+					if(c < 1) {
+						break;
+					}
+					if(c == '\"') {
+						sb.append('\\');
+					}
+					else if(c == '\\') {
+						sb.append('\\');
+					}
+					sb.append(c);
+				}
+			}
+			else {
+				sb.append(s);
+			}
+			sb.append('\"');
 		}
 	}
 }

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class SplashScreenWidget : cave.ui.LayerWidget
 	{
 		public SplashScreenWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

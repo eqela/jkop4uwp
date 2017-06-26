@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class PaperOrientation : cape.StringObject
 	{
 		public PaperOrientation() {

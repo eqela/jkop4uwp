@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class DateTime : cape.StringObject
 	{
 		public DateTime() {
@@ -93,7 +92,7 @@ namespace cape
 			return(sb.toString());
 		}
 
-		public string toStringTime(char delim = '-') {
+		public string toStringTime(char delim = ':') {
 			var sb = new cape.StringBuilder();
 			sb.append(cape.String.forIntegerWithPadding(getHours(), 2));
 			if(delim > 0) {

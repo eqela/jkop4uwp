@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class StringLineReader : cape.LineReader
 	{
 		private cape.CharacterIteratorForString iterator = null;

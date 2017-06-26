@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class TextButtonWidget : cave.ui.LayerWidget
 	{
 		public TextButtonWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -40,6 +39,7 @@ namespace cave.ui
 
 		public TextButtonWidget(cave.GuiApplicationContext ctx) : base(ctx) {
 			widgetContext = ctx;
+			setWidgetStyle("TextButtonWidget");
 		}
 
 		private cave.GuiApplicationContext widgetContext = null;
@@ -62,6 +62,17 @@ namespace cave.ui
 
 		public System.Action getWidgetClickHandler() {
 			return(widgetClickHandler);
+		}
+
+		public cave.ui.TextButtonWidget setWidgetStyle(string style) {
+			widgetRoundingRadius = (double)context.getStylePixels(style, "roundingRadius");
+			widgetBackgroundColor = context.getStyleColor(style, "backgroundColor");
+			widgetPressedBackgroundColor = context.getStyleColor(style, "pressedColor");
+			widgetTextColor = context.getStyleColor(style, "textColor");
+			widgetFontSize = context.getStylePixels(style, "fontSize");
+			widgetFontFamily = context.getStyleString(style, "fontFamily");
+			widgetPadding = context.getStylePixels(style, "padding");
+			return(this);
 		}
 
 		public override void initializeWidget() {

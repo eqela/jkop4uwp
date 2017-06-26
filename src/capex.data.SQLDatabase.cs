@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
+namespace capex.data {
 	public abstract class SQLDatabase
 	{
 		public SQLDatabase() {
@@ -35,6 +34,7 @@ namespace capex.data
 		public abstract capex.data.SQLStatement prepareCreateTableStatement(string table, System.Collections.Generic.List<capex.data.SQLTableColumnInfo> columns);
 		public abstract capex.data.SQLStatement prepareDeleteTableStatement(string table);
 		public abstract capex.data.SQLStatement prepareCreateIndexStatement(string table, string column, bool unique);
+		public abstract long getLastInsertId(string table);
 		public abstract void close(System.Action callback);
 		public abstract void execute(capex.data.SQLStatement stmt, System.Action<bool> callback);
 		public abstract void query(capex.data.SQLStatement stmt, System.Action<capex.data.SQLResultSetIterator> callback);
@@ -49,7 +49,7 @@ namespace capex.data
 		public abstract System.Collections.Generic.List<object> queryAllTableNames();
 
 		public virtual bool ensureTableExists(capex.data.SQLTableInfo table) {
-			if(table == null) {
+			if(!(table != null)) {
 				return(false);
 			}
 			var name = table.getName();
@@ -59,7 +59,7 @@ namespace capex.data
 			if(tableExists(name)) {
 				return(true);
 			}
-			if(execute(prepareCreateTableStatement(name, table.getColumns())) == false) {
+			if(!execute(prepareCreateTableStatement(name, table.getColumns()))) {
 				return(false);
 			}
 			var array = table.getIndexes();
@@ -364,6 +364,9 @@ namespace capex.data
 						}
 						else if(o is cape.IntegerObject) {
 							stmt.addParamInteger(cape.Integer.asInteger(o));
+						}
+						else if(o is cape.LongIntegerObject) {
+							stmt.addParamLongInteger(cape.LongInteger.asLong(o));
 						}
 						else if(o is cape.DoubleObject) {
 							stmt.addParamDouble(cape.Double.asDouble(o));

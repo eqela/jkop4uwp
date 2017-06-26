@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class PrintWriterWrapper : cape.Writer, cape.PrintWriter, cape.Closable, cape.FlushableWriter
 	{
 		public PrintWriterWrapper() {

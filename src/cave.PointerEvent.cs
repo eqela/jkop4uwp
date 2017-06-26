@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public class PointerEvent
 	{
 		public PointerEvent() {

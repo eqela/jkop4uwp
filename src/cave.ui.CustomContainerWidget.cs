@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class CustomContainerWidget : Windows.UI.Xaml.Controls.Panel, cave.ui.WidgetWithLayout, cave.ui.HeightAwareWidget
 	{
 		public CustomContainerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
+namespace capex.data {
 	public class SQLTableColumnIndexInfo
 	{
 		public SQLTableColumnIndexInfo() {

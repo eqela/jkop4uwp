@@ -22,14 +22,21 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
+namespace capex.data {
 	public interface SQLStatement
 	{
+		capex.data.SQLStatement setIsStoredProcedure(bool v);
+		bool getIsStoredProcedure();
 		capex.data.SQLStatement addParamString(string val);
 		capex.data.SQLStatement addParamInteger(int val);
+		capex.data.SQLStatement addParamLongInteger(long val);
 		capex.data.SQLStatement addParamDouble(double val);
 		capex.data.SQLStatement addParamBlob(byte[] val);
+		capex.data.SQLStatement setParamString(string name, string val);
+		capex.data.SQLStatement setParamInteger(string name, int val);
+		capex.data.SQLStatement setParamLongInteger(string name, long val);
+		capex.data.SQLStatement setParamDouble(string name, double val);
+		capex.data.SQLStatement setParamBlob(string name, byte[] val);
 		void resetStatement();
 		string getError();
 	}

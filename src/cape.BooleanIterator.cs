@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// A BooleanIterator object iterates over a sequence of values that are all of the
 	/// boolean data type (either true or false).

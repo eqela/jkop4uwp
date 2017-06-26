@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.text
-{
+namespace capex.text {
 	public class RichTextImageParagraph : capex.text.RichTextParagraph
 	{
 		public RichTextImageParagraph() : base() {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.map
-{
+namespace capex.map {
 	public class PhysicalAddress : cape.StringObject
 	{
 		public PhysicalAddress() {

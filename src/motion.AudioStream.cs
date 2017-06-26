@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public interface AudioStream
 	{
 		bool play();

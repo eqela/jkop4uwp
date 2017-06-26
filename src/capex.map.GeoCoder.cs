@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.map
-{
+namespace capex.map {
 	public interface GeoCoder
 	{
 		bool queryAddress(double latitude, double longitude, capex.map.GeoCoderAddressListener listener);

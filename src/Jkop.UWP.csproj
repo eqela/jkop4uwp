@@ -192,6 +192,9 @@
     <Compile Include="cape.LineReader.cs" />
     <Compile Include="cape.Log.cs" />
     <Compile Include="cape.LoggingContext.cs" />
+    <Compile Include="cape.LongInteger.cs" />
+    <Compile Include="cape.LongIntegerIterator.cs" />
+    <Compile Include="cape.LongIntegerObject.cs" />
     <Compile Include="cape.Map.cs" />
     <Compile Include="cape.MapObject.cs" />
     <Compile Include="cape.Math.cs" />
@@ -239,6 +242,7 @@
     <Compile Include="capex.console.CommandLineArgument.cs" />
     <Compile Include="capex.console.ConsoleApplication.cs" />
     <Compile Include="capex.console.ConsoleApplicationContext.cs" />
+    <Compile Include="capex.console.ConsoleApplicationMain.cs" />
     <Compile Include="capex.console.Stdin.cs" />
     <Compile Include="capex.console.Stdout.cs" />
     <Compile Include="capex.console.Terminal.cs" />
@@ -259,6 +263,11 @@
     <Compile Include="capex.data.SQLTableColumnIndexInfo.cs" />
     <Compile Include="capex.data.SQLTableColumnInfo.cs" />
     <Compile Include="capex.data.SQLTableInfo.cs" />
+    <Compile Include="capex.http.HTTPClient.cs" />
+    <Compile Include="capex.http.HTTPClientListener.cs" />
+    <Compile Include="capex.http.HTTPClientOperation.cs" />
+    <Compile Include="capex.http.HTTPClientRequest.cs" />
+    <Compile Include="capex.http.HTTPClientResponse.cs" />
     <Compile Include="capex.image.BitmapBuffer.cs" />
     <Compile Include="capex.image.GreyscaleImage.cs" />
     <Compile Include="capex.image.ImageFilter.cs" />
@@ -308,6 +317,7 @@
     <Compile Include="capex.text.WordWrap.cs" />
     <Compile Include="capex.text.XMLMaker.cs" />
     <Compile Include="capex.text.XMLParser.cs" />
+    <Compile Include="capex.util.DynamicModule.cs" />
     <Compile Include="capex.util.Matrix33.cs" />
     <Compile Include="capex.util.Matrix44.cs" />
     <Compile Include="capex.util.MimeTypeRegistry.cs" />
@@ -390,6 +400,7 @@
     <Compile Include="cave.ui.SignatureWidget.cs" />
     <Compile Include="cave.ui.SplashScreenWidget.cs" />
     <Compile Include="cave.ui.SwitcherLayerWidget.cs" />
+    <Compile Include="cave.ui.TabWidget.cs" />
     <Compile Include="cave.ui.TextAreaWidget.cs" />
     <Compile Include="cave.ui.TextButtonWidget.cs" />
     <Compile Include="cave.ui.TextInputWidget.cs" />

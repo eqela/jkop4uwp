@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public interface ResizeAwareWidget
 	{
 		void onWidgetResized();

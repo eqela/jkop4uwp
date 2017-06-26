@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public class UDPSocketImpl : capex.net.UDPSocket
 	{
 		public UDPSocketImpl() : base() {

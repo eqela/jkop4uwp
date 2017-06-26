@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class SidebarWidget : cave.ui.LayerWidget
 	{
 		public SidebarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -158,7 +157,9 @@ namespace cave.ui
 				addWidget(widget);
 			}
 			else {
-				addWidget((Windows.UI.Xaml.UIElement)cave.ui.VerticalScrollerWidget.forWidget(context, widget));
+				var scroller = cave.ui.VerticalScrollerWidget.forWidget(context, widget);
+				scroller.setWidgetScrollBarDisabled(true);
+				addWidget((Windows.UI.Xaml.UIElement)scroller);
 			}
 		}
 

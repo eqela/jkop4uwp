@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
-	public interface DynamicIterator : cape.StringIterator, cape.IntegerIterator, cape.DoubleIterator, cape.Iterator<object>
+namespace cape {
+	public interface DynamicIterator : cape.StringIterator, cape.IntegerIterator, cape.LongIntegerIterator, cape.DoubleIterator, cape.Iterator<object>
 	{
 	}
 }

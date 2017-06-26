@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public class Length
 	{
 		public Length() {

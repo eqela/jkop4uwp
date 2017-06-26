@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class StringSet
 	{
 		private System.Collections.Generic.Dictionary<string,cape.BooleanObject> data = null;

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class PrintReader : cape.Reader, cape.LineReader, cape.Closable
 	{
 		private cape.Reader reader = null;

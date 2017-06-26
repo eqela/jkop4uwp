@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class CharacterIteratorForString : cape.CharacterIteratorForBuffer
 	{
 		public CharacterIteratorForString(string str) : base(cape.String.toUTF8Buffer(str)) {

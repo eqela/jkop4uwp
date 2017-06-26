@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class LayerWidget : cave.ui.CustomContainerWidget
 	{
 		public LayerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

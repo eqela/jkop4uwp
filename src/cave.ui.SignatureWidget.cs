@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class SignatureWidget : cave.ui.CanvasWidget
 	{
 		public SignatureWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

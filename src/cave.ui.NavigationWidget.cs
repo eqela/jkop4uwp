@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class NavigationWidget : cave.ui.LayerWidget, cave.ui.TitleContainerWidget, cave.KeyListener
 	{
 		public NavigationWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -96,20 +95,21 @@ namespace cave.ui
 		private cave.ui.LayerWidget sidebarSlotLeft = null;
 		private bool sidebarIsFixed = false;
 		private bool sidebarIsDisplayed = false;
-		private bool enableSidebar = true;
-		private bool enableActionBar = true;
-		private bool actionBarIsFloating = false;
-		private cave.Color actionBarBackgroundColor = null;
-		private cave.Color actionBarTextColor = null;
-		private int actionBarMenuItemSpacing = 0;
-		private cave.Color backgroundColor = null;
-		private string backImageResourceName = "backarrow";
-		private string burgerMenuImageResourceName = "burger";
+		private Windows.UI.Xaml.UIElement contentWidget = null;
+		private bool widgetEnableSidebar = true;
+		private bool widgetEnableActionBar = true;
+		private bool widgetActionBarIsFloating = false;
+		private cave.Color widgetActionBarBackgroundColor = null;
+		private cave.Color widgetActionBarTextColor = null;
+		private int widgetActionBarMenuItemSpacing = 0;
+		private cave.Color widgetBackgroundColor = null;
+		private string widgetBackImageResourceName = "backarrow";
+		private string widgetBurgerMenuImageResourceName = "burger";
 
 		public NavigationWidget(cave.GuiApplicationContext ctx) : base(ctx) {
 			widgetStack = new cape.Stack<Windows.UI.Xaml.UIElement>();
-			actionBarBackgroundColor = cave.Color.black();
-			actionBarTextColor = cave.Color.white();
+			widgetActionBarBackgroundColor = cave.Color.black();
+			widgetActionBarTextColor = cave.Color.white();
 		}
 
 		public virtual void onKeyEvent(cave.KeyEvent @event) {
@@ -148,16 +148,16 @@ namespace cave.ui
 			}
 			var handler = getMenuHandler();
 			if(widgetStack != null && widgetStack.getSize() > 1) {
-				actionBar.configureLeftButton(backImageResourceName, () => {
+				actionBar.configureLeftButton(widgetBackImageResourceName, () => {
 					popWidget();
 				});
 			}
-			else if(enableSidebar == false) {
+			else if(widgetEnableSidebar == false) {
 				actionBar.configureLeftButton(null, null);
 			}
 			else if(handler == null) {
 				if(sidebarIsFixed == false) {
-					actionBar.configureLeftButton(burgerMenuImageResourceName, () => {
+					actionBar.configureLeftButton(widgetBurgerMenuImageResourceName, () => {
 						displaySidebarWidget();
 					});
 				}
@@ -166,7 +166,7 @@ namespace cave.ui
 				}
 			}
 			else {
-				actionBar.configureLeftButton(burgerMenuImageResourceName, handler);
+				actionBar.configureLeftButton(widgetBurgerMenuImageResourceName, handler);
 			}
 		}
 
@@ -281,7 +281,7 @@ namespace cave.ui
 		}
 
 		public virtual void createBackground() {
-			var bgc = getBackgroundColor();
+			var bgc = getWidgetBackgroundColor();
 			if(bgc != null) {
 				addWidget((Windows.UI.Xaml.UIElement)cave.ui.CanvasWidget.forColor(context, bgc));
 			}
@@ -291,21 +291,21 @@ namespace cave.ui
 			base.initializeWidget();
 			createBackground();
 			var mainContainer = cave.ui.VerticalBoxWidget.forContext(context);
-			if(enableActionBar) {
+			if(widgetEnableActionBar) {
 				actionBar = new cave.ui.ActionBarWidget(context);
-				actionBar.setWidgetBackgroundColor(actionBarBackgroundColor);
-				actionBar.setWidgetTextColor(actionBarTextColor);
-				actionBar.setWidgetMenuItemSpacing(actionBarMenuItemSpacing);
+				actionBar.setWidgetBackgroundColor(widgetActionBarBackgroundColor);
+				actionBar.setWidgetTextColor(widgetActionBarTextColor);
+				actionBar.setWidgetMenuItemSpacing(widgetActionBarMenuItemSpacing);
 				var appIcon = getAppIconResource();
 				if(cape.String.isEmpty(appIcon) == false) {
 					actionBar.configureRightButton(appIcon, getAppMenuHandler());
 				}
 			}
-			if(actionBar != null && actionBarIsFloating == false) {
+			if(actionBar != null && widgetActionBarIsFloating == false) {
 				mainContainer.addWidget((Windows.UI.Xaml.UIElement)actionBar);
 			}
 			contentArea = new cave.ui.SwitcherLayerWidget(context);
-			if(actionBar != null && actionBarIsFloating == true) {
+			if(actionBar != null && widgetActionBarIsFloating == true) {
 				var ll = new cave.ui.LayerWidget(context);
 				ll.addWidget((Windows.UI.Xaml.UIElement)contentArea);
 				ll.addWidget((Windows.UI.Xaml.UIElement)cave.ui.VerticalBoxWidget.forContext(context).addWidget((Windows.UI.Xaml.UIElement)actionBar, 0.00).addWidget((Windows.UI.Xaml.UIElement)new cave.ui.CustomContainerWidget(context), 1.00));
@@ -321,7 +321,10 @@ namespace cave.ui
 			addWidget((Windows.UI.Xaml.UIElement)superMainContainer);
 			sidebarWidget = createSidebarWidget();
 			updateMenuButton();
-			var main = createMainWidget();
+			var main = contentWidget;
+			if(!(main != null)) {
+				main = createMainWidget();
+			}
 			if(main != null) {
 				pushWidget(main);
 			}
@@ -371,7 +374,7 @@ namespace cave.ui
 				if(actionBar != null) {
 					actionBar.removeOverlay();
 					actionBar.clearMenuItems();
-					actionBar.setActionBarBackgroundColor(actionBarBackgroundColor);
+					actionBar.setActionBarBackgroundColor(widgetActionBarBackgroundColor);
 				}
 				var menuItems1 = getActionBarMenuItems();
 				if(menuItems1 != null) {
@@ -379,6 +382,20 @@ namespace cave.ui
 				}
 			}
 			updateMenuButton();
+		}
+
+		public void setWidgetContent(Windows.UI.Xaml.UIElement widget) {
+			if(!(widget != null)) {
+				return;
+			}
+			if(widgetStack.getSize() > 0) {
+				return;
+			}
+			if(!(contentArea != null)) {
+				contentWidget = widget;
+				return;
+			}
+			pushWidget(widget);
 		}
 
 		public bool pushWidget(Windows.UI.Xaml.UIElement widget) {
@@ -412,84 +429,84 @@ namespace cave.ui
 			return(topmost);
 		}
 
-		public bool getEnableSidebar() {
-			return(enableSidebar);
+		public bool getWidgetEnableSidebar() {
+			return(widgetEnableSidebar);
 		}
 
-		public cave.ui.NavigationWidget setEnableSidebar(bool v) {
-			enableSidebar = v;
+		public cave.ui.NavigationWidget setWidgetEnableSidebar(bool v) {
+			widgetEnableSidebar = v;
 			return(this);
 		}
 
-		public bool getEnableActionBar() {
-			return(enableActionBar);
+		public bool getWidgetEnableActionBar() {
+			return(widgetEnableActionBar);
 		}
 
-		public cave.ui.NavigationWidget setEnableActionBar(bool v) {
-			enableActionBar = v;
+		public cave.ui.NavigationWidget setWidgetEnableActionBar(bool v) {
+			widgetEnableActionBar = v;
 			return(this);
 		}
 
-		public bool getActionBarIsFloating() {
-			return(actionBarIsFloating);
+		public bool getWidgetActionBarIsFloating() {
+			return(widgetActionBarIsFloating);
 		}
 
-		public cave.ui.NavigationWidget setActionBarIsFloating(bool v) {
-			actionBarIsFloating = v;
+		public cave.ui.NavigationWidget setWidgetActionBarIsFloating(bool v) {
+			widgetActionBarIsFloating = v;
 			return(this);
 		}
 
-		public cave.Color getActionBarBackgroundColor() {
-			return(actionBarBackgroundColor);
+		public cave.Color getWidgetActionBarBackgroundColor() {
+			return(widgetActionBarBackgroundColor);
 		}
 
-		public cave.ui.NavigationWidget setActionBarBackgroundColor(cave.Color v) {
-			actionBarBackgroundColor = v;
+		public cave.ui.NavigationWidget setWidgetActionBarBackgroundColor(cave.Color v) {
+			widgetActionBarBackgroundColor = v;
 			return(this);
 		}
 
-		public cave.Color getActionBarTextColor() {
-			return(actionBarTextColor);
+		public cave.Color getWidgetActionBarTextColor() {
+			return(widgetActionBarTextColor);
 		}
 
-		public cave.ui.NavigationWidget setActionBarTextColor(cave.Color v) {
-			actionBarTextColor = v;
+		public cave.ui.NavigationWidget setWidgetActionBarTextColor(cave.Color v) {
+			widgetActionBarTextColor = v;
 			return(this);
 		}
 
-		public int getActionBarMenuItemSpacing() {
-			return(actionBarMenuItemSpacing);
+		public int getWidgetActionBarMenuItemSpacing() {
+			return(widgetActionBarMenuItemSpacing);
 		}
 
-		public cave.ui.NavigationWidget setActionBarMenuItemSpacing(int v) {
-			actionBarMenuItemSpacing = v;
+		public cave.ui.NavigationWidget setWidgetActionBarMenuItemSpacing(int v) {
+			widgetActionBarMenuItemSpacing = v;
 			return(this);
 		}
 
-		public cave.Color getBackgroundColor() {
-			return(backgroundColor);
+		public cave.Color getWidgetBackgroundColor() {
+			return(widgetBackgroundColor);
 		}
 
-		public cave.ui.NavigationWidget setBackgroundColor(cave.Color v) {
-			backgroundColor = v;
+		public cave.ui.NavigationWidget setWidgetBackgroundColor(cave.Color v) {
+			widgetBackgroundColor = v;
 			return(this);
 		}
 
-		public string getBackImageResourceName() {
-			return(backImageResourceName);
+		public string getWidgetBackImageResourceName() {
+			return(widgetBackImageResourceName);
 		}
 
-		public cave.ui.NavigationWidget setBackImageResourceName(string v) {
-			backImageResourceName = v;
+		public cave.ui.NavigationWidget setWidgetBackImageResourceName(string v) {
+			widgetBackImageResourceName = v;
 			return(this);
 		}
 
-		public string getBurgerMenuImageResourceName() {
-			return(burgerMenuImageResourceName);
+		public string getWidgetBurgerMenuImageResourceName() {
+			return(widgetBurgerMenuImageResourceName);
 		}
 
-		public cave.ui.NavigationWidget setBurgerMenuImageResourceName(string v) {
-			burgerMenuImageResourceName = v;
+		public cave.ui.NavigationWidget setWidgetBurgerMenuImageResourceName(string v) {
+			widgetBurgerMenuImageResourceName = v;
 			return(this);
 		}
 	}

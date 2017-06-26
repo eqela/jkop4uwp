@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class KeyValueListForStrings : cape.KeyValueList<string, string>
 	{
 		public KeyValueListForStrings() : base() {

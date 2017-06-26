@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public interface ActionBarControlWidget
 	{
 		Windows.UI.Xaml.UIElement createActionBarOverlay(cave.ui.ActionBarWidget actionbar);

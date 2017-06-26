@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// The Buffer class provides convenience methods for dealing with data buffers
 	/// (arbitrary sequences of bytes).

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class Map
 	{
 		public Map() {
@@ -51,7 +50,7 @@ namespace cape
 		}
 
 		public static cape.MapObject<K, V> asObject<K, V>(System.Collections.Generic.Dictionary<K,V> map) {
-			if(map == null) {
+			if(!(map != null)) {
 				return(null);
 			}
 			var v = new cape.Map.MyMapObject<K, V>();
@@ -88,7 +87,10 @@ namespace cape
 		}
 
 		public static bool set<K, V>(System.Collections.Generic.Dictionary<K,V> data, K key, V val) {
-			if(data == null || key == null) {
+			if(!(data != null)) {
+				return(false);
+			}
+			if(!(key != null)) {
 				return(false);
 			}
 			data[key] = val;
@@ -100,7 +102,10 @@ namespace cape
 		}
 
 		public static void remove<K, V>(System.Collections.Generic.Dictionary<K,V> data, K key) {
-			if(data == null || key == null) {
+			if(!(data != null)) {
+				return;
+			}
+			if(!(key != null)) {
 				return;
 			}
 			data.Remove(key);
@@ -114,35 +119,41 @@ namespace cape
 		}
 
 		public static bool containsKey<K, V>(System.Collections.Generic.Dictionary<K,V> data, K key) {
-			if(data == null || key == null) {
+			if(!(data != null)) {
+				return(false);
+			}
+			if(!(key != null)) {
 				return(false);
 			}
 			return(data.ContainsKey(key));
 		}
 
 		public static bool containsValue<K, V>(System.Collections.Generic.Dictionary<K,V> data, V val) {
-			if(data == null || val == null) {
+			if(!(data != null)) {
+				return(false);
+			}
+			if(!(val != null)) {
 				return(false);
 			}
 			return(data.ContainsValue(val));
 		}
 
 		public static void clear<K, V>(System.Collections.Generic.Dictionary<K,V> data) {
-			if(data == null) {
+			if(!(data != null)) {
 				return;
 			}
 			data.Clear();
 		}
 
 		public static System.Collections.Generic.Dictionary<K,V> dup<K, V>(System.Collections.Generic.Dictionary<K,V> data) {
-			if(data == null) {
+			if(!(data != null)) {
 				return(null);
 			}
 			return(new System.Collections.Generic.Dictionary<K, V>(data));
 		}
 
 		public static System.Collections.Generic.List<K> getKeys<K, V>(System.Collections.Generic.Dictionary<K,V> data) {
-			if(data == null) {
+			if(!(data != null)) {
 				return(null);
 			}
 			var v = new System.Collections.Generic.List<K>();
@@ -153,7 +164,7 @@ namespace cape
 		}
 
 		public static System.Collections.Generic.List<V> getValues<K, V>(System.Collections.Generic.Dictionary<K,V> data) {
-			if(data == null) {
+			if(!(data != null)) {
 				return(null);
 			}
 			var v = new System.Collections.Generic.List<V>();
@@ -163,8 +174,37 @@ namespace cape
 			return(v);
 		}
 
+		class MyKeyIterator<K> : cape.Iterator<K>
+		{
+			public MyKeyIterator() {
+			}
+
+			public System.Collections.Generic.IEnumerator<K> enumerator;
+
+			public virtual K next() {
+				var v = (K)default(K);
+				if(enumerator != null) {
+					if(enumerator.MoveNext() == false) {
+						enumerator = null;
+					}
+					else {
+						v = enumerator.Current;
+					}
+				}
+				return(v);
+			}
+		}
+
 		public static cape.Iterator<K> iterateKeys<K, V>(System.Collections.Generic.Dictionary<K,V> data) {
-			return(cape.Vector.iterate(cape.Map.getKeys(data)));
+			if(!(data != null)) {
+				return(null);
+			}
+			var v = new cape.Map.MyKeyIterator<K>();
+			var keys = data.Keys;
+			if(keys != null) {
+				v.enumerator = keys.GetEnumerator();
+			}
+			return((cape.Iterator<K>)v);
 		}
 
 		public static cape.Iterator<V> iterateValues<K, V>(System.Collections.Generic.Dictionary<K,V> data) {

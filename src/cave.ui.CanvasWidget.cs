@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class CanvasWidget : Windows.UI.Xaml.Controls.UserControl, cave.ui.WidgetWithLayout
 	{
 		public CanvasWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

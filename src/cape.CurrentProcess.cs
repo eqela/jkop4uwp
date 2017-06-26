@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class CurrentProcess
 	{
 		public CurrentProcess() {

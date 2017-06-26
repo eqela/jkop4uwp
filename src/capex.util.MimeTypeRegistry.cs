@@ -22,21 +22,20 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class MimeTypeRegistry
 	{
 		private static capex.util.MimeTypeRegistry myInstance = null;
 
 		public static capex.util.MimeTypeRegistry instance() {
-			if(capex.util.MimeTypeRegistry.myInstance == null) {
+			if(!(capex.util.MimeTypeRegistry.myInstance != null)) {
 				capex.util.MimeTypeRegistry.myInstance = new capex.util.MimeTypeRegistry();
 			}
 			return(capex.util.MimeTypeRegistry.myInstance);
 		}
 
 		public static string typeForFile(cape.File f) {
-			if(f == null) {
+			if(!(f != null)) {
 				return("application/unknown");
 			}
 			var mtr = capex.util.MimeTypeRegistry.instance();
@@ -817,7 +816,7 @@ namespace capex.util
 
 		public string getMimetype(string str) {
 			string v = null;
-			if(!(object.Equals(str, null))) {
+			if(str != null) {
 				string mime = null;
 				var ld = cape.String.lastIndexOf(str, '.');
 				if(ld >= 0) {
@@ -864,34 +863,32 @@ namespace capex.util
 		}
 
 		public bool read(cape.File file) {
-			if(file == null) {
+			if(!(file != null)) {
 				return(false);
 			}
 			var buf = new cape.PrintReader((cape.Reader)file.read());
-			if(buf == null) {
+			if(!(buf != null)) {
 				return(false);
 			}
-			else {
-				var n = 0;
-				while(true) {
-					var line = buf.readLine();
-					if(object.Equals(line, null)) {
-						break;
+			var n = 0;
+			while(true) {
+				var line = buf.readLine();
+				if(!(line != null)) {
+					break;
+				}
+				var va = cape.String.split(line, ':');
+				cape.Iterator<string> val = cape.Vector.iterate(va);
+				if(val != null) {
+					var front = val.next();
+					var back = val.next();
+					if(front != null) {
+						front = cape.String.strip(front);
 					}
-					var va = cape.String.split(line, ':');
-					cape.Iterator<string> val = cape.Vector.iterate(va);
-					if(val != null) {
-						var front = val.next();
-						var back = val.next();
-						if(!(object.Equals(front, null))) {
-							front = cape.String.strip(front);
-						}
-						if(!(object.Equals(back, null))) {
-							back = cape.String.strip(back);
-						}
-						if(add(front, back)) {
-							n++;
-						}
+					if(back != null) {
+						back = cape.String.strip(back);
+					}
+					if(add(front, back)) {
+						n++;
 					}
 				}
 			}

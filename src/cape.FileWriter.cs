@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface FileWriter : cape.Writer, cape.Closable, cape.SeekableWriter
 	{
 	}

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class FormWidget : cave.ui.LayerWidget
 	{
 		public FormWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

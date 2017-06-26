@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class ScreenForWidget : Windows.UI.Xaml.Controls.Page, cave.ScreenWithContext
 	{
 		public static cave.ui.ScreenForWidget findScreenForWidget(Windows.UI.Xaml.UIElement widget) {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class FileInputWidget
 	{
 		public FileInputWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

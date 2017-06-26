@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface Iterateable<T>
 	{
 		cape.Iterator<T> iterate();

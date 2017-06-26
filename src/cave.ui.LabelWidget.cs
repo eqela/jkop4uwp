@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class LabelWidget : Windows.UI.Xaml.Controls.UserControl
 	{
 		public LabelWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -52,13 +51,9 @@ namespace cave.ui
 
 		public LabelWidget(cave.GuiApplicationContext context) {
 			widgetContext = context;
-			widgetFontFamily = "Arial";
-			widgetFontSize = (double)context.getHeightValue("3mm");
-			widgetFontBold = false;
-			widgetTextColor = cave.Color.forRGB(0, 0, 0);
+			setWidgetStyle("LabelWidget");
 			textBlock = new Windows.UI.Xaml.Controls.TextBlock();
 			this.Content = textBlock;
-			updateWidgetFont();
 		}
 
 		public cave.ui.LabelWidget setWidgetText(string text) {
@@ -133,6 +128,24 @@ namespace cave.ui
 
 		public cave.ui.LabelWidget setWidgetFontResource(string res) {
 			widgetFontResource = res;
+			updateWidgetFont();
+			return(this);
+		}
+
+		public cave.ui.LabelWidget setWidgetStyle(string style) {
+			widgetFontFamily = widgetContext.getStyleString(style, "fontFamily");
+			if(cape.String.isEmpty(widgetFontFamily)) {
+				widgetFontFamily = "Arial";
+			}
+			widgetTextColor = widgetContext.getStyleColor(style, "textColor");
+			if(!(widgetTextColor != null)) {
+				widgetTextColor = cave.Color.forRGB(0, 0, 0);
+			}
+			widgetFontSize = (double)widgetContext.getStylePixels(style, "fontSize");
+			if(widgetFontSize < 1.00) {
+				widgetFontSize = (double)widgetContext.getHeightValue("3mm");
+			}
+			widgetFontBold = cape.Boolean.asBoolean((object)widgetContext.getStyleString(style, "fontBold"));
 			updateWidgetFont();
 			return(this);
 		}

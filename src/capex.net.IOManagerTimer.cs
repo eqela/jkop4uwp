@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public interface IOManagerTimer
 	{
 		void stop();

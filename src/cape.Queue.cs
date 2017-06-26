@@ -22,13 +22,16 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class Queue<T>
 	{
 		private System.Collections.Generic.List<T> data = null;
 
 		public Queue() {
+			data = new System.Collections.Generic.List<T>();
+		}
+
+		public void clear() {
 			data = new System.Collections.Generic.List<T>();
 		}
 

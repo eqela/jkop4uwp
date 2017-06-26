@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class VerticalScrollerWithToolbarWidget : cave.ui.LayerWidget
 	{
 		public VerticalScrollerWithToolbarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

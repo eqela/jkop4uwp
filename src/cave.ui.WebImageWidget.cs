@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class WebImageWidget : cave.ui.AsynchronousImageWidget
 	{
 		public WebImageWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

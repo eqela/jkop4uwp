@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public interface KeyListener
 	{
 		void onKeyEvent(cave.KeyEvent @event);

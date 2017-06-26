@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public abstract class ZipWriter
 	{
 		public ZipWriter() {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public abstract class ZipReader
 	{
 		public ZipReader() {
@@ -35,17 +34,20 @@ namespace capex.util
 		}
 
 		public static bool extractZipFileToDirectory(cape.File zipFile, cape.File destDir, System.Action<cape.File> listener = null) {
-			if(zipFile == null || destDir == null) {
+			if(!(zipFile != null)) {
+				return(false);
+			}
+			if(!(destDir != null)) {
 				return(false);
 			}
 			var zf = capex.util.ZipReader.forFile(zipFile);
-			if(zf == null) {
+			if(!(zf != null)) {
 				return(false);
 			}
-			if(destDir.isDirectory() == false) {
+			if(!destDir.isDirectory()) {
 				destDir.createDirectoryRecursive();
 			}
-			if(destDir.isDirectory() == false) {
+			if(!destDir.isDirectory()) {
 				return(false);
 			}
 			var array = zf.getEntries();
@@ -78,7 +80,7 @@ namespace capex.util
 						if(listener != null) {
 							listener(dd);
 						}
-						if(entry.writeToFile(dd) == false) {
+						if(!entry.writeToFile(dd)) {
 							return(false);
 						}
 					}

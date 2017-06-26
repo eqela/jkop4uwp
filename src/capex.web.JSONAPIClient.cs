@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.web
-{
+namespace capex.web {
 	public class JSONAPIClient
 	{
 		public JSONAPIClient() {

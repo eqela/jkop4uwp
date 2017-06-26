@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class RadioButtonGroupWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithValue
 	{
 		public RadioButtonGroupWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

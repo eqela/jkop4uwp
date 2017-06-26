@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public interface IOManagerEntry
 	{
 		void setListeners(System.Action rrl, System.Action wrl);

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class MenuBarWidget : cave.ui.LayerWidget
 	{
 		public MenuBarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -45,12 +44,13 @@ namespace cave.ui
 			if(!(v != null)) {
 				v = new cave.ui.Menu();
 			}
+			var m = v;
 			var button = cave.ui.TextButtonWidget.forText(context, title);
 			button.setWidgetPadding(context.getHeightValue("1mm"));
 			button.setWidgetPaddingHorizontal(context.getWidthValue("3mm"));
 			button.setWidgetBackgroundColor(cave.Color.forString("#BBBBBB"));
 			button.setWidgetClickHandler(() => {
-				cave.ui.PopupMenu.showBelow((Windows.UI.Xaml.UIElement)button, v);
+				cave.ui.PopupMenu.showBelow(context, (Windows.UI.Xaml.UIElement)button, m);
 			});
 			box.addWidget((Windows.UI.Xaml.UIElement)button);
 			return(v);

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class PopupWidget : cave.ui.LayerWidget
 	{
 		public PopupWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -40,6 +39,7 @@ namespace cave.ui
 		private Windows.UI.Xaml.UIElement widgetContent = null;
 		private int animationDestY = 0;
 		private System.Action popupAnimationEndHandler = null;
+		private bool widgetModal = true;
 
 		public PopupWidget(cave.GuiApplicationContext ctx) : base(ctx) {
 			widgetContext = ctx;
@@ -70,7 +70,9 @@ namespace cave.ui
 			if(widgetContainerBackgroundColor == null) {
 				widgetContainerBackgroundColor = cave.ui.CanvasWidget.forColor(widgetContext, cave.Color.forRGBADouble((double)0, (double)0, (double)0, 0.80));
 				cave.ui.Widget.setWidgetClickHandler((Windows.UI.Xaml.UIElement)widgetContainerBackgroundColor, () => {
-					;
+					if(!widgetModal) {
+						hidePopup();
+					}
 				});
 			}
 			addWidget((Windows.UI.Xaml.UIElement)widgetContainerBackgroundColor);
@@ -99,7 +101,7 @@ namespace cave.ui
 				parent = cave.ui.Widget.getParent(parent);
 			}
 			if(parentLayer == null) {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.PopupWidget.showPopup] (PopupWidget.sling:124:3): No LayerWidget was found in the widget tree. Cannot show popup!");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.PopupWidget.showPopup] (PopupWidget.sling:126:3): No LayerWidget was found in the widget tree. Cannot show popup!");
 				return;
 			}
 			parentLayer.addWidget((Windows.UI.Xaml.UIElement)this);
@@ -138,6 +140,15 @@ namespace cave.ui
 
 		public cave.ui.PopupWidget setPopupAnimationEndHandler(System.Action v) {
 			popupAnimationEndHandler = v;
+			return(this);
+		}
+
+		public bool getWidgetModal() {
+			return(widgetModal);
+		}
+
+		public cave.ui.PopupWidget setWidgetModal(bool v) {
+			widgetModal = v;
 			return(this);
 		}
 	}

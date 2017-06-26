@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.console
-{
+namespace capex.console {
 	public abstract class Terminal
 	{
 		public Terminal() {

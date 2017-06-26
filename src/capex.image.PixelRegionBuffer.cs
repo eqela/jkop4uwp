@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.image
-{
+namespace capex.image {
 	public class PixelRegionBuffer
 	{
 		public PixelRegionBuffer() {

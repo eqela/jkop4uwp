@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public interface WidgetWithLayout
 	{
 		bool layoutWidget(int widthConstraint, bool force);

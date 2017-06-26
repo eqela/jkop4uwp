@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface FileReader : cape.Reader, cape.SizedReader, cape.Closable, cape.SeekableReader
 	{
 	}

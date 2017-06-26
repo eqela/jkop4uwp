@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public abstract class ListItemWidget : cave.ui.VerticalBoxWidget, cave.ui.TitledWidget, cave.ui.DisplayAwareWidget
 	{
 		public ListItemWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface SeekableReader : cape.Reader
 	{
 		bool setCurrentPosition(long n);

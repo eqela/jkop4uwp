@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// The Boolean class provides convenience methods for dealing with boolean values
 	/// (either true or false).

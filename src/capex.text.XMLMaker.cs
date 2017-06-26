@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.text
-{
+namespace capex.text {
 	public class XMLMaker : cape.StringObject
 	{
 		public class CData : cape.StringObject

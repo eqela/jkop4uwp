@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.web
-{
+namespace capex.web {
 	public interface WebClient
 	{
 		void query(string method, string url, cape.KeyValueList<string, string> headers, byte[] body, System.Action<string, cape.KeyValueList<string, string>, byte[]> callback);

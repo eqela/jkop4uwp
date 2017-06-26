@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.map
-{
+namespace capex.map {
 	public abstract class GeoLocationManager
 	{
 		public static capex.map.GeoLocationManager forApplicationContext(cape.ApplicationContext context) {

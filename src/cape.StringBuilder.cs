@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class StringBuilder : cape.StringObject
 	{
 		private System.Text.StringBuilder builder = null;

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class ImageButtonWidget : cave.ui.LayerWidget
 	{
 		public ImageButtonWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

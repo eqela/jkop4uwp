@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class HorizontalScrollerWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithLayout
 	{
 		public HorizontalScrollerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public interface TextSprite : motion.Sprite
 	{
 		void setText(motion.TextProperties text);

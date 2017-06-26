@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class WidgetAnimation
 	{
 		public static cave.ui.WidgetAnimation forDuration(cave.GuiApplicationContext context, long duration) {

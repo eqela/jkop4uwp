@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.text
-{
+namespace capex.text {
 	public class RichTextDocument
 	{
 		public static capex.text.RichTextDocument forWikiMarkupFile(cape.File file) {

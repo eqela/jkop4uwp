@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class CharacterIteratorForReader : cape.CharacterDecoder
 	{
 		private cape.Reader reader = null;

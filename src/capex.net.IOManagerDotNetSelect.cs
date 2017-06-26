@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public class IOManagerDotNetSelect : capex.net.IOManager
 	{
 		private class MyTimer : capex.net.IOManagerTimer, cape.Runnable

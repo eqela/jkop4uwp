@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class DotNetStreamReader : cape.FileReader, cape.SizedReader, cape.Reader, cape.Closable, cape.SeekableReader
 	{
 		public DotNetStreamReader() {

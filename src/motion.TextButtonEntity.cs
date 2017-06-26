@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public class TextButtonEntity : motion.MultiSpriteEntity, cave.PointerListener
 	{
 		public static motion.TextButtonEntity forText(string text) {

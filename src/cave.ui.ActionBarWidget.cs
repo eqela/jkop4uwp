@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class ActionBarWidget : cave.ui.LayerWidget, cave.ui.ScreenAwareWidget
 	{
 		public ActionBarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

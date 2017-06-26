@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public class TCPClientImpl : capex.net.TCPClient
 	{
 		public TCPClientImpl() : base() {

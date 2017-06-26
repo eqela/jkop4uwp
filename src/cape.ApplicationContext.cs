@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// An ApplicationContext represents the environment in which an application
 	/// executes. The implementation of this is system dependent, and depending on the

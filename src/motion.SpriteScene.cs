@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public class SpriteScene : motion.Scene, motion.SpriteLayer
 	{
 		public SpriteScene() : base() {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public interface WidgetWithValue
 	{
 		void setWidgetValue(object value);

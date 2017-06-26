@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public interface PointerListener
 	{
 		bool onPointerEvent(cave.PointerEvent @event);

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public abstract class CharacterDecoder : cape.CharacterIterator
 	{
 		public CharacterDecoder() {

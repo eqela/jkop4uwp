@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.fb
-{
+namespace cave.fb {
 	public class Login
 	{
 		public Login() {
@@ -48,7 +47,7 @@ namespace cave.fb
 
 		public void execute(Windows.UI.Xaml.UIElement widget, System.Action<string, string, cape.Error> callback) {
 			var cb = callback;
-			System.Diagnostics.Debug.WriteLine("[cave.fb.Login.execute] (Login.sling:219:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.fb.Login.execute] (Login.sling:232:2): Not implemented");
 			if(cb != null) {
 				cb(null, null, cape.Error.forCode("not_supported"));
 			}

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.crypto
-{
+namespace capex.crypto {
 	public class MD5Encoder
 	{
 		public MD5Encoder() {

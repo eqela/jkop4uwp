@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface FlushableWriter : cape.Writer
 	{
 		void flush();

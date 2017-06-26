@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class BufferReader : cape.Reader, cape.SizedReader, cape.SeekableReader
 	{
 		public BufferReader() {

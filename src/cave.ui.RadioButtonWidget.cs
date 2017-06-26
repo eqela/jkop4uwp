@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class RadioButtonWidget : cave.ui.LayerWidget, cave.ui.WidgetWithValue
 	{
 		public RadioButtonWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

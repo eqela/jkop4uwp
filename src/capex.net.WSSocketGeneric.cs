@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public class WSSocketGeneric : capex.net.WSSocket
 	{
 		private class MyWSMessage

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.crypto
-{
+namespace capex.crypto {
 	public abstract class SHAEncoder
 	{
 		public SHAEncoder() {

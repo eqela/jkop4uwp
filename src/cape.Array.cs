@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// The Array class provides convenience methods for dealing with static array
 	/// objects. For dynamic array support, use vectors instead.

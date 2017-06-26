@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.notification
-{
+namespace cave.notification {
 	public class Notification
 	{
 		private cave.GuiApplicationContext context = null;

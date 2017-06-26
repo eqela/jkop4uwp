@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public interface HeightAwareWidget
 	{
 		void onWidgetHeightChanged(int height);

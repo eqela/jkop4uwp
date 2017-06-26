@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public interface ScreenWithContext
 	{
 		void setContext(cave.GuiApplicationContext ctx);

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class VerticalBoxWidget : cave.ui.CustomContainerWidget
 	{
 		public VerticalBoxWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class DynamicVector : cape.Duplicateable, cape.Iterateable<object>, cape.VectorObject<object>, cape.ObjectWithSize
 	{
 		public static cape.DynamicVector asDynamicVector(object @object) {
-			if(@object == null) {
+			if(!(@object != null)) {
 				return(null);
 			}
 			if(@object is cape.DynamicVector) {
@@ -122,6 +121,27 @@ namespace cape
 			return((object)v);
 		}
 
+		public cape.DynamicVector mergeDynamicVector(cape.DynamicVector dynamicVector) {
+			if(!(dynamicVector != null) || dynamicVector.getSize() < 1) {
+				return(this);
+			}
+			return(mergeVector(dynamicVector.toVector()));
+		}
+
+		public cape.DynamicVector mergeVector(System.Collections.Generic.List<object> vector) {
+			if(vector != null) {
+				var n = 0;
+				var m = vector.Count;
+				for(n = 0 ; n < m ; n++) {
+					var item = vector[n];
+					if(item != null) {
+						append(item);
+					}
+				}
+			}
+			return(this);
+		}
+
 		public cape.DynamicVector append(object @object) {
 			vector.Add(@object);
 			return(this);
@@ -129,6 +149,11 @@ namespace cape
 
 		public cape.DynamicVector append(int value) {
 			vector.Add(cape.Integer.asObject(value));
+			return(this);
+		}
+
+		public cape.DynamicVector append(long value) {
+			vector.Add(cape.LongInteger.asObject(value));
 			return(this);
 		}
 
@@ -149,6 +174,11 @@ namespace cape
 
 		public cape.DynamicVector set(int index, int value) {
 			cape.Vector.set(vector, index, cape.Integer.asObject(value));
+			return(this);
+		}
+
+		public cape.DynamicVector set(int index, long value) {
+			cape.Vector.set(vector, index, cape.LongInteger.asObject(value));
 			return(this);
 		}
 
@@ -180,6 +210,14 @@ namespace cape
 				return(defval);
 			}
 			return(cape.Integer.asInteger(vv));
+		}
+
+		public long getLongInteger(int index, long defval = (long)0) {
+			var vv = get(index);
+			if(vv == null) {
+				return(defval);
+			}
+			return(cape.LongInteger.asLong(vv));
 		}
 
 		public bool getBoolean(int index, bool defval = false) {
@@ -226,6 +264,10 @@ namespace cape
 
 		public virtual int getSize() {
 			return(cape.Vector.getSize(vector));
+		}
+
+		public void setCapacity(int capacity) {
+			cape.Vector.setCapacity(vector, capacity);
 		}
 
 		public void sort() {

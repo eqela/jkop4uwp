@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.crypto
-{
+namespace capex.crypto {
 	public class BlockCipherReader : cape.Reader, cape.SizedReader, cape.SeekableReader
 	{
 		public BlockCipherReader() {

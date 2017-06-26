@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public abstract class FileAdapter : cape.File
 	{
 		public FileAdapter() {

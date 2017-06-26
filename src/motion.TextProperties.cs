@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public class TextProperties
 	{
 		public static motion.TextProperties forText(string tt) {

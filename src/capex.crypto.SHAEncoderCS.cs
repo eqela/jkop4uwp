@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.crypto
-{
+namespace capex.crypto {
 	public class SHAEncoderCS : capex.crypto.SHAEncoder
 	{
 		public SHAEncoderCS() : base() {

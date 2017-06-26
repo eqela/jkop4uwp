@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// The String class provides all the common string manipulation functions,
 	/// including comparisons, concatenation, transformations to upper and lowercase,
@@ -52,6 +51,9 @@ namespace cape
 			}
 			if(obj is cape.IntegerObject) {
 				return(cape.String.forInteger(((cape.IntegerObject)obj).toInteger()));
+			}
+			if(obj is cape.LongIntegerObject) {
+				return(cape.String.forLongInteger(((cape.LongIntegerObject)obj).toLong()));
 			}
 			if(obj is cape.DoubleObject) {
 				return(cape.String.forDouble(((cape.DoubleObject)obj).toDouble()));
@@ -212,7 +214,7 @@ namespace cape
 			if(data == null) {
 				return(null);
 			}
-			System.Diagnostics.Debug.WriteLine("[cape.String.forUCS2Buffer] (String.sling:310:2): Not implemented.");
+			System.Diagnostics.Debug.WriteLine("[cape.String.forUCS2Buffer] (String.sling:312:2): Not implemented.");
 			return(null);
 		}
 
@@ -253,8 +255,58 @@ namespace cape
 		/// representation of the value of the integer using the "base-10" decimal notation.
 		/// </summary>
 
-		public static string forLong(long vv) {
+		public static string forLongInteger(long vv) {
 			return(vv.ToString());
+		}
+
+		/// <summary>
+		/// Takes a string that represents a number, and presents it in a nicely formatted
+		/// manner, with delimiter separating each sequence of three digits.
+		/// </summary>
+
+		public static string formatNumberString(string vv, char delimiter) {
+			if(!(vv != null)) {
+				return(null);
+			}
+			var it = cape.String.iterate(vv);
+			if(!(it != null)) {
+				return(null);
+			}
+			var rr = cape.String.getLength(vv);
+			var sb = new cape.StringBuilder();
+			while(true) {
+				var c = it.getNextChar();
+				if(c < 1) {
+					break;
+				}
+				sb.append(c);
+				rr--;
+				if(rr < 1) {
+					break;
+				}
+				if(rr % 3 == 0) {
+					sb.append(delimiter);
+				}
+			}
+			return(sb.toString());
+		}
+
+		/// <summary>
+		/// Converts an integer value to a string and presents it in a nicely formatted
+		/// manner, with delimiter separating each sequence of three digits.
+		/// </summary>
+
+		public static string formatInteger(int vv, char delimiter) {
+			return(cape.String.formatNumberString(cape.String.forInteger(vv), delimiter));
+		}
+
+		/// <summary>
+		/// Converts a long integer value to a string and presents it in a nicely formatted
+		/// manner, with delimiter separating each sequence of three digits.
+		/// </summary>
+
+		public static string formatLongInteger(int vv, char delimiter) {
+			return(cape.String.formatNumberString(cape.String.forLongInteger((long)vv), delimiter));
 		}
 
 		/// <summary>
@@ -269,7 +321,7 @@ namespace cape
 
 		public static string forIntegerWithPadding(int vv, int length, string paddingString = null) {
 			var r = cape.String.forInteger(vv);
-			if(object.Equals(r, null)) {
+			if(!(r != null)) {
 				return(null);
 			}
 			var ll = cape.String.getLength(r);
@@ -691,7 +743,7 @@ namespace cape
 		/// </summary>
 
 		public static string getSubString(string str, int start) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(null);
 			}
 			if(start >= cape.String.getLength(str)) {
@@ -719,7 +771,7 @@ namespace cape
 		/// </summary>
 
 		public static string getSubString(string str, int start, int length) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(null);
 			}
 			var strl = cape.String.getLength(str);
@@ -743,7 +795,10 @@ namespace cape
 		/// </summary>
 
 		public static bool contains(string str1, string str2) {
-			if(object.Equals(str1, null) || object.Equals(str2, null)) {
+			if(!(str1 != null)) {
+				return(false);
+			}
+			if(!(str2 != null)) {
 				return(false);
 			}
 			return(str1.Contains(str2));
@@ -756,7 +811,10 @@ namespace cape
 		/// </summary>
 
 		public static bool startsWith(string str1, string str2, int offset = 0) {
-			if(object.Equals(str1, null) || object.Equals(str2, null)) {
+			if(!(str1 != null)) {
+				return(false);
+			}
+			if(!(str2 != null)) {
 				return(false);
 			}
 			string nstr = null;
@@ -796,7 +854,10 @@ namespace cape
 		/// </summary>
 
 		public static bool endsWith(string str1, string str2) {
-			if(object.Equals(str1, null) || object.Equals(str2, null)) {
+			if(!(str1 != null)) {
+				return(false);
+			}
+			if(!(str2 != null)) {
 				return(false);
 			}
 			return(str1.EndsWith(str2));
@@ -829,10 +890,34 @@ namespace cape
 		/// </summary>
 
 		public static string strip(string str) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(null);
 			}
 			return(str.Trim());
+		}
+
+		/// <summary>
+		/// Strips (or trims) the given string "str" by removing all blank characters from
+		/// the end of the string.
+		/// </summary>
+
+		public static string stripFromEnd(string str) {
+			if(!(str != null)) {
+				return(null);
+			}
+			return(str.TrimEnd(null));
+		}
+
+		/// <summary>
+		/// Strips (or trims) the given string "str" by removing all blank characters from
+		/// the beginning of the string.
+		/// </summary>
+
+		public static string stripFromStart(string str) {
+			if(!(str != null)) {
+				return(null);
+			}
+			return(str.TrimStart(null));
 		}
 
 		/// <summary>
@@ -842,7 +927,7 @@ namespace cape
 		/// </summary>
 
 		public static string replace(string str, char oldChar, char newChar) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(null);
 			}
 			return(str.Replace(oldChar, newChar));
@@ -855,7 +940,7 @@ namespace cape
 		/// </summary>
 
 		public static string replace(string str, string target, string replacement) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(null);
 			}
 			return(str.Replace(target, replacement));
@@ -866,7 +951,7 @@ namespace cape
 		/// </summary>
 
 		public static char[] toCharArray(string str) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(null);
 			}
 			return(str.ToCharArray());
@@ -889,15 +974,15 @@ namespace cape
 			var n = 0;
 			while(true) {
 				if(max > 0 && cape.Vector.getSize(v) >= max - 1) {
-					cape.Vector.append(v, cape.String.subString(str, n));
+					cape.Vector.append(v, cape.String.getSubString(str, n));
 					break;
 				}
 				var x = cape.String.indexOf(str, delim, n);
 				if(x < 0) {
-					cape.Vector.append(v, cape.String.subString(str, n));
+					cape.Vector.append(v, cape.String.getSubString(str, n));
 					break;
 				}
-				cape.Vector.append(v, cape.String.subString(str, n, x - n));
+				cape.Vector.append(v, cape.String.getSubString(str, n, x - n));
 				n = x + 1;
 			}
 			return(v);
@@ -909,11 +994,11 @@ namespace cape
 		/// </summary>
 
 		public static bool isInteger(string str) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(false);
 			}
 			var it = cape.String.iterate(str);
-			if(it == null) {
+			if(!(it != null)) {
 				return(false);
 			}
 			while(true) {
@@ -941,8 +1026,13 @@ namespace cape
 			var v = 0;
 			var m = cape.String.getLength(str);
 			var n = 0;
+			var negative = false;
 			for(n = 0 ; n < m ; n++) {
 				var c = cape.String.charAt(str, n);
+				if(n == 0 && c == '-') {
+					negative = true;
+					continue;
+				}
 				if(c >= '0' && c <= '9') {
 					v = v * 10;
 					v += (int)(c - '0');
@@ -950,6 +1040,9 @@ namespace cape
 				else {
 					break;
 				}
+			}
+			if(negative) {
+				v *= -1;
 			}
 			return(v);
 		}
@@ -967,8 +1060,13 @@ namespace cape
 			var v = (long)0;
 			var m = cape.String.getLength(str);
 			var n = 0;
+			var negative = false;
 			for(n = 0 ; n < m ; n++) {
 				var c = cape.String.charAt(str, n);
+				if(n == 0 && c == '-') {
+					negative = true;
+					continue;
+				}
 				if(c >= '0' && c <= '9') {
 					v = v * 10;
 					v += (long)(c - '0');
@@ -976,6 +1074,9 @@ namespace cape
 				else {
 					break;
 				}
+			}
+			if(negative) {
+				v *= (long)-1;
 			}
 			return(v);
 		}
@@ -1048,7 +1149,7 @@ namespace cape
 		/// </summary>
 
 		public static string reverse(string @string) {
-			if(object.Equals(@string, null)) {
+			if(!(@string != null)) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -1098,7 +1199,7 @@ namespace cape
 					sb.append(paddingCharacter);
 				}
 			}
-			else if(align > 0) {
+			else if(align == 0) {
 				var ff = add / 2;
 				var ss = add - ff;
 				for(n = 0 ; n < ff ; n++) {
@@ -1222,7 +1323,7 @@ namespace cape
 							continue;
 						}
 						if(flags != null) {
-							if(!(object.Equals(cape.Map.get(flags, o), null))) {
+							if(cape.Map.get(flags, o) != null) {
 								continue;
 							}
 							cape.Map.set(flags, o, "true");
@@ -1244,11 +1345,11 @@ namespace cape
 		/// </summary>
 
 		public static bool validateCharacters(string str, System.Func<char, bool> validator) {
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(false);
 			}
 			var it = cape.String.iterate(str);
-			if(it == null) {
+			if(!(it != null)) {
 				return(false);
 			}
 			while(true) {

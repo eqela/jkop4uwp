@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class WebWidget
 	{
 		public WebWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -82,11 +81,11 @@ namespace cave.ui
 		private void updateWidgetContent() {
 			var url = widgetUrl;
 			if(!(object.Equals(url, null))) {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.WebWidget.updateWidgetContent] (WebWidget.sling:158:3): Not implemented");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.WebWidget.updateWidgetContent] (WebWidget.sling:159:3): Not implemented");
 			}
 			else {
 				var htmlString = widgetHtmlString;
-				System.Diagnostics.Debug.WriteLine("[cave.ui.WebWidget.updateWidgetContent] (WebWidget.sling:184:3): Not implemented");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.WebWidget.updateWidgetContent] (WebWidget.sling:185:3): Not implemented");
 			}
 		}
 

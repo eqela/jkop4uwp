@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class ImageWidget : Windows.UI.Xaml.Controls.Control, cave.ui.WidgetWithLayout
 	{
 		public ImageWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

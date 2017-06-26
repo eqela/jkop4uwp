@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class CharacterIteratorForBuffer : cape.CharacterDecoder, cape.Duplicateable
 	{
 		private byte[] buffer = null;

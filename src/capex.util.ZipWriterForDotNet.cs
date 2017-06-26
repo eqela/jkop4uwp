@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class ZipWriterForDotNet : capex.util.ZipWriter
 	{
 		public ZipWriterForDotNet() : base() {
@@ -33,22 +32,30 @@ namespace capex.util
 		private System.IO.Compression.ZipArchive archive = null;
 
 		public capex.util.ZipWriterForDotNet initialize() {
-			if(file == null) {
+			if(!(file != null)) {
 				return(null);
 			}
 			var fp = file.getPath();
-			if(object.Equals(fp, null)) {
+			if(!(fp != null)) {
 				return(null);
 			}
-			archive = System.IO.Compression.ZipFile.Open(fp, System.IO.Compression.ZipArchiveMode.Create);
-			if(archive == null) {
+			try {
+				archive = System.IO.Compression.ZipFile.Open(fp, System.IO.Compression.ZipArchiveMode.Create);
+			}
+			catch(System.Exception e) {
+				return(null);
+			}
+			if(!(archive != null)) {
 				return(null);
 			}
 			return(this);
 		}
 
 		public override bool addFile(cape.File file, string filename) {
-			if(archive == null || file == null) {
+			if(!(archive != null)) {
+				return(false);
+			}
+			if(!(file != null)) {
 				return(false);
 			}
 			if(System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(archive, file.getPath(), filename) == null) {
@@ -58,7 +65,7 @@ namespace capex.util
 		}
 
 		public override bool close() {
-			if(archive == null) {
+			if(!(archive != null)) {
 				return(false);
 			}
 			archive.Dispose();

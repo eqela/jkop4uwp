@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class SimpleConfigFile
 	{
 		public static capex.util.SimpleConfigFile forFile(cape.File file) {
 			var v = new capex.util.SimpleConfigFile();
-			if(v.read(file) == false) {
-				v = null;
+			if(!v.read(file)) {
+				return(null);
 			}
 			return(v);
 		}
@@ -42,7 +41,7 @@ namespace capex.util
 
 		public static cape.DynamicMap readFileAsMap(cape.File file) {
 			var cf = capex.util.SimpleConfigFile.forFile(file);
-			if(cf == null) {
+			if(!(cf != null)) {
 				return(null);
 			}
 			return(cf.getDataAsMap());
@@ -61,11 +60,14 @@ namespace capex.util
 		}
 
 		public cape.File getRelativeFile(string fileName) {
-			if(file == null || object.Equals(fileName, null)) {
+			if(!(file != null)) {
+				return(null);
+			}
+			if(!(fileName != null)) {
 				return(null);
 			}
 			var p = file.getParent();
-			if(p == null) {
+			if(!(p != null)) {
 				return(null);
 			}
 			return(p.entry(fileName));
@@ -81,7 +83,7 @@ namespace capex.util
 			var keys = map.iterateKeys();
 			while(keys != null) {
 				var key = keys.next();
-				if(object.Equals(key, null)) {
+				if(!(key != null)) {
 					break;
 				}
 				data.add((string)key, (string)map.getString(key));
@@ -90,12 +92,12 @@ namespace capex.util
 		}
 
 		public cape.DynamicMap getDataAsMap() {
-			if(mapData == null) {
+			if(!(mapData != null)) {
 				mapData = new cape.DynamicMap();
 				var it = data.iterate();
 				while(it != null) {
 					var kvp = it.next();
-					if(kvp == null) {
+					if(!(kvp != null)) {
 						break;
 					}
 					mapData.set(kvp.key, (object)kvp.value);
@@ -106,11 +108,11 @@ namespace capex.util
 
 		public cape.DynamicMap getDynamicMapValue(string key, cape.DynamicMap defval) {
 			var str = getStringValue(key, null);
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(defval);
 			}
 			var v = cape.JSONParser.parse(str) as cape.DynamicMap;
-			if(v == null) {
+			if(!(v != null)) {
 				return(defval);
 			}
 			return(v);
@@ -118,11 +120,11 @@ namespace capex.util
 
 		public cape.DynamicVector getDynamicVectorValue(string key, cape.DynamicVector defval) {
 			var str = getStringValue(key, null);
-			if(object.Equals(str, null)) {
+			if(!(str != null)) {
 				return(defval);
 			}
 			var v = cape.JSONParser.parse(str) as cape.DynamicVector;
-			if(v == null) {
+			if(!(v != null)) {
 				return(defval);
 			}
 			return(v);
@@ -130,11 +132,11 @@ namespace capex.util
 
 		public string getStringValue(string key, string defval = null) {
 			var map = getDataAsMap();
-			if(map == null) {
+			if(!(map != null)) {
 				return(defval);
 			}
 			var v = map.getString(key);
-			if(object.Equals(v, null)) {
+			if(!(v != null)) {
 				return(defval);
 			}
 			if(cape.String.startsWith(v, "\"\"\"\n") && cape.String.endsWith(v, "\n\"\"\"")) {
@@ -145,7 +147,7 @@ namespace capex.util
 
 		public int getIntegerValue(string key, int defval = 0) {
 			var map = getDataAsMap();
-			if(map == null) {
+			if(!(map != null)) {
 				return(defval);
 			}
 			return(map.getInteger(key, defval));
@@ -153,7 +155,7 @@ namespace capex.util
 
 		public double getDoubleValue(string key, double defval = 0.00) {
 			var map = getDataAsMap();
-			if(map == null) {
+			if(!(map != null)) {
 				return(defval);
 			}
 			return(map.getDouble(key, defval));
@@ -161,7 +163,7 @@ namespace capex.util
 
 		public bool getBooleanValue(string key, bool defval = false) {
 			var map = getDataAsMap();
-			if(map == null) {
+			if(!(map != null)) {
 				return(defval);
 			}
 			return(map.getBoolean(key, defval));
@@ -169,25 +171,25 @@ namespace capex.util
 
 		public cape.File getFileValue(string key, cape.File defval = null) {
 			var v = getRelativeFile(getStringValue(key, null));
-			if(v == null) {
+			if(!(v != null)) {
 				return(defval);
 			}
 			return(v);
 		}
 
 		public cape.Iterator<cape.KeyValuePair<string, string>> iterate() {
-			if(data == null) {
+			if(!(data != null)) {
 				return(null);
 			}
 			return(data.iterate());
 		}
 
 		public virtual bool read(cape.File file) {
-			if(file == null) {
+			if(!(file != null)) {
 				return(false);
 			}
 			var reader = file.read();
-			if(reader == null) {
+			if(!(reader != null)) {
 				return(false);
 			}
 			var ins = new cape.PrintReader((cape.Reader)reader);
@@ -195,7 +197,7 @@ namespace capex.util
 			string tag = null;
 			cape.StringBuilder lineBuffer = null;
 			string terminator = null;
-			while(!(object.Equals(line = ins.readLine(), null))) {
+			while((line = ins.readLine()) != null) {
 				if(lineBuffer != null) {
 					lineBuffer.append(line);
 					if(object.Equals(line, terminator)) {
@@ -214,7 +216,7 @@ namespace capex.util
 				}
 				if(cape.String.endsWith(line, "{")) {
 					if(cape.String.indexOf(line, ':') < 0) {
-						if(object.Equals(tag, null)) {
+						if(!(tag != null)) {
 							tag = cape.String.strip(cape.String.getSubString(line, 0, cape.String.getLength(line) - 1));
 						}
 						continue;
@@ -241,12 +243,12 @@ namespace capex.util
 					terminator = "\"\"\"";
 					continue;
 				}
-				if(!(object.Equals(tag, null)) && object.Equals(line, "}")) {
+				if(tag != null && object.Equals(line, "}")) {
 					tag = null;
 					continue;
 				}
 				var sp = cape.String.split(line, ':', 2);
-				if(sp == null) {
+				if(!(sp != null)) {
 					continue;
 				}
 				var key = cape.String.strip(cape.Vector.get(sp, 0));
@@ -257,7 +259,7 @@ namespace capex.util
 				if(cape.String.isEmpty(key)) {
 					continue;
 				}
-				if(!(object.Equals(tag, null))) {
+				if(tag != null) {
 					key = key + "[" + tag + "]";
 				}
 				data.add((string)key, (string)val);
@@ -267,17 +269,20 @@ namespace capex.util
 		}
 
 		public virtual bool write(cape.File outfile) {
-			if(outfile == null || data == null) {
+			if(!(outfile != null)) {
+				return(false);
+			}
+			if(!(data != null)) {
 				return(false);
 			}
 			var os = cape.PrintWriterWrapper.forWriter((cape.Writer)outfile.write());
-			if(os == null) {
+			if(!(os != null)) {
 				return(false);
 			}
 			var it = data.iterate();
 			while(it != null) {
 				var kvp = it.next();
-				if(kvp == null) {
+				if(!(kvp != null)) {
 					break;
 				}
 				os.println(kvp.key + ": " + kvp.value);

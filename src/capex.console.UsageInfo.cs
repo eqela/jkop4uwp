@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.console
-{
+namespace capex.console {
 	public class UsageInfo
 	{
 		public static capex.console.UsageInfo forCommand(string command) {

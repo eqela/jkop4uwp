@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class DynamicMap : cape.Duplicateable, cape.Iterateable<string>
 	{
 		public static cape.DynamicMap asDynamicMap(object @object) {
-			if(@object == null) {
+			if(!(@object != null)) {
 				return(null);
 			}
 			if(@object is cape.DynamicMap) {
@@ -128,7 +127,7 @@ namespace cape
 		}
 
 		public cape.DynamicMap set(string key, object value) {
-			if(!(object.Equals(key, null))) {
+			if(key != null) {
 				map[key] = value;
 			}
 			return(this);
@@ -142,6 +141,10 @@ namespace cape
 			return(set(key, (object)cape.Integer.asObject(value)));
 		}
 
+		public cape.DynamicMap set(string key, long value) {
+			return(set(key, (object)cape.LongInteger.asObject(value)));
+		}
+
 		public cape.DynamicMap set(string key, bool value) {
 			return(set(key, (object)cape.Boolean.asObject(value)));
 		}
@@ -151,7 +154,7 @@ namespace cape
 		}
 
 		public object get(string key) {
-			return(cape.Map.get(map, key, null));
+			return(cape.Map.getValue(map, key));
 		}
 
 		public string getString(string key, string defval = null) {
@@ -168,6 +171,14 @@ namespace cape
 				return(defval);
 			}
 			return(cape.Integer.asInteger(vv));
+		}
+
+		public long getLongInteger(string key, long defval = (long)0) {
+			var vv = get(key);
+			if(vv == null) {
+				return(defval);
+			}
+			return(cape.LongInteger.asLong(vv));
 		}
 
 		public bool getBoolean(string key, bool defval = false) {
@@ -188,7 +199,7 @@ namespace cape
 
 		public byte[] getBuffer(string key) {
 			var vv = get(key);
-			if(vv == null) {
+			if(!(vv != null)) {
 				return(null);
 			}
 			return(cape.Buffer.asBuffer(vv));
@@ -208,7 +219,7 @@ namespace cape
 
 		public System.Collections.Generic.List<object> getVector(string key) {
 			var val = get(key);
-			if(val == null) {
+			if(!(val != null)) {
 				return(null);
 			}
 			if(val is System.Collections.Generic.List<object>) {
@@ -227,15 +238,7 @@ namespace cape
 		}
 
 		public System.Collections.Generic.List<string> getKeys() {
-			var v = new System.Collections.Generic.List<string>();
-			var it = iterateKeys();
-			while(true) {
-				var kk = it.next();
-				if(object.Equals(kk, null)) {
-					break;
-				}
-				v.Add(kk);
-			}
+			System.Collections.Generic.List<string> v = cape.Map.getKeys(map);
 			return(v);
 		}
 

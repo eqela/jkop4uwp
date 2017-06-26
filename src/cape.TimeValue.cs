@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class TimeValue
 	{
 		public TimeValue() {
@@ -37,6 +36,14 @@ namespace cape
 
 		private long seconds = (long)0;
 		private long microSeconds = (long)0;
+
+		public string toString() {
+			var sb = new cape.StringBuilder();
+			sb.append(cape.String.forLongInteger(seconds));
+			sb.append('.');
+			sb.append(cape.String.forLongInteger(microSeconds));
+			return(sb.toString());
+		}
 
 		public cape.TimeValue dup() {
 			var v = new cape.TimeValue();

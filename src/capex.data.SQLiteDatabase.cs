@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
+namespace capex.data {
 	public abstract class SQLiteDatabase : capex.data.SQLDatabase
 	{
 		public SQLiteDatabase() : base() {
@@ -35,17 +34,17 @@ namespace capex.data
 		}
 
 		public static capex.data.SQLiteDatabase forFile(cape.File file, bool allowCreate = true, cape.LoggingContext logger = null) {
-			if(file == null) {
+			if(!(file != null)) {
 				return(null);
 			}
 			var v = capex.data.SQLiteDatabase.instance();
-			if(v == null) {
+			if(!(v != null)) {
 				return(null);
 			}
 			if(logger != null) {
 				v.setLogger(logger);
 			}
-			if(file.isFile() == false) {
+			if(!file.isFile()) {
 				if(allowCreate == false) {
 					return(null);
 				}
@@ -75,7 +74,7 @@ namespace capex.data
 
 		public override cape.DynamicMap querySingleRow(capex.data.SQLStatement stmt) {
 			var it = query(stmt);
-			if(it == null) {
+			if(!(it != null)) {
 				return(null);
 			}
 			var v = it.next();
@@ -83,19 +82,19 @@ namespace capex.data
 		}
 
 		public override bool tableExists(string table) {
-			if(object.Equals(table, null)) {
+			if(!(table != null)) {
 				return(false);
 			}
 			var stmt = prepare("SELECT name FROM sqlite_master WHERE type='table' AND name=?;");
-			if(stmt == null) {
+			if(!(stmt != null)) {
 				return(false);
 			}
 			stmt.addParamString(table);
 			var sr = querySingleRow(stmt);
-			if(sr == null) {
+			if(!(sr != null)) {
 				return(false);
 			}
-			if(cape.String.equals(table, sr.getString("name")) == false) {
+			if(!cape.String.equals(table, sr.getString("name"))) {
 				return(false);
 			}
 			return(true);
@@ -110,11 +109,11 @@ namespace capex.data
 
 		public override System.Collections.Generic.List<object> queryAllTableNames() {
 			var stmt = prepare("SELECT name FROM sqlite_master WHERE type='table';");
-			if(stmt == null) {
+			if(!(stmt != null)) {
 				return(null);
 			}
 			var it = query(stmt);
-			if(it == null) {
+			if(!(it != null)) {
 				return(null);
 			}
 			var v = new System.Collections.Generic.List<object>();
@@ -171,7 +170,10 @@ namespace capex.data
 		}
 
 		public override capex.data.SQLStatement prepareCreateTableStatement(string table, System.Collections.Generic.List<capex.data.SQLTableColumnInfo> columns) {
-			if(object.Equals(table, null) || columns == null) {
+			if(!(table != null)) {
+				return(null);
+			}
+			if(!(columns != null)) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -199,7 +201,7 @@ namespace capex.data
 		}
 
 		public override capex.data.SQLStatement prepareDeleteTableStatement(string table) {
-			if(object.Equals(table, null)) {
+			if(!(table != null)) {
 				return(null);
 			}
 			var sb = new cape.StringBuilder();
@@ -210,7 +212,10 @@ namespace capex.data
 		}
 
 		public override capex.data.SQLStatement prepareCreateIndexStatement(string table, string column, bool unique) {
-			if(object.Equals(table, null) || object.Equals(column, null)) {
+			if(!(table != null)) {
+				return(null);
+			}
+			if(!(column != null)) {
 				return(null);
 			}
 			var unq = "";
@@ -219,6 +224,14 @@ namespace capex.data
 			}
 			var sql = "CREATE " + unq + "INDEX " + table + "_" + column + " ON " + table + " (" + column + ")";
 			return(prepare(sql));
+		}
+
+		public override long getLastInsertId(string table) {
+			var v = querySingleRow(prepare("SELECT ROWID AS id FROM " + table + " ORDER BY ROWID DESC LIMIT 1;"));
+			if(!(v != null)) {
+				return((long)0);
+			}
+			return((long)v.getInteger("id"));
 		}
 	}
 }

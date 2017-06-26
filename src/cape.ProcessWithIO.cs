@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface ProcessWithIO : cape.Process
 	{
 		cape.Writer getStandardInput();

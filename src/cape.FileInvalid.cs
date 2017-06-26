@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class FileInvalid : cape.FileAdapter
 	{
 		public FileInvalid() : base() {

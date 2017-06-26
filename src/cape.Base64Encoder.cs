@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class Base64Encoder
 	{
 		public Base64Encoder() {

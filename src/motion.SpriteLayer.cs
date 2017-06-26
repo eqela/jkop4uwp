@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public interface SpriteLayer
 	{
 		motion.TextureSprite addTextureSpriteForSize(motion.Texture texture, double width, double height);

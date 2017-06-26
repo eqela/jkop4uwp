@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public abstract class SSLSocket : capex.net.ConnectedSocket
 	{
 		public SSLSocket() {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface BufferDataReceiver
 	{
 		void onBufferData(byte[] data, long size);

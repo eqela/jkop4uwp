@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.map
-{
+namespace capex.map {
 	public class GeoCoderForGoogleMapsAPI : capex.map.GeoCoder
 	{
 		public static capex.map.GeoCoderForGoogleMapsAPI forAPIKey(string apiKey) {

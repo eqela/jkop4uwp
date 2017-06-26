@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	internal class FileForDotNet : cape.FileAdapter
 	{
 		private class MyFileReader : cape.DotNetStreamReader
@@ -149,7 +148,7 @@ namespace cape
 				var l = cape.String.getLength(x);
 				var c1 = cape.String.getChar(x, 1);
 				if(l == 2 && c1 == ':') {
-					completePath = x + "\\";
+					completePath = x + @"\";
 					return;
 				}
 				if(l == 3 && c1 == ':' && cape.String.getChar(x, 2) == '\\') {

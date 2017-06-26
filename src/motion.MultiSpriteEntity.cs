@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public class MultiSpriteEntity : motion.Entity
 	{
 		public MultiSpriteEntity() : base() {

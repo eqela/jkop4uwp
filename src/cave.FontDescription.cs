@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave
-{
+namespace cave {
 	public class FontDescription
 	{
 		public static cave.FontDescription forDefault() {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.google.maps
-{
+namespace cave.google.maps {
 	public class MapWidget : cave.ui.ScreenAwareWidget
 	{
 		public MapWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

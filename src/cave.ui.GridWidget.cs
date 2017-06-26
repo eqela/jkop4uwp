@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class GridWidget : cave.ui.CustomContainerWidget
 	{
 		public GridWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

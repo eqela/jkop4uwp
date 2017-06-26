@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class FileFinder : cape.Iterator<cape.File>
 	{
 		public static cape.FileFinder forRoot(cape.File root) {

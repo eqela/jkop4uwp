@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public class SceneManager
 	{
 		public static motion.SceneManager forScene(motion.Scene scene, motion.Backend backend) {

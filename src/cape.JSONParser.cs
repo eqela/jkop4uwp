@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class JSONParser
 	{
-		private class NullObject
+		public class NullObject
 		{
 			public NullObject() {
 			}
@@ -56,6 +55,10 @@ namespace cape
 		private cape.CharacterIterator iterator = null;
 
 		private JSONParser(string str) {
+			setDataString(str);
+		}
+
+		public void setDataString(string str) {
 			iterator = (cape.CharacterIterator)new cape.CharacterIteratorForString(str);
 			iterator.moveToNextChar();
 		}
@@ -89,9 +92,17 @@ namespace cape
 			if(ss != '\'' && ss != '\"') {
 				return(null);
 			}
+			var i = 0;
 			var sb = new cape.StringBuilder();
 			while(true) {
 				var c = iterator.getNextChar();
+				i++;
+				if(c < 1) {
+					for(var n = 0 ; n < i ; n++) {
+						iterator.moveToPreviousChar();
+					}
+					return(null);
+				}
 				if(c == ss) {
 					iterator.moveToNextChar();
 					break;
@@ -248,7 +259,7 @@ namespace cape
 				return((object)v1);
 			}
 			var s = acceptString();
-			if(!(object.Equals(s, null))) {
+			if(s != null) {
 				return((object)s);
 			}
 			var b = acceptBoolean();
@@ -264,6 +275,61 @@ namespace cape
 				return(v2);
 			}
 			return(null);
+		}
+
+		public object getNextToken() {
+			if(acceptChar('[')) {
+				return((object)"[");
+			}
+			if(acceptChar(']')) {
+				return((object)"]");
+			}
+			if(acceptChar('{')) {
+				return((object)"{");
+			}
+			if(acceptChar('}')) {
+				return((object)"}");
+			}
+			if(acceptChar(',')) {
+				return((object)",");
+			}
+			var s = acceptString();
+			if(s != null) {
+				return((object)s);
+			}
+			var b = acceptBoolean();
+			if(b != null) {
+				return((object)b);
+			}
+			var n = acceptNull();
+			if(n != null) {
+				return((object)n);
+			}
+			var v = acceptNumber();
+			if(v != null) {
+				return(v);
+			}
+			return(null);
+		}
+
+		public void pushData(string @string) {
+			if(!(@string != null)) {
+				return;
+			}
+			if(iterator == null) {
+				setDataString(@string);
+				return;
+			}
+			var sb = new cape.StringBuilder();
+			while(true) {
+				var c = iterator.getNextChar();
+				if(c < 1) {
+					break;
+				}
+				sb.append(c);
+			}
+			sb.append(@string);
+			setDataString(sb.toString());
 		}
 	}
 }

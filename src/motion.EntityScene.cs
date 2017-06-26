@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public interface EntityScene
 	{
 		void addEntity(motion.Entity entity);

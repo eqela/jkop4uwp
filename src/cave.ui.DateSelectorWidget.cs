@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class DateSelectorWidget : cave.ui.LayerWidget, cave.ui.WidgetWithValue
 	{
 		public DateSelectorWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

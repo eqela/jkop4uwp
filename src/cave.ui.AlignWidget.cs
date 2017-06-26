@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class AlignWidget : cave.ui.CustomContainerWidget
 	{
 		public AlignWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

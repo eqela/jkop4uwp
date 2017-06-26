@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
+namespace capex.data {
 	public class SQLTableInfo
 	{
 		public SQLTableInfo() {
@@ -89,7 +88,7 @@ namespace capex.data
 		}
 
 		public capex.data.SQLTableInfo addLongColumn(string name) {
-			return(addColumn(capex.data.SQLTableColumnInfo.forLong(name)));
+			return(addColumn(capex.data.SQLTableColumnInfo.forLongInteger(name)));
 		}
 
 		public capex.data.SQLTableInfo addStringColumn(string name) {
@@ -109,7 +108,7 @@ namespace capex.data
 		}
 
 		public capex.data.SQLTableInfo addLongKeyColumn(string name) {
-			return(addColumn(capex.data.SQLTableColumnInfo.forLongKey(name)));
+			return(addColumn(capex.data.SQLTableColumnInfo.forLongIntegerKey(name)));
 		}
 
 		public capex.data.SQLTableInfo addDoubleColumn(string name) {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class SwitcherLayerWidget : cave.ui.CustomContainerWidget
 	{
 		public SwitcherLayerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

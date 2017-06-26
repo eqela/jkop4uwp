@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class ToolbarWidget : cave.ui.LayerWidget
 	{
 		public ToolbarWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

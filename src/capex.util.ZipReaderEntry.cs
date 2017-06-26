@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class ZipReaderEntry
 	{
 		public ZipReaderEntry() {
@@ -52,14 +51,14 @@ namespace capex.util
 		}
 
 		public virtual bool writeToFile(cape.File file) {
-			if(file == null) {
+			if(!(file != null)) {
 				return(false);
 			}
 			if(getIsDirectory()) {
 				return(file.createDirectoryRecursive());
 			}
 			var reader = getContentReader();
-			if(reader == null) {
+			if(!(reader != null)) {
 				return(false);
 			}
 			var fp = file.getParent();
@@ -67,7 +66,7 @@ namespace capex.util
 				fp.createDirectoryRecursive();
 			}
 			var writer = file.write();
-			if(writer == null) {
+			if(!(writer != null)) {
 				if(reader is cape.Closable) {
 					((cape.Closable)reader).close();
 				}
@@ -83,7 +82,7 @@ namespace capex.util
 					break;
 				}
 			}
-			if(v == false) {
+			if(!v) {
 				file.remove();
 			}
 			if(reader != null && reader is cape.Closable) {
@@ -96,7 +95,10 @@ namespace capex.util
 		}
 
 		public cape.File writeToDir(cape.File dir, bool fullPath = true, bool overwrite = true) {
-			if(dir == null || object.Equals(name, null)) {
+			if(!(dir != null)) {
+				return(null);
+			}
+			if(!(name != null)) {
 				return(null);
 			}
 			cape.File path = null;
@@ -123,17 +125,17 @@ namespace capex.util
 					for(n = 0 ; n < m ; n++) {
 						var x = array[n];
 						if(x != null) {
-							if(!(object.Equals(x, null)) && cape.String.getLength(x) > 0) {
+							if(x != null && cape.String.getLength(x) > 0) {
 								path = path.entry(x);
 							}
 						}
 					}
 				}
 				var dd = path.getParent();
-				if(dd.isDirectory() == false) {
+				if(!dd.isDirectory()) {
 					dd.createDirectoryRecursive();
 				}
-				if(dd.isDirectory() == false) {
+				if(!dd.isDirectory()) {
 					return(null);
 				}
 			}
@@ -142,7 +144,7 @@ namespace capex.util
 					return(null);
 				}
 			}
-			if(writeToFile(path) == false) {
+			if(!writeToFile(path)) {
 				return(null);
 			}
 			return(path);

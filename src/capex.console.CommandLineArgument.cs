@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.console
-{
+namespace capex.console {
 	public class CommandLineArgument
 	{
 		public string arg = null;
@@ -41,42 +40,42 @@ namespace capex.console
 		}
 
 		public bool isParameter() {
-			if(!(object.Equals(parameter, null))) {
+			if(parameter != null) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isFlag() {
-			if(!(object.Equals(flag, null))) {
+			if(flag != null) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isOption() {
-			if(!(object.Equals(key, null))) {
+			if(key != null) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isFlag(string text) {
-			if(!(object.Equals(text, null)) && object.Equals(text, flag)) {
+			if(text != null && object.Equals(text, flag)) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool isOption(string text) {
-			if(!(object.Equals(text, null)) && object.Equals(text, key)) {
+			if(text != null && object.Equals(text, key)) {
 				return(true);
 			}
 			return(false);
 		}
 
 		public bool hasValue() {
-			if(!(object.Equals(value, null))) {
+			if(value != null) {
 				return(true);
 			}
 			return(false);

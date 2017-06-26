@@ -22,11 +22,15 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class SystemClock
 	{
 		public SystemClock() {
+		}
+
+		public static long getTimezoneOffsetAsSeconds() {
+			System.Diagnostics.Debug.WriteLine("[cape.SystemClock.getTimezoneOffsetAsSeconds] (SystemClock.sling:56:2): Not implemented");
+			return((long)0);
 		}
 
 		public static long asSeconds() {
@@ -41,6 +45,11 @@ namespace cape
 			var v = new cape.TimeValue();
 			cape.SystemClock.update(v);
 			return(v);
+		}
+
+		public static string asString() {
+			var tv = cape.SystemClock.asTimeValue();
+			return(tv.toString());
 		}
 
 		public static void update(cape.TimeValue v) {

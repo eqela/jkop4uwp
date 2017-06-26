@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.crypto
-{
+namespace capex.crypto {
 	public class BlockCipherWriter : cape.Writer, cape.SeekableWriter
 	{
 		public BlockCipherWriter() {

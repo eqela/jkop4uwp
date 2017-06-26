@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.pim
-{
+namespace cave.pim {
 	public class Contact
 	{
 		public Contact() {

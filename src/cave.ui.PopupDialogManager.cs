@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class PopupDialogManager
 	{
 		private cave.GuiApplicationContext context = null;

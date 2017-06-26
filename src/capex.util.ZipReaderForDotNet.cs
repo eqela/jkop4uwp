@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.util
-{
+namespace capex.util {
 	public class ZipReaderForDotNet : capex.util.ZipReader
 	{
 		public ZipReaderForDotNet() : base() {
@@ -44,7 +43,7 @@ namespace capex.util
 				catch(System.Exception e) {
 					stream = null;
 				}
-				if(stream == null) {
+				if(!(stream != null)) {
 					return(null);
 				}
 				return((cape.Reader)cape.DotNetStreamReader.forStream(stream));
@@ -64,15 +63,15 @@ namespace capex.util
 		private System.IO.Compression.ZipArchive archive = null;
 
 		public capex.util.ZipReaderForDotNet initialize() {
-			if(file == null) {
+			if(!(file != null)) {
 				return(null);
 			}
 			var fp = file.getPath();
-			if(object.Equals(fp, null)) {
+			if(!(fp != null)) {
 				return(null);
 			}
 			archive = System.IO.Compression.ZipFile.Open(fp, System.IO.Compression.ZipArchiveMode.Read);
-			if(archive == null) {
+			if(!(archive != null)) {
 				return(null);
 			}
 			return(this);

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class ButtonWidget : Windows.UI.Xaml.Controls.Button
 	{
 		public ButtonWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {

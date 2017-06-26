@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	/// <summary>
 	/// The ProcessLauncher class provides a mechanism for starting and controlling
 	/// additional processes.

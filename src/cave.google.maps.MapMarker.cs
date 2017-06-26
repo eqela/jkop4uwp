@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.google.maps
-{
+namespace cave.google.maps {
 	public interface MapMarker
 	{
 		double getLat();

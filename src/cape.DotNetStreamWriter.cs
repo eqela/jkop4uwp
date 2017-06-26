@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class DotNetStreamWriter : cape.Writer, cape.PrintWriter, cape.Closable, cape.SeekableWriter, cape.FlushableWriter
 	{
 		public DotNetStreamWriter() {

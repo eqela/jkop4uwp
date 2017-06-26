@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface VectorObject<T> : cape.ObjectWithSize
 	{
 		System.Collections.Generic.List<T> toVector();

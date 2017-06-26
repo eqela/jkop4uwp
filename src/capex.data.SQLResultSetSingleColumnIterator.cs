@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-namespace capex.data
-{
-	public class SQLResultSetSingleColumnIterator : cape.DynamicIterator, cape.StringIterator, cape.IntegerIterator, cape.DoubleIterator, cape.BooleanIterator, cape.Iterator<object>
+namespace capex.data {
+	public class SQLResultSetSingleColumnIterator : cape.DynamicIterator, cape.StringIterator, cape.IntegerIterator, cape.LongIntegerIterator, cape.DoubleIterator, cape.BooleanIterator, cape.Iterator<object>
 	{
 		public SQLResultSetSingleColumnIterator() {
 		}
@@ -65,6 +64,14 @@ namespace capex.data
 				return(0);
 			}
 			return(m.getInteger(columnName));
+		}
+
+		public virtual long nextLong() {
+			var m = nextMap();
+			if(m == null) {
+				return((long)0);
+			}
+			return(m.getLongInteger(columnName));
 		}
 
 		public virtual double nextDouble() {

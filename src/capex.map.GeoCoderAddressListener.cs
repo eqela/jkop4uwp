@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.map
-{
+namespace capex.map {
 	public interface GeoCoderAddressListener
 	{
 		void onQueryAddressCompleted(capex.map.PhysicalAddress address);

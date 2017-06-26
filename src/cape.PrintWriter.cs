@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface PrintWriter : cape.Writer
 	{
 		bool print(string str);

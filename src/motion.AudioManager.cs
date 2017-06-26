@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace motion
-{
+namespace motion {
 	public abstract class AudioManager
 	{
 		public AudioManager() {

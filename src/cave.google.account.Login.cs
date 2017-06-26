@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.google.account
-{
+namespace cave.google.account {
 	public class Login
 	{
 		public Login() {

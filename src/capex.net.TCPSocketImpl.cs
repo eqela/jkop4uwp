@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.net
-{
+namespace capex.net {
 	public class TCPSocketImpl : capex.net.TCPSocket
 	{
 		public TCPSocketImpl() : base() {

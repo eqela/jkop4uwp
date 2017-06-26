@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public class Vector
 	{
 		public Vector() {
@@ -31,14 +30,14 @@ namespace cape
 
 		public static System.Collections.Generic.List<T> asVector<T>(object obj) {
 			var vo = obj as cape.VectorObject<T>;
-			if(vo == null) {
+			if(!(vo != null)) {
 				return(null);
 			}
 			return(vo.toVector());
 		}
 
 		public static System.Collections.Generic.List<T> forIterator<T>(cape.Iterator<T> iterator) {
-			if(iterator == null) {
+			if(!(iterator != null)) {
 				return(null);
 			}
 			var v = new System.Collections.Generic.List<T>();
@@ -53,7 +52,7 @@ namespace cape
 		}
 
 		public static System.Collections.Generic.List<T> forArray<T>(T[] array) {
-			if(array == null) {
+			if(!(array != null)) {
 				return(null);
 			}
 			var v = new System.Collections.Generic.List<T>();
@@ -73,6 +72,13 @@ namespace cape
 
 		public static void insert<T>(System.Collections.Generic.List<T> vector, T @object, int index) {
 			vector.Insert(index, @object);
+		}
+
+		public static void setCapacity<T>(System.Collections.Generic.List<T> vector, int capacity) {
+			if(!(vector != null)) {
+				return;
+			}
+			vector.Capacity = capacity;
 		}
 
 		public static int getSize<T>(System.Collections.Generic.List<T> vector) {
@@ -178,7 +184,7 @@ namespace cape
 				this.vector = vector;
 				this.increment = increment;
 				if(increment < 0 && vector != null) {
-					index = cape.Vector.getSize(vector) - 1;
+					index = vector.Count - 1;
 				}
 			}
 
@@ -186,7 +192,7 @@ namespace cape
 				if(vector == null) {
 					return((T)default(T));
 				}
-				if(index < 0 || index >= cape.Vector.getSize(vector)) {
+				if(index < 0 || index >= vector.Count) {
 					return((T)default(T));
 				}
 				var v = vector[index];
@@ -204,7 +210,7 @@ namespace cape
 		}
 
 		public static void sort<T>(System.Collections.Generic.List<T> vector, System.Func<T, T, int> comparer) {
-			if(vector == null) {
+			if(!(vector != null)) {
 				return;
 			}
 			vector.Sort((a,b) => { return(comparer(a,b)); });

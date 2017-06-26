@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class VerticalScrollerWidget : Windows.UI.Xaml.Controls.UserControl, cave.ui.WidgetWithLayout, cave.ui.HeightAwareWidget
 	{
 		public VerticalScrollerWidget() : this(cave.GuiApplicationContextForUWP.getInstance()) {
@@ -41,6 +40,9 @@ namespace cave.ui
 
 		public VerticalScrollerWidget(cave.GuiApplicationContext context) {
 			this.Content = new Windows.UI.Xaml.Controls.ScrollViewer();
+		}
+
+		public void setWidgetScrollBarDisabled(bool value) {
 		}
 
 		public virtual void onWidgetHeightChanged(int height) {

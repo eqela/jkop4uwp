@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cape
-{
+namespace cape {
 	public interface SizedReader : cape.Reader
 	{
 		int getSize();

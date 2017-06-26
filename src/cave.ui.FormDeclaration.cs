@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class FormDeclaration
 	{
 		public static cave.ui.FormDeclaration forDescription(string desc) {

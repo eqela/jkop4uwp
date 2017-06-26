@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace capex.console
-{
+namespace capex.console {
 	public class Stdin
 	{
 		public Stdin() {

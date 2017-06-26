@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-namespace cave.ui
-{
+namespace cave.ui {
 	public class Widget
 	{
 		public class MyWidgetInfo
@@ -136,7 +135,7 @@ namespace cave.ui
 				}
 			}
 			else {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.addChild] (Widget.sling:179:3): Unsupported parent type when adding a child widget");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.addChild] (Widget.sling:180:3): Unsupported parent type when adding a child widget");
 			}
 			var pp = parent as cave.ui.CustomContainerWidget;
 			if(pp != null) {
@@ -158,7 +157,7 @@ namespace cave.ui
 				return(null);
 			}
 			var pp = parentWidget as cave.ui.CustomContainerWidget;
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.removeFromParent] (Widget.sling:215:2): Not implemented.");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.removeFromParent] (Widget.sling:216:2): Not implemented.");
 			if(pp != null) {
 				pp.onChildWidgetRemoved(child);
 			}
@@ -217,6 +216,24 @@ namespace cave.ui
 			}
 			var v = 0;
 			v = (int)cave.ui.Widget.getMyWidgetInfo(widget).y;
+			return(v);
+		}
+
+		public static int getAbsoluteX(Windows.UI.Xaml.UIElement widget) {
+			if(!(widget != null)) {
+				return(0);
+			}
+			var v = 0;
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.getAbsoluteX] (Widget.sling:409:2): Not implemented");
+			return(v);
+		}
+
+		public static int getAbsoluteY(Windows.UI.Xaml.UIElement widget) {
+			if(!(widget != null)) {
+				return(0);
+			}
+			var v = 0;
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.getAbsoluteY] (Widget.sling:431:2): Not implemented");
 			return(v);
 		}
 
@@ -358,6 +375,8 @@ namespace cave.ui
 		}
 
 		private static Windows.UI.Xaml.Input.PointerEventHandler existingWidgetClickHandler = null;
+		private static Windows.UI.Xaml.Input.DoubleTappedEventHandler existingWidgetDoubleClickHandler = null;
+		private static bool singleClick = false;
 
 		public static void setWidgetClickHandler(Windows.UI.Xaml.UIElement widget, System.Action handler) {
 			if(widget is cave.ui.CustomContainerWidget) {
@@ -373,10 +392,36 @@ namespace cave.ui
 				cave.ui.Widget.existingWidgetClickHandler = null;
 			}
 			if(handler != null) {
-				existingWidgetClickHandler = (object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e) => {
-					handler();
+				existingWidgetClickHandler = async (object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e) => {
+					singleClick = true;
+					await System.Threading.Tasks.Task.Delay(200);
+					if(singleClick) {
+						handler();
+					}
 				};
 				widget.PointerReleased += existingWidgetClickHandler;
+			}
+		}
+
+		public static void setWidgetDoubleClickHandler(Windows.UI.Xaml.UIElement widget, System.Action handler) {
+			if(widget is cave.ui.CustomContainerWidget) {
+				if(!(handler != null)) {
+					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(false);
+				}
+				else {
+					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(true);
+				}
+			}
+			if(cave.ui.Widget.existingWidgetDoubleClickHandler != null) {
+				widget.DoubleTapped -= existingWidgetDoubleClickHandler;
+				cave.ui.Widget.existingWidgetDoubleClickHandler = null;
+			}
+			if(handler != null) {
+				existingWidgetDoubleClickHandler = (object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e) => {
+					singleClick = false;
+					handler();
+				};
+				widget.DoubleTapped += existingWidgetDoubleClickHandler;
 			}
 		}
 
@@ -389,7 +434,7 @@ namespace cave.ui
 					((cave.ui.CustomContainerWidget)widget).togglePointerEventHandling(true);
 				}
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetLongClickHandler] (Widget.sling:884:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetLongClickHandler] (Widget.sling:1028:2): Not implemented");
 		}
 
 		public static void setWidgetPointerHandlers(Windows.UI.Xaml.UIElement widget, System.Action<double, double> onStartHandler = null, System.Action<double, double> onTouchHandler = null, System.Action<double, double> onEndHandler = null) {
@@ -402,10 +447,10 @@ namespace cave.ui
 				}
 			}
 			if(onStartHandler != null) {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:969:3): setWidgetPointerHandlers/onStartHandler: Not implemented");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:1118:3): setWidgetPointerHandlers/onStartHandler: Not implemented");
 			}
 			if(onTouchHandler != null) {
-				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:972:3): setWidgetPointerHandlers/onStartHandler: Not implemented");
+				System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setWidgetPointerHandlers] (Widget.sling:1121:3): setWidgetPointerHandlers/onStartHandler: Not implemented");
 			}
 			if(onEndHandler != null) {
 				cave.ui.Widget.setWidgetClickHandler(widget, () => {
@@ -460,7 +505,7 @@ namespace cave.ui
 			if(!(widget != null)) {
 				return;
 			}
-			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setAlpha] (Widget.sling:1033:2): Not implemented");
+			System.Diagnostics.Debug.WriteLine("[cave.ui.Widget.setAlpha] (Widget.sling:1182:2): Not implemented");
 		}
 	}
 }
